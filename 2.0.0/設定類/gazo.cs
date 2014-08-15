@@ -52,7 +52,7 @@ namespace _2._0._0
        public static void zakoLoad()
        {
            zakoGraphs[0] = DX.LoadGraph("キャラクタ\\zako.png");
-           zakoGraphs[1] = DX.LoadGraph("zako2.png");
+           zakoGraphs[1] = DX.LoadGraph("キャラクタ\\zako2.png");
            zakoGraphs[2] = DX.LoadGraph("zako3.png");
 
            for (int i = 0; i <zakoGraphs.Length; i++)

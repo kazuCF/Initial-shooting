@@ -134,6 +134,10 @@ namespace _2._0._0
         {
             DX.DrawBox((int)x + fx+Program.dnx, (int)y + fy+Program.dny, (int)x2+Program.dnx+fx,(int)y2+fy+Program.dny, Color, FillFlag);
         }
+        public static void DrawPixel(int x, int y, int Color)
+        {
+            DX.DrawPixel(x + fx + Program.dnx, y + fy + Program.dny, Color);
+        }
         public static void setarea1()//描画範囲のセット
         {
             //  DX.SetDrawArea(fx, fy, scx +fx, scy +fy);  

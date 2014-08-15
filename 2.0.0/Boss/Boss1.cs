@@ -13,12 +13,12 @@ namespace _2._0._0
             zx = X; zy = Y; gw = gazo.Boss1gw; gh = gazo.Boss1gh;
             set_life = new int[10] ;
             damage = 5;
-            
+            danmakusu = 4;
             for (int i = 0; i < set_life.Length; i++)
             {
                 set_life[i] = 5000;
             }
-
+            input_phypos(Program.scx/2,150.0f,50);
         }
         public override void iroiro()
         {

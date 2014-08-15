@@ -8,6 +8,7 @@ namespace _2._0._0
 {
     public static class start
     {
+        private static int myoutyou;
         public static int size = 5;
         private static int ssize = 1;
         private static int startgameGraph;
@@ -31,6 +32,7 @@ namespace _2._0._0
         private const int koumokusu = 4;
         public static void syokika()
         {
+   
             size = 5; ssize = 1;
             startgameGraph = DX.LoadGraph("startgame.bmp");
             exitGraph = DX.LoadGraph("exit.bmp");
@@ -69,73 +71,39 @@ namespace _2._0._0
             DX.DrawString(115, 30, "しゅーてぃんぐげぇむつぅ", DX.GetColor(255, 255, 0));
 
 #warning エディットモード?
- //  Program.gamemode = 8;
+  //Program.gamemode = 8;
 
-            DX.DrawGraph(150, 283, howto, DX.TRUE);
-            DX.DrawGraph(150, 183, startgameGraph, DX.TRUE);
-            DX.DrawGraph(150, 383, exitGraph, DX.TRUE);
+         //   DX.DrawGraph(150, 283, howto, DX.TRUE);
+            DX.DrawString(150, 183, "Start Game", (selecting==0?Program.red:Program.white));
+            DX.DrawString(150, 283, "How to Play", (selecting == 1 ? Program.red : Program.white));
+            DX.DrawString(150, 383, "Exit", (selecting == 2 ? Program.red : Program.white));
+         //   DX.DrawGraph(150, 183, startgameGraph, DX.TRUE);
+          //  DX.DrawGraph(150, 383, exitGraph, DX.TRUE);
             //    DX.DrawGraph(300, 453, zkettei, DX.TRUE);
-            if (edit.key[DX.KEY_INPUT_DOWN] == 1) { selecting=(++selecting)%koumokusu; }
-            else if (edit.key[DX.KEY_INPUT_UP] == 1) { selecting = (--selecting) % koumokusu; }
-            if (start1)
+            if (Program.key[DX.KEY_INPUT_DOWN] == 1) { selecting=(++selecting)%koumokusu; }
+            else if (Program.key[DX.KEY_INPUT_UP] == 1) { selecting = (--selecting) % koumokusu; }
+            if (!Program.enter&&Program.key[DX.KEY_INPUT_RETURN] == 1)
             {
-                if( edit.key[DX.KEY_INPUT_DOWN] == 1)
+                switch (selecting)
                 {
-                    start1 = false;
-                    exit = false;
-                    how = true;
-                    down = true;
+                    case 0:
+                        Program.gamemode = 4; DX.SetFontSize(15);
+                        time = 0;
+                        size = 5;
+                        r = 0; g = 0; b = 0;
+                        Program.enter = true;
+                        break;
+                    case 1:
+                        Program.gamemode = 3; DX.SetFontSize(15);
+                        time = 0;
+                        size = 5;
+                        r = 0; g = 0; b = 0;
+                        Program.enter = true;
+                        break;
+                    case 2:
+                        Program.gamemode = 7;
+                        break;
                 }
-                else
-                {
-                    down = false;
-                }
-                DX.DrawGraph(100, 183, sentaku2, DX.TRUE);
-
-            }
-            else if (exit)
-            {
-                if (DX.CheckHitKey(DX.KEY_INPUT_UP) != 0)
-                {
-                    start1 = false;
-                    how = true;
-                    exit = false;
-                    up = true;
-                }
-                else
-                {
-                    up = false;
-                }
-
-                DX.DrawGraph(100, 383, sentaku2, DX.TRUE);
-
-            }
-            else if (how)
-            {
-                if (DX.CheckHitKey(DX.KEY_INPUT_UP) != 0 && !up)
-                {
-                    how = false;
-                    start1 = true;
-                    exit = false;
-                    up = true;
-                }
-                if (DX.CheckHitKey(DX.KEY_INPUT_UP) == 0)
-                {
-                    up = false;
-                }
-                if (DX.CheckHitKey(DX.KEY_INPUT_DOWN) != 0 && !down)
-                {
-                    how = false;
-                    start1 = false;
-                    exit = true;
-                    down = true;
-                }
-                if (DX.CheckHitKey(DX.KEY_INPUT_DOWN) == 0)
-                {
-                    down = false;
-                }
-                DX.DrawGraph(100, 283, sentaku2, DX.TRUE);
-
             }
             if (!Program.enter && DX.CheckHitKey(DX.KEY_INPUT_RETURN) != 0)
             {

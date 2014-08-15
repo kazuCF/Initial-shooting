@@ -188,8 +188,8 @@ namespace _2._0._0
             Red = DX.GetColor(255, 0, 0);
             Blue = DX.GetColor(0, 255, 255);
 
-            tekiimg[0] = DX.LoadGraph("zakoteki.png");
-            tekiimg[1] = DX.LoadGraph("zako1.png");
+            tekiimg[0] = DX.LoadGraph("キャラクタ\\zako.png");
+            tekiimg[1] = DX.LoadGraph("キャラクタ\\zako2.png");
             tekiimg[2] = DX.LoadGraph("zako2.png");
             tekiimg[3] = DX.LoadGraph("BossGraph.bmp");
         }

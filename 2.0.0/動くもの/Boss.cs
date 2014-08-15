@@ -28,7 +28,7 @@ namespace _2._0._0
         protected int fucount = 0;
         protected new int damage = 5;
         protected static int count = -1;
-        protected static int danmakusu = 1;
+        protected  int danmakusu = 1;
         protected float[] shot_base_angle = new float[10];
 #endregion
         public void syokika()
@@ -109,7 +109,7 @@ namespace _2._0._0
             if (num == 0)
             {
                 gamemode4.bossnum++;
-                gamemode4.removeall();
+   //             gamemode4.removeall();
                 gamemode4.bosschuu = true;
               //  zx = Program.fmx / 2; zy = -30;
                 knd = -1;
@@ -232,13 +232,13 @@ namespace _2._0._0
         int ki = 0;
         #region shot0
         protected void shot0()
-        {          int t2 = -1;        
-            if(dansaisyo)
-            {
-            count=0;
+        {          int t2 = -1;
+        if (dansaisyo)
+        {
+            count = 0;
             t2 = 0;
-                dansaisyo=false;
-            }
+            dansaisyo = false;
+        }
             int t = shot_cnt % 240;
             if (t == 0)
             {

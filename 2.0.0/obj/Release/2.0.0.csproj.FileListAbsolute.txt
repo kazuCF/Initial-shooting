@@ -1,0 +1,5 @@
+E:\中二シューティング本\2.0.0\2.0.0\2.0.0\bin\Release\2.0.0.exe
+E:\中二シューティング本\2.0.0\2.0.0\2.0.0\bin\Release\2.0.0.pdb
+E:\中二シューティング本\2.0.0\2.0.0\2.0.0\obj\Release\ResolveAssemblyReference.cache
+E:\中二シューティング本\2.0.0\2.0.0\2.0.0\obj\Release\2.0.0.exe
+E:\中二シューティング本\2.0.0\2.0.0\2.0.0\obj\Release\2.0.0.pdb

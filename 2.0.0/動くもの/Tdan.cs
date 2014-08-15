@@ -33,7 +33,7 @@ namespace _2._0._0
       public List<Tdan>tamas=new List<Tdan>();
       public Tdan(float X,float Y,int Cnt,int Col,float Angle,float Speed,int Size, int State)
       {
-          x = X; y = Y; cnt = Cnt; inswitch = false; seizon = true; angle = Angle; speed = Speed; size = Size;
+          x = X; y = Y; cnt = Cnt; inswitch = true; seizon = true; angle = Angle; speed = Speed; size = Size;
           col = Col; state = State; bangle = angle;
 
           switch (size)

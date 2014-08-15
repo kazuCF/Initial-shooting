@@ -17,7 +17,7 @@ namespace _2._0._0
               set_life[i] = 5000;
           }
           input_phypos(Program.scx-70,  50, 50);
-          danmakusu = 2;
+          danmakusu = 1;
       }
       public override void iroiro()
       {

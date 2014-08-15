@@ -16,7 +16,7 @@ namespace _2._0._0
         public static bool readin = false;
         public static int tekiyomi = 0;
         public static int htime = 0;
-        public static int bossnum = 0;
+        public static int bossnum = -1;
         public static int chapter = 1;
         public static int time = 0;
         public static bool kaishi = true;
@@ -27,14 +27,15 @@ namespace _2._0._0
         public static List<en> teki = new List<en>();
         public static void syokika()
         {
+            tekiyomi = 0;
             im.Clear();
             ef.Clear();
             teki.Clear();
             chapter = 1;
-            bossnum = 0;
+            bossnum = -1;
             time = 0;
-            bosss[0] = new Boss1(Program.scx / 2, 30);
-            bosss[1] = new NBoss1(Program.scx / 2, -30);
+            bosss[1] = new Boss1(Program.scx / 2, 30);
+            bosss[0] = new NBoss1(Program.scx / 2, -30);
 
         }
         public static void removeall()
@@ -50,6 +51,9 @@ namespace _2._0._0
                 case 1:
                     chapter1();
                     break;
+                case 2:
+                    chapter2();
+                    break;
             }
             im.RemoveAll(c => !c.seizon);
             ef.RemoveAll(c => !c.seizon);
@@ -58,7 +62,7 @@ namespace _2._0._0
             foreach (var i in im) { i.main(); } Program.enter_func("アイテム計算", 0);
             foreach (var i in ef) { i.main(); } Program.enter_func("エフェクト計算", 0);
             foreach (var i in teki) { i.main(); if (ziki.bommcool == 60) { i.life -= 5; } } Program.enter_func("敵計算", 0);
-          
+
             DX.DrawGraph(Program.hamix + 225, Program.scy - 200, gazo.haikeig, DX.TRUE);
             DX.DrawBox(0, 0, Program.fx, Program.scy, DX.GetColor(0, 0, 255), DX.TRUE);
             DX.DrawBox(0, 0, Program.scx, Program.fy, DX.GetColor(0, 0, 255), DX.TRUE);
@@ -76,20 +80,18 @@ namespace _2._0._0
 
         private static void chapter1()
         {
-
             switch (tekiyomi)
             {
-
                 case 0:
-                 if (tekiyomikomi("1-1-1", 0)) { htime = time + 40; tekiyomi++; }
-                     //if (tekiyomikomi("1-1-5", htime)) { tekiyomi++; htime = time + 40; }
-                  
-               break;
+                    if (tekiyomikomi("1-1-1", 0)) { htime = time + 40; tekiyomi++; }
+                    //if (tekiyomikomi("1-1-5", htime)) { tekiyomi++; htime = time + 40; }
+
+                    break;
                 case 1:
-                   if (tekiyomikomi("1-1-2", htime)) { htime = time + 40; tekiyomi++; }
-                //if (tekiyomikomi("1-1-6", htime)) { tekiyomi++; htime = time + 40; }
-                       
-               break;
+                    if (tekiyomikomi("1-1-2", htime)) { htime = time + 40; tekiyomi++; }
+                    //if (tekiyomikomi("1-1-6", htime)) { tekiyomi++; htime = time + 40; }
+
+                    break;
                 case 2:
                     if (tekiyomikomi("1-1-3", htime)) { tekiyomi++; htime = time + 40; }
                     break;
@@ -101,32 +103,43 @@ namespace _2._0._0
                     if (time > htime)
                     {
                         removeall();
-                        bosss[1].boss_shot_main();
-                        if (bosss[1].end) { tekiyomi++; htime = time + 40; gamemode4.bosschuu = false; }
+                        bosss[0].boss_shot_main();
+                        if (bosss[0].end) { tekiyomi++; htime = time + 40; gamemode4.bosschuu = false; }
                     }
                     break;
                 case 5:
-                    if (tekiyomikomi("1-1-5", htime)){ tekiyomi++; htime = time + 40; }
+                    if (tekiyomikomi("1-1-5", htime)) { tekiyomi++; htime = time + 40; }
                     break;
                 case 6:
                     if (tekiyomikomi("1-1-6", htime)) { tekiyomi++; htime = time + 40; }
                     break;
+                case 7:
+                    if (tekiyomikomi("1-1-7", htime)) { tekiyomi++; htime = time + 240; }
+                    break;
+                case 8:
+                    if (time > htime)
+                    {
+                        // removeall();
+                        bosss[1].boss_shot_main();
+                        if (bosss[1].end) { tekiyomi++; htime = time + 40; gamemode4.bosschuu = false; }
+                    }
+                    break;
+                default:
+                    chapter++;
+                    tekiyomi = 0;
+                    break;
             }
-            Program.enter_func("ステージ全般", 0);
-
-
-
-
-
-
-
-
-            if (time > 10000)
-            {
-                bosss[0].boss_shot_main();
-            }
+            Program.enter_func("第1章", 0);
         }
-
+        private static void chapter2()
+        {
+            switch (tekiyomi)
+            {
+                case 0:
+                    break;
+            }
+            Program.enter_func("第2章", 0);
+        }
 
         private static bool tekiyomikomi(string filename)
         {
@@ -148,29 +161,7 @@ namespace _2._0._0
                 while (!read.EndOfStream)
                 {
                     fileend = false;
-                    //   var line = read.ReadLine();
                     lines[k] = read.ReadLine();
-                    //  var values = lines[k].Split(',');
-                    /*values = lines[k].Split(',');
-                    float[] ivalues = new float[values.Length];
-                    int[] intmonos = new int[values.Length];
-                    for (int i = 0; i < values.Length; i++)
-                    {
-                        ivalues[i] = float.Parse(values[i]);
-                        if (i > 1) { intmonos[i] = int.Parse(values[i]); }
-                    }
-                    var items = new int[values.Length - jyouhousu];
-                    for (int i = jyouhousu + 1; i < values.Length; i++)
-                    {
-                        items[i - jyouhousu - 1] = intmonos[i];
-                    }
-                    if (ivalues[4] + hajime == time) { teki.Add(new en(ivalues[0], ivalues[1], intmonos[2], intmonos[3], intmonos[4], intmonos[5], intmonos[6], intmonos[7], intmonos[8], intmonos[9], intmonos[10], ivalues[11], ivalues[12], intmonos[13], items)); owari = false; }
-                    else if (ivalues[4] + hajime > time) { owari = false; }
-                  */
-                    /*    for (int i = 0; i < ivalues.Length; i++)
-                        {
-                            tekis[k, i] = ivalues[i];
-                        }*/
                     k++;
                     //
                     //0 x座標
@@ -199,7 +190,7 @@ namespace _2._0._0
                 values = i.Split(',');
                 int timing = int.Parse(values[4]);
 
-                if (timing+ hajime > time ) { owari = false; continue; }
+                if (timing + hajime > time) { owari = false; continue; }
                 else if (timing + hajime < time) { continue; }
                 else
                 {
@@ -215,11 +206,11 @@ namespace _2._0._0
                     {
                         items[l - jyouhousu - 1] = intmonos[l];
                     }
-                    teki.Add(new en(ivalues[0], ivalues[1], intmonos[2], intmonos[3], intmonos[4], intmonos[5], intmonos[6], intmonos[7], intmonos[8], intmonos[9], intmonos[10], ivalues[11], ivalues[12], intmonos[13], items)); 
+                    teki.Add(new en(ivalues[0], ivalues[1], intmonos[2], intmonos[3], intmonos[4], intmonos[5], intmonos[6], intmonos[7], intmonos[8], intmonos[9], intmonos[10], ivalues[11], ivalues[12], intmonos[13], items));
                     owari = false;
                 }
             }
-            if (owari) { readin =false; }
+            if (owari) { readin = false; }
             return owari;
         }
     }

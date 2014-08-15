@@ -71,7 +71,7 @@ namespace _2._0._0
             DX.DrawString(115, 30, "しゅーてぃんぐげぇむつぅ", DX.GetColor(255, 255, 0));
 
 #warning エディットモード?
-  //Program.gamemode = 8;
+ // Program.gamemode = 8;
 
          //   DX.DrawGraph(150, 283, howto, DX.TRUE);
             DX.DrawString(150, 183, "Start Game", (selecting==0?Program.red:Program.white));

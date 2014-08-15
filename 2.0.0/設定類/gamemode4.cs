@@ -31,7 +31,7 @@ namespace _2._0._0
             im.Clear();
             ef.Clear();
             teki.Clear();
-            chapter = 1;
+            chapter = 2;
             bossnum = -1;
             time = 0;
             bosss[1] = new Boss1(Program.scx / 2, 30);
@@ -136,6 +136,8 @@ namespace _2._0._0
             switch (tekiyomi)
             {
                 case 0:
+                    if (tekiyomikomi("2-1-1", htime)) { tekiyomi++; htime = time + 40; }
+                 
                     break;
             }
             Program.enter_func("第2章", 0);

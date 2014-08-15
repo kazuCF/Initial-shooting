@@ -129,7 +129,7 @@ namespace _2._0._0
 
         }
        
-        public static Blpoint_t Blpoint = new Blpoint_t();
+    //    public static Blpoint_t Blpoint = new Blpoint_t();
         public static ugoki ugokin = new ugoki();
         public struct Operate_t
         {
@@ -165,7 +165,7 @@ namespace _2._0._0
          gtime = 0;
          jizokujikan = 5;
          pat = 11;
-         Blpoint.Num = 0;
+     //    Blpoint.Num = 0;
          ugokin.Num = 0;
          
          ugokinamae = new string[] { "nway","速度変化nway","円形","ばらまき","減速ばらまき","角度記憶な時期狙い","自機追い弾","自機狙い→円形","回転"};
@@ -196,7 +196,7 @@ namespace _2._0._0
         public static void InputBlData(float x, float y, int Knd, int Col, float Angle, int time, int waittime,int hp)
         {
             tekis.Add(new en(x, y, Col, Knd, time, waittime, 20, 1, 0, 2, 0, 5, 3, hp, 0));
-            Blpoint.Bl[Blpoint.Num].x = x;
+          /*  Blpoint.Bl[Blpoint.Num].x = x;
             Blpoint.Bl[Blpoint.Num].y = y;
             Blpoint.Bl[Blpoint.Num].Knd = Knd;
             Blpoint.Bl[Blpoint.Num].fx = x;
@@ -219,7 +219,7 @@ namespace _2._0._0
             Blpoint.Bl[Blpoint.Num].seizon = true;
             Blpoint.Bl[Blpoint.Num].hyouji = true;
             Blpoint.Bl[Blpoint.Num].hp = hp;
-            Blpoint.Num++;
+            Blpoint.Num++;*/
         }
         public static void InputugData(float x,float y,float ex,float ey,float sx, float sy,int jizoku)
         {
@@ -247,7 +247,7 @@ namespace _2._0._0
             {
                
                 //今現在進んだ距離が進むべき距離以内の間、かつ登録出来る個数の間ループ
-                while (Blpoint.Num < 100000)
+                while (tekis.Count < 100000)
                 {
                     for (int i = 0; i < Operate.renzokukaisu; i++)
                     {
@@ -308,7 +308,7 @@ namespace _2._0._0
                     mode = (++mode) % 2;
                     gtime = 0;
                     susumu = 0;
-                    for (int i = 0; i < Blpoint.Num; i++)
+                    /*for (int i = 0; i < Blpoint.Num; i++)
                     {
                         Blpoint.Bl[i].fx = Blpoint.Bl[i].x;
                         Blpoint.Bl[i].fy = Blpoint.Bl[i].y;
@@ -317,7 +317,7 @@ namespace _2._0._0
                         Blpoint.Bl[i].tamas.Clear();
                         Blpoint.Bl[i].seizon = true;
                         Blpoint.Bl[i].hyouji = true;
-                    }
+                    }*/
                     foreach (var i in tekis)
                     {
                         i.zx = i.fx;
@@ -326,6 +326,7 @@ namespace _2._0._0
                         i.cnte = 0; i.tamas.Clear();
                         i.seizon = true;
                         i.hyouji = true;
+                        i.life = i.defalutlife;
                     }
                 }
                 else if (mode == 2)
@@ -358,7 +359,7 @@ namespace _2._0._0
                 if (key[DX.KEY_INPUT_BACK] == 1)
                 {
                     gtime = 0;
-                    for (int i = 0; i < Blpoint.Num; i++)
+                   /* for (int i = 0; i < Blpoint.Num; i++)
                     {
                         Blpoint.Bl[i].fx = Blpoint.Bl[i].x;
                         Blpoint.Bl[i].fy = Blpoint.Bl[i].y;
@@ -371,7 +372,7 @@ namespace _2._0._0
                         {
                             Blpoint.Bl[i].read.Close();
                         }
-                    }
+                    }*/
                     foreach (var i in tekis)
                     {
                         i.zx = i.fx; i.zy = i.fy;
@@ -380,6 +381,7 @@ namespace _2._0._0
                         i.hyouji = true;
                         if (i.ugokikata >= 12 && i.read != null)
                         { i.read.Close(); }
+                        i.life = i.defalutlife;
                     }
                     mode2kaishi = gtime;
                     susumu = 0;
@@ -388,10 +390,10 @@ namespace _2._0._0
                 {
                     if (key[DX.KEY_INPUT_Z] == 1 || key[DX.KEY_INPUT_Z] > 30)
                     {
-                        if (Blpoint.Num > 0)
+                   /*     if (Blpoint.Num > 0)
                         {
                             Blpoint.Num--;
-                        }
+                        }*/
                         if (tekis.Any())
                         {
                             tekis.RemoveAt(tekis.Count - 1);
@@ -400,10 +402,10 @@ namespace _2._0._0
                     }
                     if (key[DX.KEY_INPUT_Y] == 1 || key[DX.KEY_INPUT_Y] > 30)
                     {
-                        if (Blpoint.Num < 99999 & !(Blpoint.Bl[Blpoint.Num].x == 0 && Blpoint.Bl[Blpoint.Num].y == 0))
+                      /*  if (Blpoint.Num < 99999 & !(Blpoint.Bl[Blpoint.Num].x == 0 && Blpoint.Bl[Blpoint.Num].y == 0))
                         {
                             Blpoint.Num++;
-                        }
+                        }*/
 
                     }
                 }
@@ -512,8 +514,8 @@ namespace _2._0._0
             #region mode1
             if (mode == 1)
             {
-                gtime = Blpoint.Bl[sentakun].time;
-
+               // gtime = Blpoint.Bl[sentakun].time;
+                gtime = tekis[sentakun].toujyou;
                 if (key[DX.KEY_INPUT_SPACE] == 1)//表示フラグ
                     Operate.flag *= -1; 
                 if (key[DX.KEY_INPUT_RETURN] == 1)
@@ -532,13 +534,14 @@ namespace _2._0._0
                     else if (key[DX.KEY_INPUT_RIGHT] == 1)
                     {
                         sentakun++;
-                        if (sentakun >= Blpoint.Bl.Count()) { sentakun = Blpoint.Bl.Count() - 1; }
-
+                      //  if (sentakun >= Blpoint.Bl.Count()) { sentakun = Blpoint.Bl.Count() - 1; }
+                        if (sentakun >= tekis.Count) { sentakun = tekis.Count - 1; }
                     }
                     else if (key[DX.KEY_INPUT_N] == 1)
                     {
                         sentakun++;
-                        if (sentakun >= Blpoint.Bl.Count()) { sentakun = Blpoint.Bl.Count() - 1; }
+                        //if (sentakun >= Blpoint.Bl.Count()) { sentakun = Blpoint.Bl.Count() - 1; }
+                        if (sentakun >= tekis.Count) { sentakun = tekis.Count - 1; }
                     }
                 }
                 else if (key[DX.KEY_INPUT_R] != 0)
@@ -546,12 +549,12 @@ namespace _2._0._0
                     if (key[DX.KEY_INPUT_LEFT] == 1)
                     {
                         tekis[sentakun].tamakosuu--;
-                        Blpoint.Bl[sentakun].tamakosuu--;
+                     //   Blpoint.Bl[sentakun].tamakosuu--;
                     }
                     else if (key[DX.KEY_INPUT_RIGHT] == 1)
                     {
                         tekis[sentakun].tamakosuu++;
-                        Blpoint.Bl[sentakun].tamakosuu++;
+                  //      Blpoint.Bl[sentakun].tamakosuu++;
                     }
                 }
                 else if (key[DX.KEY_INPUT_P] != 0)
@@ -559,12 +562,12 @@ namespace _2._0._0
                     if (key[DX.KEY_INPUT_LEFT] == 1)
                     {
                         tekis[sentakun].tamacol--;
-                        Blpoint.Bl[sentakun].tamacol--;
+             //           Blpoint.Bl[sentakun].tamacol--;
                     }
                     else if (key[DX.KEY_INPUT_RIGHT] == 1)
                     {
                         tekis[sentakun].tamacol++;
-                        Blpoint.Bl[sentakun].tamacol++;
+                //        Blpoint.Bl[sentakun].tamacol++;
                     }
                 }
                 else if (key[DX.KEY_INPUT_O] != 0)
@@ -572,11 +575,11 @@ namespace _2._0._0
                     if (key[DX.KEY_INPUT_LEFT] == 1)
                     {
                         tekis[sentakun].tamaknd--;
-                        Blpoint.Bl[sentakun].tamaknd--;
+                 //       Blpoint.Bl[sentakun].tamaknd--;
                     }
                     else if (key[DX.KEY_INPUT_RIGHT] == 1)
                     {
-                        Blpoint.Bl[sentakun].tamaknd++;
+                  //      Blpoint.Bl[sentakun].tamaknd++;
                         tekis[sentakun].tamaknd++;
                     }
                 }
@@ -584,12 +587,12 @@ namespace _2._0._0
                 {
                     if (key[DX.KEY_INPUT_LEFT] == 1)
                     {
-                        Blpoint.Bl[sentakun].tamaugoki--;
+                      /*  Blpoint.Bl[sentakun].tamaugoki--;
                         if (Blpoint.Bl[sentakun].tamaugoki < 0) { Blpoint.Bl[sentakun].tamaugoki = 0; }
                         Blpoint.Bl[sentakun].tamakankaku = tehonkankaku[Blpoint.Bl[sentakun].tamaugoki];
                         Blpoint.Bl[sentakun].pluskaku = tehonpluskaku[Blpoint.Bl[sentakun].tamaugoki];
                         Blpoint.Bl[sentakun].tamaspd = tehonspeed[Blpoint.Bl[sentakun].tamaugoki];
-
+*/
                         tekis[sentakun].tamasyurui--;
                         if (tekis[sentakun].tamasyurui < 0) { tekis[sentakun].tamasyurui = 0; }
                         tekis[sentakun].kankaku = tehonkankaku[tekis[sentakun].tamasyurui];
@@ -599,11 +602,11 @@ namespace _2._0._0
                     }
                     else if (key[DX.KEY_INPUT_RIGHT] == 1)
                     {
-                        Blpoint.Bl[sentakun].tamaugoki++;
+                       /* Blpoint.Bl[sentakun].tamaugoki++;
                         Blpoint.Bl[sentakun].tamakankaku = tehonkankaku[Blpoint.Bl[sentakun].tamaugoki];
                         Blpoint.Bl[sentakun].pluskaku = tehonpluskaku[Blpoint.Bl[sentakun].tamaugoki];
                         Blpoint.Bl[sentakun].tamaspd = tehonspeed[Blpoint.Bl[sentakun].tamaugoki];
-                        tekis[sentakun].tamasyurui++;
+                        tekis[sentakun].tamasyurui++;*/
                         tekis[sentakun].kankaku = tehonkankaku[tekis[sentakun].tamasyurui];
                         tekis[sentakun].pluskaku = tehonpluskaku[tekis[sentakun].tamasyurui];
                         tekis[sentakun].tamasokudo = tehonspeed[tekis[sentakun].tamasyurui];
@@ -614,7 +617,7 @@ namespace _2._0._0
                 {
                     if (key[DX.KEY_INPUT_LEFT] % 5 == 1)
                     {
-                        if (Blpoint.Bl[sentakun].tamaugoki == 3 || Blpoint.Bl[sentakun].tamaugoki == 4)
+                      /*  if (Blpoint.Bl[sentakun].tamaugoki == 3 || Blpoint.Bl[sentakun].tamaugoki == 4)
                         {
                             Blpoint.Bl[sentakun].pluskaku -= 0.5f;
                         }
@@ -622,7 +625,7 @@ namespace _2._0._0
                         {
                             Blpoint.Bl[sentakun].pluskaku--;
                         }
-
+                        */
                         if (tekis[sentakun].tamasyurui == 3 || tekis[sentakun].tamasyurui == 4)
                         {
                             tekis[sentakun].pluskaku -= 0.5f;
@@ -633,7 +636,7 @@ namespace _2._0._0
                         }
                     }
                     else if (key[DX.KEY_INPUT_RIGHT] % 5 == 1)
-                    {
+                    {/*
                         if (Blpoint.Bl[sentakun].tamaugoki == 3 || Blpoint.Bl[sentakun].tamaugoki == 4)
                         {
                             Blpoint.Bl[sentakun].pluskaku += 0.5f;
@@ -641,7 +644,7 @@ namespace _2._0._0
                         else
                         {
                             Blpoint.Bl[sentakun].pluskaku++;
-                        }
+                        }*/
                         if (tekis[sentakun].tamasyurui == 3 || tekis[sentakun].tamasyurui == 4)
                         {
                             tekis[sentakun].pluskaku += 0.5f;
@@ -656,14 +659,14 @@ namespace _2._0._0
                 {
                     if (key[DX.KEY_INPUT_LEFT] % 5 == 1)
                     {
-                        Blpoint.Bl[sentakun].tamakankaku--;
-                        if (Blpoint.Bl[sentakun].tamakankaku < 1) { Blpoint.Bl[sentakun].tamakankaku = 1; }
+                      //  Blpoint.Bl[sentakun].tamakankaku--;
+                    //    if (Blpoint.Bl[sentakun].tamakankaku < 1) { Blpoint.Bl[sentakun].tamakankaku = 1; }
                         tekis[sentakun].kankaku--;
                         if (tekis[sentakun].kankaku < 1) { tekis[sentakun].kankaku = 1; }
                     }
                     else if (key[DX.KEY_INPUT_RIGHT] % 5 == 1)
                     {
-                        Blpoint.Bl[sentakun].tamakankaku++;
+                       // Blpoint.Bl[sentakun].tamakankaku++;
                         tekis[sentakun].kankaku++;
                     }
                 }
@@ -671,12 +674,12 @@ namespace _2._0._0
                 {
                     if (key[DX.KEY_INPUT_LEFT] > 0)
                     {
-                        Blpoint.Bl[sentakun].time--;
+                   //     Blpoint.Bl[sentakun].time--;
                         tekis[sentakun].toujyou--;
                     }
                     else if (key[DX.KEY_INPUT_RIGHT] > 0)
                     {
-                        Blpoint.Bl[sentakun].time++;
+                        //Blpoint.Bl[sentakun].time++;
                         tekis[sentakun].toujyou++;
                     }
                 }
@@ -684,12 +687,12 @@ namespace _2._0._0
                 {
                     if (key[DX.KEY_INPUT_LEFT] > 0)
                     {
-                        Blpoint.Bl[sentakun].hp--;
+                   //     Blpoint.Bl[sentakun].hp--;
                         tekis[sentakun].life--;
                     }
                     else if (key[DX.KEY_INPUT_RIGHT] > 0)
                     {
-                        Blpoint.Bl[sentakun].hp++;
+                       // Blpoint.Bl[sentakun].hp++;
                         tekis[sentakun].life++;
                     }
                 }
@@ -697,14 +700,14 @@ namespace _2._0._0
                 {
                     if (key[DX.KEY_INPUT_LEFT] == 1)
                     {
-                        if (Blpoint.Bl[sentakun].tamaugoki == 8)
+                  /*      if (Blpoint.Bl[sentakun].tamaugoki == 8)
                         {
                             Blpoint.Bl[sentakun].tamaspd -= 0.1f;
                         }
                         else
                         {
                             Blpoint.Bl[sentakun].tamaspd--;
-                        }
+                        }*/
                         if (tekis[sentakun].tamasyurui == 8)
                         {
                             tekis[sentakun].tamasokudo -= 0.1f;
@@ -716,14 +719,14 @@ namespace _2._0._0
                     }
                     else if (key[DX.KEY_INPUT_RIGHT] == 1)
                     {
-                        if (Blpoint.Bl[sentakun].tamaugoki == 8)
+                       /* if (Blpoint.Bl[sentakun].tamaugoki == 8)
                         {
                             Blpoint.Bl[sentakun].tamaspd += 0.1f;
                         }
                         else
                         {
                             Blpoint.Bl[sentakun].tamaspd++;
-                        }
+                        }*/
                         if (tekis[sentakun].tamasyurui == 8)
                         {
                             tekis[sentakun].tamasokudo += 0.1f;
@@ -738,14 +741,14 @@ namespace _2._0._0
                 {
                     if (key[DX.KEY_INPUT_W] == 1)
                     {
-                        Blpoint.Bl[sentakun].waittime--;
-                        if (Blpoint.Bl[sentakun].waittime < 0) { Blpoint.Bl[sentakun].waittime = 0; }
+                     //   Blpoint.Bl[sentakun].waittime--;
+                       // if (Blpoint.Bl[sentakun].waittime < 0) { Blpoint.Bl[sentakun].waittime = 0; }
                         tekis[sentakun].waittime--;
                         if (tekis[sentakun].waittime < 0) { tekis[sentakun].waittime = 0; }
                     }
                     if (key[DX.KEY_INPUT_S] == 1)
                     {
-                        Blpoint.Bl[sentakun].waittime++;
+                       // Blpoint.Bl[sentakun].waittime++;
                         tekis[sentakun].waittime++;
                     }
                 }
@@ -753,48 +756,48 @@ namespace _2._0._0
                 {
                     if (key[DX.KEY_INPUT_W] > 0)
                     {
-                        Blpoint.Bl[sentakun].y--;
+                   //     Blpoint.Bl[sentakun].y--;
                         tekis[sentakun].fy--;
                     }
                     if (key[DX.KEY_INPUT_S] > 0)
                     {
-                        Blpoint.Bl[sentakun].y++;
+                     //   Blpoint.Bl[sentakun].y++;
                         tekis[sentakun].fy++;
                     }
                 }
                 if (key[DX.KEY_INPUT_A] > 0)
                 {
-                    Blpoint.Bl[sentakun].x--;
+                   // Blpoint.Bl[sentakun].x--;
                     tekis[sentakun].fx--;
                 }
                 if (key[DX.KEY_INPUT_D] > 0)
                 {
-                    Blpoint.Bl[sentakun].x++;
+                    //Blpoint.Bl[sentakun].x++;
                     tekis[sentakun].fx++;
                 }
                 if (key[DX.KEY_INPUT_K] == 1)
                 {
-                    Blpoint.Bl[sentakun].Knd = (++Blpoint.Bl[sentakun].Knd) % tekisyuruisu;
+                    //Blpoint.Bl[sentakun].Knd = (++Blpoint.Bl[sentakun].Knd) % tekisyuruisu;
                     tekis[sentakun].gaz = (++tekis[sentakun].gaz) % tekisyuruisu;
                 }
                 if (key[DX.KEY_INPUT_C] != 0)//動き方
                 {
                     if (key[DX.KEY_INPUT_LEFT] == 1 || key[DX.KEY_INPUT_LEFT] > 30)
                     {
-                        Blpoint.Bl[sentakun].Col -= 1;
+               //         Blpoint.Bl[sentakun].Col -= 1;
                         tekis[sentakun].ugokikata--;
                     }
                     //右キー
                     if (key[DX.KEY_INPUT_RIGHT] == 1 || key[DX.KEY_INPUT_RIGHT] > 30)
                     {
-                        Blpoint.Bl[sentakun].Col += 1;
+                 //       Blpoint.Bl[sentakun].Col += 1;
                         tekis[sentakun].ugokikata++;
                     }
                 }
                 if (key[DX.KEY_INPUT_DELETE] == 1)
                 {
-                    Blpoint.Bl[sentakun].x = -99;
-                    Blpoint.Bl[sentakun].tamakankaku = 0;
+                  //  Blpoint.Bl[sentakun].x = -99;
+                   // Blpoint.Bl[sentakun].tamakankaku = 0;
                     tekis[sentakun].zx = -99;
                     tekis[sentakun].kankaku = 0;
                 }
@@ -813,8 +816,8 @@ namespace _2._0._0
                     else if (key[DX.KEY_INPUT_RIGHT] == 1)
                     {
                         sentakun++;
-                        if (sentakun >= Blpoint.Bl.Count()) { sentakun = Blpoint.Bl.Count() - 1; }
-
+                     //   if (sentakun >= Blpoint.Bl.Count()) { sentakun = Blpoint.Bl.Count() - 1; }
+                        if (sentakun >= tekis.Count) { sentakun = tekis.Count - 1; }
                     }
                 }
                 if (key[DX.KEY_INPUT_RETURN] == 1)
@@ -825,7 +828,8 @@ namespace _2._0._0
                 if (key[DX.KEY_INPUT_SPACE] == 1)
                 {
                     susumu = 0;
-                    gtime = Blpoint.Bl[sentakun].time;
+                 //   gtime = Blpoint.Bl[sentakun].time;
+                    gtime = tekis[sentakun].toujyou;
                     mode2kaishi = 0;
                     mode = 1;
                 }
@@ -833,7 +837,7 @@ namespace _2._0._0
                 {
                     gtime = 0;
                     mode2kaishi = gtime;
-                    for (int i = 0; i < Blpoint.Num; i++)
+                /*    for (int i = 0; i < Blpoint.Num; i++)
                     {
                         Blpoint.Bl[i].fx = Blpoint.Bl[i].x;
                         Blpoint.Bl[i].fy = Blpoint.Bl[i].y;
@@ -847,7 +851,7 @@ namespace _2._0._0
                             Blpoint.Bl[i].read.Close();
                         }
                        
-                    }
+                    }*/
                     foreach (var i in tekis)
                         {
                             i.zx = i.fx;
@@ -857,10 +861,12 @@ namespace _2._0._0
                             i.tamas.Clear();
                             i.seizon = true;
                             i.hyouji = true;
+                            i.life = i.defalutlife;
                             if (i.ugokikata >= 12)
                             {
                                 i.read.Close();
                             }
+
                         }
                     susumu = 0;
                 }
@@ -925,7 +931,7 @@ namespace _2._0._0
             {
                 if (mode == 0 || mode == 2)
                 {
-                    if (gtime >= i.toujyou && mode2kaishi <= i.toujyou)
+                    if (gtime >= i.toujyou && mode2kaishi <= i.toujyou && susumu == 0)
                     {
                         kansuu.DrawRotaGraphfk(i.zx, i.zy, 1, 0, i.gaz, DX.TRUE, false);
                     }
@@ -936,7 +942,7 @@ namespace _2._0._0
                   
                 }
             }
-            for (int i = 0; i < Blpoint.Num; i++)
+         /*   for (int i = 0; i < Blpoint.Num; i++)
             {
                 if (mode == 0 || mode == 2)
                 {
@@ -960,7 +966,7 @@ namespace _2._0._0
                 }
             
                 
-            }
+            }*/
             if (mode == 3)
             {
                 foreach (var k in ugokin.ug[ugokin.Num].Ug)
@@ -976,7 +982,7 @@ namespace _2._0._0
                     DX.DrawLine((int)Operate.fPt1.x, (int)Operate.fPt1.y, Mouse.x, Mouse.y, Red);
                 }
                 //マウスポインタ部に弾を表示する
-                DX.DrawRotaGraph(Mouse.x, Mouse.y, 1.0, Operate.Angle, tekiimg[Operate.Knd], DX.TRUE);
+                DX.DrawRotaGraph(Mouse.x, Mouse.y, 1.0, Operate.Angle,gazo.zakoGraphs[Operate.Knd], DX.TRUE);
                 //弾の上に、今設定されているスペースがどれ位か表示する
                 DX.DrawLine(Mouse.x, Mouse.y, Mouse.x + Operate.Space, Mouse.y, Blue);
                 //表示フラグがオンなら現在の操作設定内容を表示
@@ -984,13 +990,13 @@ namespace _2._0._0
             else if (mode == 1)
             {
                // DX.DrawLine((int)Blpoint.Bl[sentakun].x, (int)Blpoint.Bl[sentakun].y, (int)Blpoint.Bl[sentakun].x + 50, (int)Blpoint.Bl[sentakun].y, Blue);
-                kansuu.DrawLine((int)Blpoint.Bl[sentakun].x, (int)Blpoint.Bl[sentakun].y, (int)Blpoint.Bl[sentakun].x + 50, (int)Blpoint.Bl[sentakun].y, Blue);
+           //     kansuu.DrawLine((int)Blpoint.Bl[sentakun].x, (int)Blpoint.Bl[sentakun].y, (int)Blpoint.Bl[sentakun].x + 50, (int)Blpoint.Bl[sentakun].y, Blue);
                 kansuu.DrawLine((int)tekis[sentakun].zx,(int)tekis[sentakun].zy,(int)tekis[sentakun].zx+50,(int)tekis[sentakun].zy,Blue);
             }
             else if (mode == 2)
             {
               //  DX.DrawLine((int)Blpoint.Bl[sentakun].fx, (int)Blpoint.Bl[sentakun].fy, (int)Blpoint.Bl[sentakun].fx + 50, (int)Blpoint.Bl[sentakun].fy, Blue);
-                kansuu.DrawLine((int)Blpoint.Bl[sentakun].fx, (int)Blpoint.Bl[sentakun].fy, (int)Blpoint.Bl[sentakun].fx + 50, (int)Blpoint.Bl[sentakun].fy, Blue);
+             //   kansuu.DrawLine((int)Blpoint.Bl[sentakun].fx, (int)Blpoint.Bl[sentakun].fy, (int)Blpoint.Bl[sentakun].fx + 50, (int)Blpoint.Bl[sentakun].fy, Blue);
                 kansuu.DrawLine((int)tekis[sentakun].fx, (int)tekis[sentakun].fy, (int)tekis[sentakun].fx + 50, (int)tekis[sentakun].fy, Blue);
             }
             if (Operate.flag == 1)
@@ -1013,19 +1019,19 @@ namespace _2._0._0
                 }
                 else if (mode == 1)
                 {
-                    kansuu.DrawString(0, 0, "座標[%3d,%3d]:W,S,A,Dキー" + Blpoint.Bl[sentakun].x + ":" + Blpoint.Bl[sentakun].y, White);
-                    kansuu.DrawString(0, 20, "種類     [%2d] : Kキー" + Blpoint.Bl[sentakun].Knd, White);
-                    kansuu.DrawString(0, 40, "移動方法　     [%2d] : Cキー" + Blpoint.Bl[sentakun].Col, White);
-                    kansuu.DrawString(0, 60, "弾の個数    [%3d] : R+←→キー" + Blpoint.Bl[sentakun].tamakosuu, White);
-                    kansuu.DrawString(0, 80, "弾の色    [%3d] : P+←→キー" + Blpoint.Bl[sentakun].tamacol, White);
-                    kansuu.DrawString(0, 100, "弾の見た目    [%3d] : O+←→キー" + Blpoint.Bl[sentakun].tamaknd, White);
-                    kansuu.DrawString(0, 120, ugokinamae[Blpoint.Bl[sentakun].tamaugoki] + "     [%3d] : I+←→キー", White);
-                    kansuu.DrawString(0, 140, plusmessage[Blpoint.Bl[sentakun].tamaugoki]+"    [%3d] : U+←→キー" + Blpoint.Bl[sentakun].pluskaku, White);
-                    kansuu.DrawString(0, 160, "弾の発射間隔    [%3d] : Y+←→キー" + Blpoint.Bl[sentakun].tamakankaku, White);
-                    kansuu.DrawString(0, 180, "登場までの時間    [%3d] : T+←→キー" + Blpoint.Bl[sentakun].time, White);
-                    kansuu.DrawString(0, 200, "弾の速度     :F+←→キー" + Blpoint.Bl[sentakun].tamaspd, White);
-                    kansuu.DrawString(0, 220, "waittime     :shift+(w/s)" + Blpoint.Bl[sentakun].waittime, White);
-                    kansuu.DrawString(0, 240, "体力     :H+←→キー" + Blpoint.Bl[sentakun].hp, White);
+                    kansuu.DrawString(0, 0, "座標[%3d,%3d]:W,S,A,Dキー" + tekis[sentakun].zx + ":" + tekis[sentakun].zy, White);
+                    kansuu.DrawString(0, 20, "種類     [%2d] : Kキー" + tekis[sentakun].size, White);
+                    kansuu.DrawString(0, 40, "移動方法　     [%2d] : Cキー" + tekis[sentakun].ugokikata, White);
+                    kansuu.DrawString(0, 60, "弾の個数    [%3d] : R+←→キー" + tekis[sentakun].tamakosuu, White);
+                    kansuu.DrawString(0, 80, "弾の色    [%3d] : P+←→キー" + tekis[sentakun].tamacol, White);
+                    kansuu.DrawString(0, 100, "弾の見た目    [%3d] : O+←→キー" + tekis[sentakun].tamaknd, White);
+                    kansuu.DrawString(0, 120, ugokinamae[tekis[sentakun].tamaknd] + "     [%3d] : I+←→キー", White);
+                    kansuu.DrawString(0, 140, plusmessage[tekis[sentakun].tamaknd]+"    [%3d] : U+←→キー" + tekis[sentakun].pluskaku, White);
+                    kansuu.DrawString(0, 160, "弾の発射間隔    [%3d] : Y+←→キー" + tekis[sentakun].kankaku, White);
+                    kansuu.DrawString(0, 180, "登場までの時間    [%3d] : T+←→キー" + tekis[sentakun].toujyou, White);
+                    kansuu.DrawString(0, 200, "弾の速度     :F+←→キー" + tekis[sentakun].tamasokudo, White);
+                    kansuu.DrawString(0, 220, "waittime     :shift+(w/s)" + tekis[sentakun].waittime, White);
+                    kansuu.DrawString(0, 240, "体力     :H+←→キー" + tekis[sentakun].life, White);
                     kansuu.DrawString(0, 260, "選択     :n" + sentakun, White);
                     kansuu.DrawString(0, 280, "削除     :delete", White);
                     kansuu.DrawString(0, 300, "モード切替     :tab" + mode, White);
@@ -1067,7 +1073,7 @@ namespace _2._0._0
                 
                 i.main();
             }
-            for (int i = 0; i < Blpoint.Num; i++)
+         /*   for (int i = 0; i < Blpoint.Num; i++)
             {
                 Blpoint.Bl[i].hyouji = !sotohan(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy);
                 if (Blpoint.Bl[i].tamas.Count > 0) { Blpoint.Bl[i].seizon = true; }
@@ -1268,7 +1274,7 @@ namespace _2._0._0
                   Blpoint.Bl[i].idoutime += 1;
                   Blpoint.Bl[i].cnt += 1;
                 
-            }
+            }*/
         }
         public static void Output()
         {
@@ -1333,7 +1339,7 @@ namespace _2._0._0
             syokika();
             ini();
             load();
-            Blpoint.Bl = new Bl_t[10000];
+            //Blpoint.Bl = new Bl_t[10000];
             ugokin.ug = new ugoki_t[1000];
             ugokin.ug[0].Ug = new ugoki_tt[1000];
             ugokin.ug[0].num = 0;

@@ -38,7 +38,9 @@ namespace _2._0._0
         public float pluskaku;
         public float tamasokudo;
         public int ti = 0;
+        public int defalutlife;
         public int size = 0;
+        public bool kaitendraw=false;
         //  public int color,size;
      //   public List<allyuudou> ttama = new List<allyuudou>();
         public List<Tdan> tamas = new List<Tdan>();
@@ -69,6 +71,7 @@ namespace _2._0._0
             itemnum = item.Length;
             life = Hp;
             fx = X; fy = Y;
+            defalutlife=Hp;
          //   life = 50;
         }
 
@@ -102,7 +105,17 @@ namespace _2._0._0
         }
         public void hihyouji()
         {
-            if (life < 0) { if (hyouji) { hyouji = false; btama_1(); this.enteritem(); } }
+            if (life < 0)
+            {
+                if (hyouji)
+                {
+                    hyouji = false; this.enteritem();
+                    if (size != 2)
+                    {
+                        btama_1();
+                    }
+                }
+            }
             if (inswitch&&kansuu.sotoRota(zx, zy, gw, gh))
             {
                 hyouji = false;
@@ -118,7 +131,17 @@ namespace _2._0._0
         public void draw()
         {
             kansuu.setarea1();
-            if (hyouji) kansuu.DrawRotaGraphfk(zx, zy, 1, 0, gaz, DX.TRUE, true);
+            if (hyouji)
+            {
+                if (kaitendraw)
+                {
+                    kansuu.DrawRotaGraphfk(zx, zy, 1, ang - PI / 2, gaz, DX.TRUE, true);
+                }
+                else
+                {
+                    kansuu.DrawRotaGraphfk(zx, zy, 1, 0, gaz, DX.TRUE, true);
+                }
+            }
             kansuu.setareaend();
         }
         public void hantei()
@@ -163,6 +186,14 @@ namespace _2._0._0
         {
             switch (ugokikata)
             {
+                case -2:
+                    zakoudou.enemy_patternm2(zx, zy, ref sx, ref sy, ref idoutime, ugokikata, waittime, ref ang, ref zspeed);
+                    kaitendraw = true;
+                    break;
+                case -1:
+                    zakoudou.enemy_patternm1(zx, zy, ref sx, ref sy, ref idoutime, ugokikata, waittime, ref ang, ref zspeed);
+                    kaitendraw = true;
+                    break;
                 case 0:
                     zakoudou.enemy_pattern0(zx, zy, ref sx, ref sy, ref idoutime, ugokikata, waittime);
                     break;
@@ -195,6 +226,7 @@ namespace _2._0._0
                     break;
                 case 10:
                     zakoudou.enemy_pattern10(zx, zy, ref sx, ref sy, ref idoutime, ugokikata, waittime, ref ang, ref zspeed);
+                    kaitendraw = true;
                     break;
                 case 11:
                     zakoudou.enemy_pattern11(zx, zy, ref sx, ref sy, ref idoutime, ugokikata, waittime);

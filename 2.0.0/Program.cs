@@ -44,6 +44,7 @@ namespace _2._0._0
             zibun.Clear();
             zibun.Add(new ziki(1, 320, 300, 0));
             power = 100; point = 0; score = 0; gamemode = 0; count = 0;
+         
 
         }
         static void Main(string[] args)

@@ -168,7 +168,7 @@ namespace _2._0._0
             }
 
         }
-        public static bool enemyfile(ref float sx, ref float sy, ref int time, int num,ref int wait,int cnt,ref StreamReader read, string filename)
+        public static bool enemyfile(ref float sx, ref float sy, ref int time, int num,ref int wait,int cnt,ref float angle,ref StreamReader read, string filename)
         {
             if (cnt == 0)
             {
@@ -196,7 +196,10 @@ namespace _2._0._0
                     if (wait == 0) wait++;
                     sx = sx / wait;
                     sy = sy / wait;
+                    if (values.Length <= 3) { angle = kansuu.angling(0, 0, sx, sy); }
+                    else { angle = float.Parse(values[3]); }
                 }
+
             }
             if (time == wait)
             {

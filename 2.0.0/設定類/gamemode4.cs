@@ -137,7 +137,9 @@ namespace _2._0._0
             {
                 case 0:
                     if (tekiyomikomi("2-1-1", htime)) { tekiyomi++; htime = time + 40; }
-                 
+                    break;
+                case 1:
+                    if (tekiyomikomi("2-1-2", htime)) { tekiyomi++; htime = time + 40; }
                     break;
             }
             Program.enter_func("第2章", 0);

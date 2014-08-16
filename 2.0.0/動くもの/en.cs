@@ -233,7 +233,8 @@ namespace _2._0._0
                     break;
 
                 default:
-                    zakoudou.enemyfile(ref sx, ref sy, ref idoutime, ugokikata, ref waittime,ti, ref read,"ugokiting" + (ugokikata - 12));
+                    zakoudou.enemyfile(ref sx, ref sy, ref idoutime, ugokikata, ref waittime,ti,ref ang, ref read,"ugokiting" + (ugokikata - 12));
+                    zspeed = 0; kaitendraw = true;
                     break;
 
             }
@@ -291,7 +292,9 @@ namespace _2._0._0
                 case 10:
                     btama10();
                     break;
-     
+                case 11:
+                    btama11();
+                    break;
             }
         }
 
@@ -484,7 +487,7 @@ namespace _2._0._0
                 {
                     for (int i = 0; i < tamakosuu; i++)
                     {
-                        tamas.Add(new Tdan(zx, zy, 0, tamacol, tzang + kansuu.rang(kansuu.PI() / 4), 3 + kansuu.rang(pluskaku), tamaknd));
+                        tamas.Add(new Tdan(zx, zy, 0, tamacol, tzang + kansuu.rang(kansuu.PI() / 4), 3 + kansuu.rang((int)pluskaku), tamaknd));
                     }
                 }
             }
@@ -498,7 +501,7 @@ namespace _2._0._0
                 {
                     for (int i = 0; i < tamakosuu; i++)
                     {
-                        tamas.Add(new Tdan(zx, zy, 0, tamacol, tzang + kansuu.rang(kansuu.PI() / 4), 4 + kansuu.rang(pluskaku), tamaknd,7));
+                        tamas.Add(new Tdan(zx, zy, 0, tamacol, tzang + kansuu.rang(kansuu.PI() / 4), 4 + kansuu.rang((int)pluskaku), tamaknd,7));
                     }
                 }
             }
@@ -698,6 +701,13 @@ namespace _2._0._0
                 tamas.Add(new Tdan(zx,zy,0,tamacol,pluskaku,tamasokudo,tamaknd));
             }
         }
-   
+        public void btama11()//直下撃ち
+        {
+            int t = shot_cnt;
+            if (t % kankaku == 0)
+            {
+                tamas.Add(new Tdan(zx, zy, 0, tamacol, PI * 1 / 2, tamasokudo, tamaknd));
+            }
+        }
     }
 }

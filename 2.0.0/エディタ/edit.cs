@@ -90,6 +90,7 @@ namespace _2._0._0
             public float ey;
             public float sx;
             public float sy;
+            public float angle;
             public int jizoku;
         }
         public struct Bl_t
@@ -221,7 +222,7 @@ namespace _2._0._0
             Blpoint.Bl[Blpoint.Num].hp = hp;
             Blpoint.Num++;*/
         }
-        public static void InputugData(float x,float y,float ex,float ey,float sx, float sy,int jizoku)
+        public static void InputugData(float x,float y,float ex,float ey,float sx, float sy,int jizoku,float angle)
         {
             ugokin.ug[ugokin.Num].Ug[ugokin.ug[ugokin.Num].num].x = x;
             ugokin.ug[ugokin.Num].Ug[ugokin.ug[ugokin.Num].num].y = y;
@@ -230,6 +231,14 @@ namespace _2._0._0
             ugokin.ug[ugokin.Num].Ug[ugokin.ug[ugokin.Num].num].sx = sx;
             ugokin.ug[ugokin.Num].Ug[ugokin.ug[ugokin.Num].num].sy = sy;
             ugokin.ug[ugokin.Num].Ug[ugokin.ug[ugokin.Num].num].jizoku = jizoku;
+            if (sx != 0 && sy != 0 || ugokin.ug[ugokin.Num].num == 0)
+            {
+                ugokin.ug[ugokin.Num].Ug[ugokin.ug[ugokin.Num].num].angle = angle;
+            }
+            else
+            {
+                ugokin.ug[ugokin.Num].Ug[ugokin.ug[ugokin.Num].num].angle = ugokin.ug[ugokin.Num].Ug[ugokin.ug[ugokin.Num].num - 1].angle;
+            }
             ugokin.ug[ugokin.Num].num++;
         }
         public static void CalcBullet()
@@ -237,7 +246,7 @@ namespace _2._0._0
                 float x = Operate.fPt1.x - Program.fx, y = Operate.fPt1.y - Program.fy;//最初の場所
                 //最初クリックした場所と最後クリックした場所との角度
                 float X = Operate.fPt2.x - Program.fx, Y = Operate.fPt2.y - Program.fy;    
-                float Angle = (float)Math.Atan2(Operate.fPt2.y - Program.fy - Operate.fPt1.y + Program.fy, Operate.fPt2.x - Program.fx - Operate.fPt1.x + Program.fx);
+                float Angle = (float)Math.Atan2(Operate.fPt2.y - Operate.fPt1.y, Operate.fPt2.x - Operate.fPt1.x );
                 float xlen = Operate.fPt2.x - Operate.fPt1.x;//xの距離
                 float ylen = Operate.fPt2.y - Operate.fPt1.y;//yの距離
                 float Length = (float)Math.Sqrt(xlen * xlen + ylen * ylen);//点と点との距離
@@ -267,7 +276,7 @@ namespace _2._0._0
 
             else if (mode == 3)
             {
-                InputugData(x,y,X,Y,xlen, ylen, jizokujikan);
+                InputugData(x,y,X,Y,xlen, ylen, jizokujikan,Angle);
             }
         }
         public static void CalcMouse()
@@ -879,7 +888,7 @@ namespace _2._0._0
                     StreamWriter writer = new StreamWriter("ugokikata\\ugokiting" + ugokin.Num + ".csv", false);
                     foreach (var k in ugokin.ug[ugokin.Num].Ug.Where(c => c.jizoku != 0))
                     {
-                        writer.WriteLine(k.sx + "," + k.sy + "," + k.jizoku);
+                        writer.WriteLine(k.sx + "," + k.sy + "," + k.jizoku+","+k.angle);
                     }
                     writer.Close();
 
@@ -920,7 +929,7 @@ namespace _2._0._0
                         ugokin.ug[ugokin.Num].num = 0;
                     }
                 }
-            }
+            } enter_func("入力管理", 0);
             
         }
 
@@ -941,7 +950,7 @@ namespace _2._0._0
                     kansuu.DrawRotaGraphfk(i.fx, i.fy, 1, 0, i.gaz, DX.TRUE, false);
                   
                 }
-            }
+            } enter_func("敵の描画", 0);
          /*   for (int i = 0; i < Blpoint.Num; i++)
             {
                 if (mode == 0 || mode == 2)
@@ -969,11 +978,11 @@ namespace _2._0._0
             }*/
             if (mode == 3)
             {
-                foreach (var k in ugokin.ug[ugokin.Num].Ug)
+                foreach (var k in ugokin.ug[ugokin.Num].Ug.Where(c=>c.x!=0&&c.y!=0))
                 {
                     kansuu.DrawRotaGraphfk(k.x, k.y, 1, 0, tekiimg[0], 1, false);
                     kansuu.DrawRotaGraphfk(k.ex, k.ey, 1, 0, tekiimg[2], 1, false);
-                }
+                } enter_func("動きチェック", 0);
             }
             if (mode == 0||mode ==3)
             {
@@ -1049,16 +1058,16 @@ namespace _2._0._0
                 }
                 else if (mode == 3)
                 {
-                    kansuu.DrawString(0, 0, "座標[%3d,%3d]" + Mouse.x + ":" + Mouse.y, White);
-                    kansuu.DrawString(0, 20, "動き方を"+ugokin.Num+"番目に保存:enter", White);
-                    kansuu.DrawString(0, 40, jizokujikan + "速度で移動:shift+←→キー", White);
-                    kansuu.DrawString(0, 60, "保存ファイル変更:Q+←→キー", White);
+                    kansuu.DrawString(0, 0, "座標[%3d,%3d]" + Mouse.x + ":" + Mouse.y, White); enter_func("座標", 0);
+                    kansuu.DrawString(0, 20, "動き方を" + ugokin.Num + "番目に保存:enter", White); enter_func("動き方", 0);
+                    kansuu.DrawString(0, 40, jizokujikan + "速度で移動:shift+←→キー", White); enter_func("速度変更", 0);
+                    kansuu.DrawString(0, 60, "保存ファイル変更:Q+←→キー", White); enter_func("保存変更", 0);
                     if (File.Exists("ugokikata\\ugokiting" +ugokin.Num+".csv"))
                     {
                         kansuu.DrawString(0, 80, "既に保存されているファイル有(上書き保存されます)", Red);
-                    }
-               
-                }
+                    } enter_func("保存チェック", 0);
+
+                } enter_func("情報描画", 0);
             }
 
         }
@@ -1072,7 +1081,7 @@ namespace _2._0._0
             {
                 
                 i.main();
-            }
+            } enter_func("雑魚の動き", 0);
          /*   for (int i = 0; i < Blpoint.Num; i++)
             {
                 Blpoint.Bl[i].hyouji = !sotohan(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy);
@@ -1347,7 +1356,7 @@ namespace _2._0._0
             {
                 DX.ClearDrawScreen();
                 DX.DrawBox(screenx, 0, screenx + 300, screeny, DX.GetColor(255, 255, 255), DX.TRUE);
-                  
+                enter_func("最初", 0); 
                 for (int i = 0; i < Program.zibun.Count; i++)
                 {
                     Program.zibun[i].Ziki();
@@ -1356,10 +1365,10 @@ namespace _2._0._0
                 }
                 if (mode == 0 || mode == 3)
                 {
-                    GetHitMouseStateAll_2();
-                    CalcMouse();
+                    GetHitMouseStateAll_2(); enter_func("マウス管理", 0);
+                    CalcMouse(); enter_func("マウス計算", 0);
                     CalcOperate();
-                    Show();
+                    Show(); enter_func("描画", 0);
                 }
                 else if (mode == 1 || mode == 2)
                 {
@@ -1374,11 +1383,57 @@ namespace _2._0._0
                 DX.DrawBox(0, 0, Program.fx, Program.scy, DX.GetColor(0, 0, 255), DX.FALSE);
                 DX.DrawBox(0, 0, Program.scx, Program.fy, DX.GetColor(0, 0, 255), DX.FALSE);
                 DX.DrawBox(0, Program.scy, Program.scx, Program.scy - Program.fy, DX.GetColor(0, 0, 255), DX.FALSE);
-            
+                enter_func("事後処理", 1);
+                drawfunc(Program.scx, 250);
                 DX.ScreenFlip();
             }
            if (DX.ProcessMessage() == 0) { Output(); }
             Program.gamemode = 1;
         }
+       public const int STRMAX = 64;
+       public const int FUNCMAX = 30;
+       public static int funccount = 0;
+       public static long lt;
+       public struct functm
+       {
+           public int tm; public string str;
+       }
+       static functm[] funct = new functm[FUNCMAX];
+       public static void enter_func(string st, int flag)
+       {
+           long nowtm;
+           if (funccount >= FUNCMAX) { return; }
+           nowtm = DX.GetNowHiPerformanceCount();
+           if (nowtm - lt < int.MaxValue)
+           {
+               funct[funccount].tm = (int)(nowtm - lt);
+               funct[funccount].str = st;
+
+           }
+           else { funct[funccount].tm = -1; }
+           lt = nowtm;
+           if (flag == 1)
+           {
+               funccount = 0;
+           }
+           else { funccount++; }
+
+       }
+       public static void drawfunc(int x, int y)
+       {
+           int total = 0;
+           int i;
+           for (i = 0; i < FUNCMAX; i++)
+           {
+               if (funct[i].str == null) { break; }
+               DX.DrawString(x, y + 14 * i, funct[i].tm / 1000.0f + "" + funct[i].str, DX.GetColor(255,0,0));
+               total += funct[i].tm;
+           }
+           DX.DrawString(x, y + 14 * i, "合計:" + total / 1000, DX.GetColor(255, 0, 0));
+           DX.DrawString(x, y + 14 * (i + 1), "敵の数:" + gamemode4.teki.Count, DX.GetColor(255, 0, 0));
+
+       }
+
     }
+
 }

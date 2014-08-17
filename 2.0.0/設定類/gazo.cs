@@ -42,7 +42,7 @@ namespace _2._0._0
        public static int[,] itemimg=new int[6,2];
        public static int[,] btamab = new int[2, 10];
        public static int[] btamabgw = new int[2] { 16, 24 };
-       
+       public static int[] titles = new int[10];
        //多弾専用
        public static int[,] otama = new int[25, 64];
        public static int[] otamagw = new int[25];
@@ -71,6 +71,7 @@ namespace _2._0._0
        {
            zakoLoad();
            bombLoad();
+           titles[0] = DX.LoadGraph("Title\\C1.png");
            sinziki = DX.LoadGraph("キャラクタ\\ziki.png");
            zikiGraph = DX.LoadGraph("atari1.png");
 

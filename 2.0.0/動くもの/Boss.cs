@@ -9,6 +9,7 @@ namespace _2._0._0
     public  class Boss : en
     {
 #region 宣言
+        public bool fend=false;
         public bool end = false;
         protected float BOSS_POS_X = Program.fmx / 2;
         protected float BOSS_POS_Y = 150.0f, v0x = 0, v0y = 0, ax, ay;
@@ -33,6 +34,7 @@ namespace _2._0._0
 #endregion
         public void syokika()
         {
+            effecttime = 255;
             count = -1;
             damage = 5;
             fucount = 0;
@@ -120,6 +122,7 @@ namespace _2._0._0
             dantime = 0;
             knd++;
             if (state == 1 && knd == danmakusu) { end = true; }
+            
             wtime = 0;
         //    ttama.Clear();
             dansaisyo = true;
@@ -146,6 +149,7 @@ namespace _2._0._0
         /// <summary>
         /// </summary>
         /// // ////////////////////////////////////////////////////
+        
         public void boss_shot_main()
         {
             if (saisyo) { enter_boss(0); saisyo = false; }
@@ -161,8 +165,17 @@ namespace _2._0._0
                 shot_calc(); Program.enter_func("ボスショット", 0);
                 kansuu.DrawBox(0, 0, hyoujirai, 20, DX.GetColor(255, 255, 255), DX.TRUE);
             }
-           
-            fucount += 1;
+            if (end)
+            {
+                hyouji = false;
+                DX.SetDrawBright(255, 0, 0); fend = dieefe(1); DX.SetDrawBright(255, 255, 255);
+   
+
+            }
+            else
+            {
+                kansuu.DrawRotaGraphfk(dx, dy, 1, 0, gaz, DX.TRUE, false);
+            } fucount += 1;
         }
         
         // // // // // // /// /////////////////////////////////////////

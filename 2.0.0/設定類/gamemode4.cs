@@ -19,6 +19,7 @@ namespace _2._0._0
         public static int bossnum = -1;
         public static int chapter = 1;
         public static int time = 0;
+        private static int effetime = 0;
         public static bool kaishi = true;
         public static bool bosschuu = false;
         public static Boss[] bosss = new Boss[2];
@@ -27,12 +28,13 @@ namespace _2._0._0
         public static List<en> teki = new List<en>();
         public static void syokika()
         {
-            tekiyomi = 0;
+            tekiyomi = -1;
             im.Clear();
             ef.Clear();
             teki.Clear();
-            chapter = 2;
+            chapter = 1;
             bossnum = -1;
+            effetime = 0;
             time = 0;
             bosss[1] = new Boss1(Program.scx / 2, 30);
             bosss[0] = new NBoss1(Program.scx / 2, -30);
@@ -82,6 +84,10 @@ namespace _2._0._0
         {
             switch (tekiyomi)
             {
+                case -1:
+                    if (startin(1)) { htime = time + 40; tekiyomi++; };
+                   
+                    break;
                 case 0:
                     if (tekiyomikomi("1-1-1", 0)) { htime = time + 40; tekiyomi++; }
                     //if (tekiyomikomi("1-1-5", htime)) { tekiyomi++; htime = time + 40; }
@@ -104,7 +110,7 @@ namespace _2._0._0
                     {
                         removeall();
                         bosss[0].boss_shot_main();
-                        if (bosss[0].end) { tekiyomi++; htime = time + 40; gamemode4.bosschuu = false; }
+                        if (bosss[0].fend) { tekiyomi++; htime = time + 40; gamemode4.bosschuu = false; }
                     }
                     break;
                 case 5:
@@ -121,7 +127,7 @@ namespace _2._0._0
                     {
                         // removeall();
                         bosss[1].boss_shot_main();
-                        if (bosss[1].end) { tekiyomi++; htime = time + 40; gamemode4.bosschuu = false; }
+                        if (bosss[1].fend) { tekiyomi++; htime = time + 40; gamemode4.bosschuu = false; }
                     }
                     break;
                 default:
@@ -216,6 +222,17 @@ namespace _2._0._0
             }
             if (owari) { readin = false; }
             return owari;
+        }
+        private static bool startin(int chapter)
+        {
+            
+            kansuu.DrawRotaGraphfk(Program.scx/2, Program.scy/2, 1, 0, gazo.titles[0], DX.TRUE, false);
+            DX.SetDrawBlendMode(DX.DX_BLENDMODE_ALPHA, effetime);
+            kansuu.DrawRotaGraphfk(Program.scx / 2, Program.scy / 2,effetime/100.0, 0, gazo.titles[0], DX.TRUE, false);
+            DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND, effetime);
+            if (++effetime >= 256) { return true; }
+            else { return false; }
+            
         }
     }
 }

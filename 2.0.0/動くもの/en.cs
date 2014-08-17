@@ -17,6 +17,7 @@ namespace _2._0._0
         protected float PI = kansuu.PI();
         protected float PI2 = kansuu.PI2();
         protected int shot_cnt = 0;
+        protected int effecttime = 255;
         public int cnte = 0;
         public bool seizon = true;
         public float life = 100;
@@ -83,10 +84,10 @@ namespace _2._0._0
           //  btama0();
             hassya();
             shot_calc();
-            this.pattern();
+           
             if (hyouji)
             {
-               
+                this.pattern();
                 this.hantei();
                 if (!editing) { this.draw(); }
                 
@@ -122,7 +123,7 @@ namespace _2._0._0
             }
             if (!hyouji&&inswitch)
             {
-                if (tamas.Count == 0)
+                if (dieefe(1)&&tamas.Count == 0)
                 {
                     seizon = false;
                 }
@@ -298,20 +299,16 @@ namespace _2._0._0
             }
         }
 
-        public void tamakanri()
+        public bool dieefe(double kakudai)
         {
-        //    for (int i = 0; i < ttama.Count; i++)
-        //        if (ttama[i].seizon)
-                {
-        //            ttama[i].ido();
-                }
-       //         else
-                {
-           //         ttama.Remove(ttama[i]);
-       //             i -= 1;
-                }
-
-            
+            if (!kaitendraw) { ang = PI / 2; }
+            DX.SetDrawBlendMode(DX.DX_BLENDMODE_INVSRC, effecttime);
+            kansuu.DrawRotaGraphfk(zx, zy, kakudai, ang - PI / 2, gaz, DX.TRUE, false);
+            DX.SetDrawBlendMode(DX.DX_BLENDMODE_ADD, effecttime);
+            kansuu.DrawRotaGraphfk(zx, zy, kakudai, ang - PI / 2, gaz, DX.TRUE, false);
+            DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND, 255);
+            effecttime-=2;
+            return effecttime < 0;
         }
         public void enteritem()
         {
@@ -327,7 +324,7 @@ namespace _2._0._0
             {
                 gamemode4.im.Add(new item(zx, zy, 4, -3.5f));
             }
-            gamemode4.ef.Add(new effect(zx, zy,-1,-1,-1,-1,255,-1,-1, 0, 255));
+          //  gamemode4.ef.Add(new effect(zx, zy,-1,-1,-1,-1,255,-1,-1, 0, 255));
         }
         public virtual void shot_calc()
         {
@@ -601,29 +598,32 @@ namespace _2._0._0
             float kaku = Math.Abs(pluskaku);
             if (t % kankaku == 0)
             {
-                if (tamakosuu % 2 == 0)
+                if (hyouji)
                 {
-                    for (int i = 0; i < tamakosuu; i++)
+                    if (tamakosuu % 2 == 0)
                     {
-                        float plusangle = 0;
-                        if (i % 2 == 1) { plusangle = kaku * (i + 1) / 2; }
-                        else { plusangle = -kaku * i / 2; }
-                        jissai = (plusangle) * chouseikakudo + tzang;
-                        tamas.Add(new Tdan(zx, zy, 0, tamacol, jissai, tamasokudo, tamaknd, 5));
+                        for (int i = 0; i < tamakosuu; i++)
+                        {
+                            float plusangle = 0;
+                            if (i % 2 == 1) { plusangle = kaku * (i + 1) / 2; }
+                            else { plusangle = -kaku * i / 2; }
+                            jissai = (plusangle) * chouseikakudo + tzang;
+                            tamas.Add(new Tdan(zx, zy, 0, tamacol, jissai, tamasokudo, tamaknd, 5));
+                        }
                     }
-                }
-                else
-                {
-                    for (int i = 0; i < tamakosuu; i++)
+                    else
                     {
-                        float plusangle = 0;
-                        if (i % 2 == 1) { plusangle = kaku * (i + 1) / 2 + kaku/2.0f; }
-                        else { plusangle = -kaku * i / 2 - kaku/2.0f; }
-                        jissai = (plusangle) * chouseikakudo + tzang;
-                        tamas.Add(new Tdan(zx, zy, 0, tamacol, jissai, tamasokudo, tamaknd, 5));
+                        for (int i = 0; i < tamakosuu; i++)
+                        {
+                            float plusangle = 0;
+                            if (i % 2 == 1) { plusangle = kaku * (i + 1) / 2 + kaku / 2.0f; }
+                            else { plusangle = -kaku * i / 2 - kaku / 2.0f; }
+                            jissai = (plusangle) * chouseikakudo + tzang;
+                            tamas.Add(new Tdan(zx, zy, 0, tamacol, jissai, tamasokudo, tamaknd, 5));
+
+                        }
 
                     }
-
                 }
                 for (int i = 0; i < tamas.Count; i++)
                 {
@@ -635,20 +635,20 @@ namespace _2._0._0
                             for (int k = 0; k < 20; k++)
                             {
                                 tamas.Add(new Tdan(tamas[i].x, tamas[i].y, 0, tamacol, kansuu.zikiangle(tamas[i].x, tamas[i].y) + kansuu.PI2() / 20 * k, 4, tamaknd));
-                         
+
                             }
-                            
+
                         }
                     }
                 }
-        
+
             }
         }
         public void btama8()//回転弾(敵から)
         {
             int t = shot_cnt;
             float omega = tamasokudo;
-            if (t == 1)
+            if (t == 1&&hyouji)
             {
                 for (int i = 0; i < tamakosuu; i++)
                 {
@@ -669,7 +669,7 @@ namespace _2._0._0
         {
             int t = shot_cnt;
             float omega = tamasokudo;
-            if (t % kankaku == 0)
+            if (t % kankaku == 0&&hyouji)
             {
                 tamas.Add(new Tdan(zx, zy, 0, tamacol, tzang, 4, tamaknd,5));
             }
@@ -696,7 +696,7 @@ namespace _2._0._0
         public void btama10()//適当な方向弾
         {
             int t = shot_cnt;
-            if (t % kankaku == 0)
+            if (t % kankaku == 0&&hyouji)
             {
                 tamas.Add(new Tdan(zx,zy,0,tamacol,pluskaku,tamasokudo,tamaknd));
             }
@@ -704,7 +704,7 @@ namespace _2._0._0
         public void btama11()//直下撃ち
         {
             int t = shot_cnt;
-            if (t % kankaku == 0)
+            if (t % kankaku == 0&&hyouji)
             {
                 tamas.Add(new Tdan(zx, zy, 0, tamacol, PI * 1 / 2, tamasokudo, tamaknd));
             }

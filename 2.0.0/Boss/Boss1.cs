@@ -11,6 +11,7 @@ namespace _2._0._0
         public Boss1(float X, float Y)
         {
             zx = X; zy = Y; gw = gazo.Boss1gw; gh = gazo.Boss1gh;
+            gaz = gazo.Boss1Graph;
             set_life = new int[10] ;
             damage = 5;
             danmakusu = 4;
@@ -52,7 +53,7 @@ namespace _2._0._0
                 DX.DrawString(0, 0, "ライフ：" + life+"残り時間："+endtime, DX.GetColor(255, 255, 255));
            //     DX.DrawBox(10, 10, 10 + life , 20, DX.GetColor(255, 255, 255), DX.TRUE);
             }
-            kansuu.DrawRotaGraphfk(dx, dy, 1, 0, gazo.Boss1Graph, DX.TRUE,true);
+        //    kansuu.DrawRotaGraphfk(dx, dy, 1, 0, gaz, DX.TRUE,true);
             hantei();
             graph_bossefe();
         }

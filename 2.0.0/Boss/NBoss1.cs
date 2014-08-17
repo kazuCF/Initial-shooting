@@ -12,6 +12,7 @@ namespace _2._0._0
           zx = X; zy = Y; gw = gazo.Boss1gw; gh = gazo.Boss1gh;
           set_life = new int[10];
           damage = 5;
+          gaz = gazo.Boss1Graph;
           for (int i = 0; i < set_life.Length; i++)
           {
               set_life[i] = 5000;
@@ -36,7 +37,7 @@ namespace _2._0._0
               DX.DrawString(0, 0, "ライフ：" + life + "残り時間：" + endtime, DX.GetColor(255, 255, 255));
               // DX.DrawBox(10, 10, 10 +hyoujirai, 20, DX.GetColor(255, 255, 255), DX.TRUE);
               }
-          kansuu.DrawRotaGraphfk(dx, dy, 1, 0, gazo.Boss1Graph, DX.TRUE, true);
+         // kansuu.DrawRotaGraphfk(dx, dy, 1, 0, gaz, DX.TRUE, true);
           hantei();
           graph_bossefe();
       }

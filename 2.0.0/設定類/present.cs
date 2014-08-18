@@ -24,18 +24,18 @@ namespace _2._0._0
         {
          
             
-             ThreadStart action = () =>
-    {
-        syokika(); start.syokika(); Program.syokika(); gazo.syokika(); gamemode4.syokika(); DX.WaitTimer(1000); 
+    //         ThreadStart action = () =>
+   // {
+        syokika(); start.syokika(); Program.syokika(); gazo.syokika(); gamemode4.syokika();
 
-    }; 
+ /*   }; 
             Thread thread = new Thread(action);
        
       
             thread.Start();
             DX.DrawString(Program.realscx / 2, Program.realscy / 2, "Now Loading", DX.GetColor(255, 255, 255));
            
-            thread.Join();
+            thread.Join();*/
                 Program.gamemode = 1;
         }
         public static void hajimari()

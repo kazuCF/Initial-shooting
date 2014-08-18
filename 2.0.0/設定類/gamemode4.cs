@@ -226,8 +226,8 @@ namespace _2._0._0
         private static bool startin(int chapter)
         {
             
-            kansuu.DrawRotaGraphfk(Program.scx/2, Program.scy/2, 1, 0, gazo.titles[0], DX.TRUE, false);
-            DX.SetDrawBlendMode(DX.DX_BLENDMODE_ALPHA, effetime);
+           // kansuu.DrawRotaGraphfk(Program.scx/2, Program.scy/2, 1, 0, gazo.titles[0], DX.TRUE, false);
+            DX.SetDrawBlendMode(DX.DX_BLENDMODE_ALPHA, 255-effetime);
             kansuu.DrawRotaGraphfk(Program.scx / 2, Program.scy / 2,effetime/100.0, 0, gazo.titles[0], DX.TRUE, false);
             DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND, effetime);
             if (++effetime >= 256) { return true; }

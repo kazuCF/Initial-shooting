@@ -18,7 +18,7 @@ namespace _2._0._0
         private static int kgw, kgh, cgw, cgh, lgw, lgh, c2gw, c2gh, k2gw, k2gh;
         public static void syokika()
         {
-            K = DX.LoadGraph("k.bmp"); C = DX.LoadGraph("kc.bmp"); L = DX.LoadGraph("kcl.bmp"); C2 = DX.LoadGraph("kclc.bmp"); KCLC2013 = DX.LoadGraph("kclc2013.bmp");
+            K = DX.LoadGraph("k.bmp"); C = DX.LoadGraph("kc.bmp"); L = DX.LoadGraph("kcl.bmp"); C2 = DX.LoadGraph("kclc.bmp"); KCLC2013 = DX.LoadGraph("kclc2013.png");
         }
         public static void Loading()
         {

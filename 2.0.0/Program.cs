@@ -10,6 +10,7 @@ namespace _2._0._0
     class Program
     {//510-64=446
         //640-32=608
+        public static int[] Fonts = new int[100];
         public static int dnx, dny, dns, dnc, dnflg, dnt;
         public static int brt;
         public static int white, black, red, green, blue;
@@ -44,7 +45,7 @@ namespace _2._0._0
             zibun.Clear();
             zibun.Add(new ziki(1, 320, 300, 0));
             power = 100; point = 0; score = 0; gamemode = 0; count = 0;
-         
+            Fonts[0] = DX.CreateFontToHandle("Lindsey", 50, 10, DX.DX_CHARSET_DEFAULT);
 
         }
         static void Main(string[] args)

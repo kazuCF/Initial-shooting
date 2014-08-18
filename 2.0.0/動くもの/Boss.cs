@@ -660,6 +660,7 @@ namespace _2._0._0
             if (t < 50) { kansuu.DrawLine(zx+6, zy+6, gx, gy, DX.GetColor(255, 255, 0), t, true); }
             else { kansuu.DrawLine(zx + 6, zy + 6, gx, gy, DX.GetColor(255, 255, 0), 50, true); }
         }
+
         public static float[] kx;
         public static float[] ky;
         public static int[] kcol;

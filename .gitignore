@@ -10,3 +10,4 @@ Properties/
 2.0.0/bin/x86/Debug/2.0.0.exe
 2.0.0/obj/x86/Debug/2.0.0.pdb
 2.0.0/obj/x86/Debug/2.0.0.csproj.FileListAbsolute.txt
+*.db

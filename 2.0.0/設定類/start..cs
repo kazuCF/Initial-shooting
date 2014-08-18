@@ -8,7 +8,7 @@ namespace _2._0._0
 {
     public static class start
     {
-        private static int myoutyou;
+
         public static int size = 5;
         private static int ssize = 1;
         private static int startgameGraph;
@@ -20,8 +20,6 @@ namespace _2._0._0
         private static bool exit ;
         private static bool start1;
         private static bool how;
-        private static bool up;
-        private static bool down ;
         private static int selecting;
         public static int r ;
         public static int g;
@@ -38,7 +36,7 @@ namespace _2._0._0
             exitGraph = DX.LoadGraph("exit.bmp");
             howto = DX.LoadGraph("howto.bmp");
             sentaku2 = DX.LoadGraph("sentaku2.bmp");
-            exit = false; start1 = true; how = false; down = false; r = g = b = wave = 0;
+            exit = false; start1 = true; how = false; r = g = b = wave = 0;
             time = stime = 1;
             selecting = 0;
         }
@@ -74,9 +72,9 @@ namespace _2._0._0
 //Program.gamemode = 8;
 
          //   DX.DrawGraph(150, 283, howto, DX.TRUE);
-            DX.DrawString(150, 183, "Start Game", (selecting==0?Program.red:Program.white));
-            DX.DrawString(150, 283, "How to Play", (selecting == 1 ? Program.red : Program.white));
-            DX.DrawString(150, 383, "Exit", (selecting == 2 ? Program.red : Program.white));
+            DX.DrawStringToHandle(150, 183, "Start Game", (selecting==0?Program.red:Program.white),Program.Fonts[0]);
+            DX.DrawStringToHandle(150, 283, "How to Play", (selecting == 1 ? Program.red : Program.white), Program.Fonts[0]);
+            DX.DrawStringToHandle(150, 383, "Exit", (selecting == 2 ? Program.red : Program.white), Program.Fonts[0]);
          //   DX.DrawGraph(150, 183, startgameGraph, DX.TRUE);
           //  DX.DrawGraph(150, 383, exitGraph, DX.TRUE);
             //    DX.DrawGraph(300, 453, zkettei, DX.TRUE);

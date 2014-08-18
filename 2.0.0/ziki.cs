@@ -259,7 +259,6 @@ namespace _2._0._0
             foreach (var i in tamas.Where(c => c.state == 1))
             {
                 int num = -1, min = -1, d;
-                int l = 0;
                 double x, y;
                 if (!gamemode4.bosschuu)
                 {
@@ -291,7 +290,7 @@ namespace _2._0._0
             switch (chara)
             {
                 case 0:
-                    if (Program.power > 200)
+                    if (Program.power > 300)
                     {
                         if (Program.key[DX.KEY_INPUT_LSHIFT] > 0) { pluskaku = 1.5f; }
                         else { pluskaku = 3; }

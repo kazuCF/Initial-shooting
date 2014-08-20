@@ -67,7 +67,7 @@ namespace _2._0._0
         }
 
 
-        public static float Crange = 4.0f;
+        public static float Crange = 3.3f;
         public static bool haniatariz(double x, double y, double atarihani, double speed, double angle)//当たり範囲を用いた自機との当たり判定
         {
             foreach (var zi in Program.zibun)
@@ -75,7 +75,6 @@ namespace _2._0._0
 
                 if (!zi.muteki)
                 {
-                    double kx = x - zi.zikix; double ky = y - zi.zikiy;
                     double r = atarihani + Crange;
                     if (speed > r)
                     {
@@ -98,6 +97,8 @@ namespace _2._0._0
                     }
                     else
                     {
+                        double kx = x - zi.zikix; double ky = y - zi.zikiy;
+
                         if (kx * kx + ky * ky < r * r)
                         {
                             zi.itemdrop(); return true;

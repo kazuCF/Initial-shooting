@@ -31,7 +31,9 @@ namespace _2._0._0
                 switch (knd)
                 {
                     case 0:
-                     //   shot1();
+                        shot1();
+                        shot2();
+                       // shot3();
                         shot6();
                         break;
                     case 1:

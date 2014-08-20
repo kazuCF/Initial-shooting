@@ -8,14 +8,21 @@ namespace _2._0._0
 {
     public static class zakoudou
     {
+
+        public static void enemy_patternm3(float ex, float ey, ref float sx, ref float sy, ref int time, int num, int wait, ref float ang, ref float speed)
+        {
+            if (time == 0) { ang = kansuu.zikiangle(ex, ey); speed = kansuu.rang(2);  }
+            else if (time == 20) { speed += 6+kansuu.rang(3); }
+        }
+        public static void enemy_patternm2(float ex, float ey, ref float sx, ref float sy, ref int time, int num, int wait, ref float ang, ref float speed)
+        {
+            if (time == 0) { ang = kansuu.PI() + kansuu.rang(-0.3f, 0.3f); speed = 5 + kansuu.rang(5); }
+        }
         public static void enemy_patternm1(float ex, float ey, ref float sx, ref float sy, ref int time, int num, int wait, ref float ang, ref float speed)
         {
             if (time == 0) { ang = kansuu.rang(-0.3f, 0.3f); speed = 5 + kansuu.rang(5); }
         }
-        public static void enemy_patternm2(float ex, float ey, ref float sx, ref float sy, ref int time, int num, int wait, ref float ang, ref float speed)
-        {
-            if (time == 0) { ang = kansuu.PI()+kansuu.rang(-0.3f, 0.3f); speed = 5 + kansuu.rang(5); }
-        }
+
         public static void enemy_pattern0(float ex, float ey, ref float sx, ref float sy, ref int time, int num, int wait)
         {
             if (time > 30 + wait) { sy = -0.5f - 0.1f * num; return; }
@@ -168,17 +175,17 @@ namespace _2._0._0
             }
 
         }
-        public static bool enemyfile(ref float sx, ref float sy, ref int time, int num,ref int wait,int cnt,ref float angle,ref StreamReader read, string filename)
+        public static bool enemyfile(ref float sx, ref float sy, ref int time, int num, ref int wait, int cnt, ref float angle, ref StreamReader read, string filename)
         {
             if (cnt == 0)
             {
-               read = new StreamReader("ugokikata\\" + filename + ".csv", false);
-           
+                read = new StreamReader("ugokikata\\" + filename + ".csv", false);
+
             }
             if (time == 0)
             {
                 var line = read.ReadLine();
-                if (line.Contains("#")) 
+                if (line.Contains("#"))
                 {
                     return true;
                 }
@@ -204,10 +211,10 @@ namespace _2._0._0
             if (time == wait)
             {
                 if (read.EndOfStream)
-                { 
+                {
                     read.Close();
                     return true;
-                   
+
                 }
                 else
                 {

@@ -72,6 +72,7 @@ namespace _2._0._0
            zakoLoad();
            bombLoad();
            titles[0] = DX.LoadGraph("Title\\C1.png");
+           titles[1] = DX.LoadGraph("Title\\C2.png");
            sinziki = DX.LoadGraph("キャラクタ\\ziki.png");
            zikiGraph = DX.LoadGraph("atari1.png");
 

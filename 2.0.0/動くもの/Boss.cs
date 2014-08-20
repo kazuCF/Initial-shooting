@@ -179,56 +179,46 @@ namespace _2._0._0
         }
         
         // // // // // // /// /////////////////////////////////////////
-      override  public void shot_calc()
+        override public void shot_calc()
         {
             dan.RemoveAll(c => Program.isbom);
             if (ziki.bommcool == 60)
             {
-                
+
                 life -= 300;
             }
             endtime--; if (endtime < 0) { life = 0; }
+        //    kansuu.setarea1();
             foreach (Tdan tama in dan)
             {
-              
-                tama.x += kansuu.Cos(tama.angle) * tama.speed;
-                tama.y += kansuu.Sin(tama.angle) * tama.speed;
+
                 if (tama.inswitch)
                 {
-                    //     if (tama.x < -50 || tama.x > Program.fmx + 50 || tama.y < -50 || tama.y > Program.fmy + 50)
-                    if (kansuu.sotoRota(tama.x, tama.y, gazo.otamagw[tama.size], gazo.otamagh[tama.size]))
+                    if (kansuu.sotoRota(tama.x, tama.y, gazo.otamagw[tama.size], gazo.otamagh[tama.size]) || kansuu.haniatariz(tama.x, tama.y, tama.atarihani, tama.speed, tama.angle))
                     {
-                        tama.seizon = false; 
+                        tama.seizon = false; continue;
                     }
-                    if (tama.cnt > 0)
-                    {
-                        if (kansuu.haniatariz(tama.x, tama.y, tama.atarihani, tama.speed, tama.angle))
-                        {
-                            tama.seizon = false;
-                        }
-                    }
-                }
+                    // if (tama.kaiten)
+                    //    {
+                    //         tama.dispangle = 2 * PI * (tama.cnt % 120) / 120;
+                    //    }
+                    //   else
+                    { tama.dispangle = tama.angle + PI / 2; }
+                    kansuu.DrawRotaGraphfk(tama.x, tama.y, 1, tama.dispangle, gazo.otama[tama.size, tama.col], DX.TRUE, true);
 
+                }
                 else { if (kansuu.naka(tama.x, tama.y, gazo.otamagw[tama.size], gazo.otamagw[tama.size])) { tama.inswitch = true; }; }
-                kansuu.setarea1();
-                if (tama.kaiten)
-                {
-                    tama.dispangle = 2 * PI * (tama.cnt % 120) / 120;
-                }
-                else { tama.dispangle = tama.angle + PI / 2; }
-                kansuu.DrawRotaGraphfk(tama.x, tama.y, 1,tama.dispangle, gazo.otama[tama.size, tama.col], DX.TRUE,true);
-                kansuu.setareaend();
-
-
-
+                tama.x += kansuu.Cos(tama.angle) * tama.speed;
+                tama.y += kansuu.Sin(tama.angle) * tama.speed;
                 tama.cnt++;
 
-            }
+            } 
+       //     kansuu.setareaend();
             shot_cnt++;
 
             angle = this.zAtan2();
             dan.RemoveAll(x => !x.seizon);
-          
+
         }
         public virtual void iroiro()
         { }
@@ -326,7 +316,7 @@ namespace _2._0._0
 
                 }
             }
-            foreach (var s2 in dan)
+            foreach (var s2 in dan.Where(c=>c.state==0||c.state==1))
             {
                 if (s2.seizon)
                 {

@@ -8,6 +8,8 @@ namespace _2._0._0
 {
     public class en
     {
+        public int state = 0;
+        public bool alfha = false;
         public bool editing = false;
         public float fx, fy;//エディト用描画変数
         public static int mynumber;
@@ -16,7 +18,7 @@ namespace _2._0._0
         protected float tzang;
         protected float PI = kansuu.PI();
         protected float PI2 = kansuu.PI2();
-        protected int shot_cnt = 0;
+        protected int shot_cnt = 1;
         protected int effecttime = 255;
         public int cnte = 0;
         public bool seizon = true;
@@ -131,9 +133,13 @@ namespace _2._0._0
         }
         public void draw()
         {
-            kansuu.setarea1();
+           // kansuu.setarea1();
             if (hyouji)
             {
+                if (alfha)
+                {
+                    DX.SetDrawBlendMode(DX.DX_BLENDMODE_ALPHA,(idoutime*6));
+                }
                 if (kaitendraw)
                 {
                     kansuu.DrawRotaGraphfk(zx, zy, 1, ang - PI / 2, gaz, DX.TRUE, true);
@@ -142,8 +148,10 @@ namespace _2._0._0
                 {
                     kansuu.DrawRotaGraphfk(zx, zy, 1, 0, gaz, DX.TRUE, true);
                 }
+                DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND, 255);
+                
             }
-            kansuu.setareaend();
+          //  kansuu.setareaend();
         }
         public void hantei()
         {
@@ -187,6 +195,10 @@ namespace _2._0._0
         {
             switch (ugokikata)
             {
+                case -3:
+                    zakoudou.enemy_patternm3(zx, zy, ref sx, ref sy, ref idoutime, ugokikata, waittime, ref ang, ref zspeed);
+                    alfha = true ; kaitendraw = true;
+                    break;
                 case -2:
                     zakoudou.enemy_patternm2(zx, zy, ref sx, ref sy, ref idoutime, ugokikata, waittime, ref ang, ref zspeed);
                     kaitendraw = true;
@@ -362,7 +374,7 @@ namespace _2._0._0
                 }
 
                 else { if (kansuu.naka(tama.x, tama.y, gazo.otamagw[tama.size], gazo.otamagw[tama.size])) { tama.inswitch = true; }; }
-                kansuu.setarea1();
+                //kansuu.setarea1();
                 if (tama.kaiten)
                 {
                     tama.dispangle = 2 * PI * (tama.cnt % 120) / 120;
@@ -372,7 +384,7 @@ namespace _2._0._0
                 {
                     kansuu.DrawRotaGraphfk(tama.x, tama.y, 1, tama.dispangle, gazo.otama[tama.size, tama.col], DX.TRUE, true);
                 }
-                kansuu.setareaend();
+              //  kansuu.setareaend();
 
                 if (!hyouji && tama.mitizure) { tama.seizon = false; }
 

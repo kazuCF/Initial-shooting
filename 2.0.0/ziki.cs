@@ -180,7 +180,7 @@ namespace _2._0._0
             if (muteki)
             {
                 mutekijikan -= 1; if (Program.count % 20 < 10) { DX.SetDrawBright(255, 0, 0); } else { DX.SetDrawBright(100, 0, 0); }
-                kansuu.DrawRotaGraphfk(zikix, zikiy, 2, 1, gazo.zikiGraph, DX.TRUE, false);
+                kansuu.DrawRotaGraphfk(zikix, zikiy, 2, 0, gazo.zikiGraph, DX.TRUE, false);
                 //   DX.DrawRotaGraph(zikix, zikiy, 1, 1, gazo.zikiGraph, DX.TRUE);
                 DX.SetDrawBright(255, 255, 255);
                 if (mutekijikan <= 0) { muteki = false; }
@@ -189,7 +189,7 @@ namespace _2._0._0
             {
                 //DX.SetDrawBlendMode(DX.DX_BLENDMODE_ADD,50);
                 //   kansuu.DrawRotaGraphfk(zikix, zikiy, 1, 1, gazo.zikiGraph, DX.TRUE);
-                kansuu.DrawRotaGraphfk(zikix, zikiy, 2, 1, gazo.zikiGraph, DX.TRUE, false);
+                kansuu.DrawRotaGraphfk(zikix, zikiy, 2, 0, gazo.zikiGraph, DX.TRUE, false);
                 // DX.DrawRotaGraph(zikix, zikiy, 1, 1, gazo.zikiGraph, DX.TRUE);
                 DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND, 255);
             }

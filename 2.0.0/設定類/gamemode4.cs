@@ -28,7 +28,7 @@ namespace _2._0._0
         public static List<en> teki = new List<en>();
         public static void syokika()
         {
-            tekiyomi = -1;
+            tekiyomi = 4;
             im.Clear();
             ef.Clear();
             teki.Clear();
@@ -65,7 +65,7 @@ namespace _2._0._0
             foreach (var i in im) { i.main(); } Program.enter_func("アイテム計算", 0);
             foreach (var i in ef) { i.main(); } Program.enter_func("エフェクト計算", 0);
             foreach (var i in teki) { i.main(); if (ziki.bommcool == 60) { i.life -= 5; } } Program.enter_func("敵計算", 0);
-    kansuu.setareaend();
+            kansuu.setareaend();
             DX.DrawGraph(Program.hamix + 225, Program.scy - 200, gazo.haikeig, DX.TRUE);
             DX.DrawBox(0, 0, Program.fx, Program.scy, DX.GetColor(0, 0, 255), DX.TRUE);
             DX.DrawBox(0, 0, Program.scx, Program.fy, DX.GetColor(0, 0, 255), DX.TRUE);
@@ -154,10 +154,13 @@ namespace _2._0._0
                 case 2:
                     if (tekiyomikomi("2-1-3", htime)) { tekiyomi++; htime = time + 40; }
                     break;
+                case 3:
+                    if (tekiyomikomi("2-1-4", htime)) { tekiyomi++; htime = time + 40; }
+                    break;
             }
             Program.enter_func("第2章", 0);
         }
-
+        
         private static bool tekiyomikomi(string filename)
         {
             return tekiyomikomi(filename, 0);
@@ -237,7 +240,7 @@ namespace _2._0._0
             DX.SetDrawBlendMode(DX.DX_BLENDMODE_ALPHA, 255-effetime);
             kansuu.DrawRotaGraphfk(Program.scx / 2, Program.scy / 2,effetime/100.0, 0, gazo.titles[chapter-1], DX.TRUE, false);
             DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND, effetime);
-            if (++effetime >= 256) { return true; }
+            if (++effetime >= 256) { effetime = 0; return true; }
             else { return false; }
             
         }

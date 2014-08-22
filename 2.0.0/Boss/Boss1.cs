@@ -32,8 +32,7 @@ namespace _2._0._0
                 {
                     case 0:
                         shot1();
-                        shot2();
-                       // shot3();
+                    //    shot2();
                         shot6();
                         break;
                     case 1:

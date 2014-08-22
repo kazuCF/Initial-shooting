@@ -78,7 +78,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="allyuudou.cs" />
     <Compile Include="エディタ\ene.cs" />
     <Compile Include="設定類\atari.cs" />
     <Compile Include="設定類\beje.cs" />

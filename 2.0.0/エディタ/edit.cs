@@ -93,44 +93,8 @@ namespace _2._0._0
             public float angle;
             public int jizoku;
         }
-        public struct Bl_t
-        {
-            public int time;
-            public int hp;
-            public int idoutime;
-            public int waittime;
-            public float sx;
-            public float sy;
-            public float fx;//画面表示用の座標
-            public float fy;
-            public float ang;//移動用の向き
-            public float zspeed;
-            public int Knd;
-            public int Col;
-            public float Angle;//未使用。
-            public float x, y;//本当の座標
-            public float pluskaku;//nway弾用、弾の角度の開き方
-            public int tamakosuu;
-            public int tamacol;
-            public int tamaknd;
-            public int tamaugoki;
-            public int tamakankaku;
-            public float tamaspd;
-            public bool hyouji;
-            public bool seizon;
-            public List<Tdan>tamas;
-            public int cnt;
-            public StreamReader read;
-
-        }
-        public struct Blpoint_t
-        {
-            public int Num;
-            public Bl_t[] Bl;//= new Bl_t[1000];
-
-        }
        
-    //    public static Blpoint_t Blpoint = new Blpoint_t();
+
         public static ugoki ugokin = new ugoki();
         public struct Operate_t
         {
@@ -166,7 +130,6 @@ namespace _2._0._0
          gtime = 0;
          jizokujikan = 5;
          pat = 11;
-     //    Blpoint.Num = 0;
          ugokin.Num = 0;
          
          ugokinamae = new string[] { "nway","速度変化nway","円形","ばらまき","減速ばらまき","角度記憶な時期狙い","自機追い弾","自機狙い→円形","回転"};
@@ -196,31 +159,7 @@ namespace _2._0._0
         }
         public static void InputBlData(float x, float y, int Knd, int Col, float Angle, int time, int waittime,int hp)
         {
-            tekis.Add(new en(x, y, Col, Knd, time, waittime, 20, 1, 0, 2, 0, 5, 3, hp, 0));
-          /*  Blpoint.Bl[Blpoint.Num].x = x;
-            Blpoint.Bl[Blpoint.Num].y = y;
-            Blpoint.Bl[Blpoint.Num].Knd = Knd;
-            Blpoint.Bl[Blpoint.Num].fx = x;
-            Blpoint.Bl[Blpoint.Num].fy = y;
-            Blpoint.Bl[Blpoint.Num].Col = Col;
-            Blpoint.Bl[Blpoint.Num].Angle = Angle;
-            Blpoint.Bl[Blpoint.Num].time = time;
-            Blpoint.Bl[Blpoint.Num].sx = 0;
-            Blpoint.Bl[Blpoint.Num].sy = 0;
-            Blpoint.Bl[Blpoint.Num].waittime = waittime;
-            Blpoint.Bl[Blpoint.Num].pluskaku = 5;
-            Blpoint.Bl[Blpoint.Num].tamakosuu = 1;
-            Blpoint.Bl[Blpoint.Num].tamacol = 0;
-            Blpoint.Bl[Blpoint.Num].tamaknd = 2;
-            Blpoint.Bl[Blpoint.Num].tamaugoki = 0;
-            Blpoint.Bl[Blpoint.Num].tamakankaku = 20;
-            Blpoint.Bl[Blpoint.Num].tamaspd = 3;
-            Blpoint.Bl[Blpoint.Num].cnt = 0;
-            Blpoint.Bl[Blpoint.Num].tamas = new List<Tdan>();
-            Blpoint.Bl[Blpoint.Num].seizon = true;
-            Blpoint.Bl[Blpoint.Num].hyouji = true;
-            Blpoint.Bl[Blpoint.Num].hp = hp;
-            Blpoint.Num++;*/
+            tekis.Add(new en(x, y, Col, Knd, time, waittime, 50, 1, 0, 2, 0, 5, 3, hp, 0));
         }
         public static void InputugData(float x,float y,float ex,float ey,float sx, float sy,int jizoku,float angle)
         {
@@ -317,16 +256,6 @@ namespace _2._0._0
                     mode = (++mode) % 2;
                     gtime = 0;
                     susumu = 0;
-                    /*for (int i = 0; i < Blpoint.Num; i++)
-                    {
-                        Blpoint.Bl[i].fx = Blpoint.Bl[i].x;
-                        Blpoint.Bl[i].fy = Blpoint.Bl[i].y;
-                        Blpoint.Bl[i].idoutime = 0;
-                        Blpoint.Bl[i].cnt = 0;
-                        Blpoint.Bl[i].tamas.Clear();
-                        Blpoint.Bl[i].seizon = true;
-                        Blpoint.Bl[i].hyouji = true;
-                    }*/
                     foreach (var i in tekis)
                     {
                         i.zx = i.fx;
@@ -368,20 +297,7 @@ namespace _2._0._0
                 if (key[DX.KEY_INPUT_BACK] == 1)
                 {
                     gtime = 0;
-                   /* for (int i = 0; i < Blpoint.Num; i++)
-                    {
-                        Blpoint.Bl[i].fx = Blpoint.Bl[i].x;
-                        Blpoint.Bl[i].fy = Blpoint.Bl[i].y;
-                        Blpoint.Bl[i].idoutime = 0;
-                        Blpoint.Bl[i].cnt = 0;
-                        Blpoint.Bl[i].tamas.Clear();
-                        Blpoint.Bl[i].seizon = true;
-                        Blpoint.Bl[i].hyouji = true;
-                        if (Blpoint.Bl[i].Col >= 12&&Blpoint.Bl[i].read!=null)
-                        {
-                            Blpoint.Bl[i].read.Close();
-                        }
-                    }*/
+
                     foreach (var i in tekis)
                     {
                         i.zx = i.fx; i.zy = i.fy;
@@ -399,10 +315,7 @@ namespace _2._0._0
                 {
                     if (key[DX.KEY_INPUT_Z] == 1 || key[DX.KEY_INPUT_Z] > 30)
                     {
-                   /*     if (Blpoint.Num > 0)
-                        {
-                            Blpoint.Num--;
-                        }*/
+
                         if (tekis.Any())
                         {
                             tekis.RemoveAt(tekis.Count - 1);
@@ -411,10 +324,7 @@ namespace _2._0._0
                     }
                     if (key[DX.KEY_INPUT_Y] == 1 || key[DX.KEY_INPUT_Y] > 30)
                     {
-                      /*  if (Blpoint.Num < 99999 & !(Blpoint.Bl[Blpoint.Num].x == 0 && Blpoint.Bl[Blpoint.Num].y == 0))
-                        {
-                            Blpoint.Num++;
-                        }*/
+
 
                     }
                 }
@@ -522,9 +432,7 @@ namespace _2._0._0
             #endregion
             #region mode1
             if (mode == 1)
-            {
-               // gtime = Blpoint.Bl[sentakun].time;
-                gtime = tekis[sentakun].toujyou;
+            {              gtime = tekis[sentakun].toujyou;
                 if (key[DX.KEY_INPUT_SPACE] == 1)//表示フラグ
                     Operate.flag *= -1; 
                 if (key[DX.KEY_INPUT_RETURN] == 1)
@@ -543,14 +451,12 @@ namespace _2._0._0
                     else if (key[DX.KEY_INPUT_RIGHT] == 1)
                     {
                         sentakun++;
-                      //  if (sentakun >= Blpoint.Bl.Count()) { sentakun = Blpoint.Bl.Count() - 1; }
-                        if (sentakun >= tekis.Count) { sentakun = tekis.Count - 1; }
+                         if (sentakun >= tekis.Count) { sentakun = tekis.Count - 1; }
                     }
                     else if (key[DX.KEY_INPUT_N] == 1)
                     {
                         sentakun++;
-                        //if (sentakun >= Blpoint.Bl.Count()) { sentakun = Blpoint.Bl.Count() - 1; }
-                        if (sentakun >= tekis.Count) { sentakun = tekis.Count - 1; }
+                         if (sentakun >= tekis.Count) { sentakun = tekis.Count - 1; }
                     }
                 }
                 else if (key[DX.KEY_INPUT_R] != 0)
@@ -558,37 +464,31 @@ namespace _2._0._0
                     if (key[DX.KEY_INPUT_LEFT] == 1)
                     {
                         tekis[sentakun].tamakosuu--;
-                     //   Blpoint.Bl[sentakun].tamakosuu--;
                     }
                     else if (key[DX.KEY_INPUT_RIGHT] == 1)
                     {
                         tekis[sentakun].tamakosuu++;
-                  //      Blpoint.Bl[sentakun].tamakosuu++;
-                    }
+                   }
                 }
                 else if (key[DX.KEY_INPUT_P] != 0)
                 {
                     if (key[DX.KEY_INPUT_LEFT] == 1)
                     {
                         tekis[sentakun].tamacol--;
-             //           Blpoint.Bl[sentakun].tamacol--;
-                    }
+                }
                     else if (key[DX.KEY_INPUT_RIGHT] == 1)
                     {
                         tekis[sentakun].tamacol++;
-                //        Blpoint.Bl[sentakun].tamacol++;
-                    }
+                   }
                 }
                 else if (key[DX.KEY_INPUT_O] != 0)
                 {
                     if (key[DX.KEY_INPUT_LEFT] == 1)
                     {
                         tekis[sentakun].tamaknd--;
-                 //       Blpoint.Bl[sentakun].tamaknd--;
                     }
                     else if (key[DX.KEY_INPUT_RIGHT] == 1)
                     {
-                  //      Blpoint.Bl[sentakun].tamaknd++;
                         tekis[sentakun].tamaknd++;
                     }
                 }
@@ -596,12 +496,7 @@ namespace _2._0._0
                 {
                     if (key[DX.KEY_INPUT_LEFT] == 1)
                     {
-                      /*  Blpoint.Bl[sentakun].tamaugoki--;
-                        if (Blpoint.Bl[sentakun].tamaugoki < 0) { Blpoint.Bl[sentakun].tamaugoki = 0; }
-                        Blpoint.Bl[sentakun].tamakankaku = tehonkankaku[Blpoint.Bl[sentakun].tamaugoki];
-                        Blpoint.Bl[sentakun].pluskaku = tehonpluskaku[Blpoint.Bl[sentakun].tamaugoki];
-                        Blpoint.Bl[sentakun].tamaspd = tehonspeed[Blpoint.Bl[sentakun].tamaugoki];
-*/
+                     
                         tekis[sentakun].tamasyurui--;
                         if (tekis[sentakun].tamasyurui < 0) { tekis[sentakun].tamasyurui = 0; }
                         tekis[sentakun].kankaku = tehonkankaku[tekis[sentakun].tamasyurui];
@@ -611,11 +506,8 @@ namespace _2._0._0
                     }
                     else if (key[DX.KEY_INPUT_RIGHT] == 1)
                     {
-                       /* Blpoint.Bl[sentakun].tamaugoki++;
-                        Blpoint.Bl[sentakun].tamakankaku = tehonkankaku[Blpoint.Bl[sentakun].tamaugoki];
-                        Blpoint.Bl[sentakun].pluskaku = tehonpluskaku[Blpoint.Bl[sentakun].tamaugoki];
-                        Blpoint.Bl[sentakun].tamaspd = tehonspeed[Blpoint.Bl[sentakun].tamaugoki];
-                        tekis[sentakun].tamasyurui++;*/
+                      
+                        tekis[sentakun].tamasyurui++;
                         tekis[sentakun].kankaku = tehonkankaku[tekis[sentakun].tamasyurui];
                         tekis[sentakun].pluskaku = tehonpluskaku[tekis[sentakun].tamasyurui];
                         tekis[sentakun].tamasokudo = tehonspeed[tekis[sentakun].tamasyurui];
@@ -626,15 +518,7 @@ namespace _2._0._0
                 {
                     if (key[DX.KEY_INPUT_LEFT] % 5 == 1)
                     {
-                      /*  if (Blpoint.Bl[sentakun].tamaugoki == 3 || Blpoint.Bl[sentakun].tamaugoki == 4)
-                        {
-                            Blpoint.Bl[sentakun].pluskaku -= 0.5f;
-                        }
-                        else
-                        {
-                            Blpoint.Bl[sentakun].pluskaku--;
-                        }
-                        */
+
                         if (tekis[sentakun].tamasyurui == 3 || tekis[sentakun].tamasyurui == 4)
                         {
                             tekis[sentakun].pluskaku -= 0.5f;
@@ -645,15 +529,8 @@ namespace _2._0._0
                         }
                     }
                     else if (key[DX.KEY_INPUT_RIGHT] % 5 == 1)
-                    {/*
-                        if (Blpoint.Bl[sentakun].tamaugoki == 3 || Blpoint.Bl[sentakun].tamaugoki == 4)
-                        {
-                            Blpoint.Bl[sentakun].pluskaku += 0.5f;
-                        }
-                        else
-                        {
-                            Blpoint.Bl[sentakun].pluskaku++;
-                        }*/
+                    {
+ 
                         if (tekis[sentakun].tamasyurui == 3 || tekis[sentakun].tamasyurui == 4)
                         {
                             tekis[sentakun].pluskaku += 0.5f;
@@ -667,15 +544,11 @@ namespace _2._0._0
                 else if (key[DX.KEY_INPUT_Y] != 0)
                 {
                     if (key[DX.KEY_INPUT_LEFT] % 5 == 1)
-                    {
-                      //  Blpoint.Bl[sentakun].tamakankaku--;
-                    //    if (Blpoint.Bl[sentakun].tamakankaku < 1) { Blpoint.Bl[sentakun].tamakankaku = 1; }
-                        tekis[sentakun].kankaku--;
+                    {   tekis[sentakun].kankaku--;
                         if (tekis[sentakun].kankaku < 1) { tekis[sentakun].kankaku = 1; }
                     }
                     else if (key[DX.KEY_INPUT_RIGHT] % 5 == 1)
                     {
-                       // Blpoint.Bl[sentakun].tamakankaku++;
                         tekis[sentakun].kankaku++;
                     }
                 }
@@ -683,12 +556,10 @@ namespace _2._0._0
                 {
                     if (key[DX.KEY_INPUT_LEFT] > 0)
                     {
-                   //     Blpoint.Bl[sentakun].time--;
                         tekis[sentakun].toujyou--;
                     }
                     else if (key[DX.KEY_INPUT_RIGHT] > 0)
                     {
-                        //Blpoint.Bl[sentakun].time++;
                         tekis[sentakun].toujyou++;
                     }
                 }
@@ -696,27 +567,18 @@ namespace _2._0._0
                 {
                     if (key[DX.KEY_INPUT_LEFT] > 0)
                     {
-                   //     Blpoint.Bl[sentakun].hp--;
                         tekis[sentakun].life--;
                     }
                     else if (key[DX.KEY_INPUT_RIGHT] > 0)
                     {
-                       // Blpoint.Bl[sentakun].hp++;
-                        tekis[sentakun].life++;
+                       tekis[sentakun].life++;
                     }
                 }
                 else if (key[DX.KEY_INPUT_F] != 0)
                 {
                     if (key[DX.KEY_INPUT_LEFT] == 1)
                     {
-                  /*      if (Blpoint.Bl[sentakun].tamaugoki == 8)
-                        {
-                            Blpoint.Bl[sentakun].tamaspd -= 0.1f;
-                        }
-                        else
-                        {
-                            Blpoint.Bl[sentakun].tamaspd--;
-                        }*/
+                  
                         if (tekis[sentakun].tamasyurui == 8)
                         {
                             tekis[sentakun].tamasokudo -= 0.1f;
@@ -728,14 +590,7 @@ namespace _2._0._0
                     }
                     else if (key[DX.KEY_INPUT_RIGHT] == 1)
                     {
-                       /* if (Blpoint.Bl[sentakun].tamaugoki == 8)
-                        {
-                            Blpoint.Bl[sentakun].tamaspd += 0.1f;
-                        }
-                        else
-                        {
-                            Blpoint.Bl[sentakun].tamaspd++;
-                        }*/
+                      
                         if (tekis[sentakun].tamasyurui == 8)
                         {
                             tekis[sentakun].tamasokudo += 0.1f;
@@ -750,14 +605,11 @@ namespace _2._0._0
                 {
                     if (key[DX.KEY_INPUT_W] == 1)
                     {
-                     //   Blpoint.Bl[sentakun].waittime--;
-                       // if (Blpoint.Bl[sentakun].waittime < 0) { Blpoint.Bl[sentakun].waittime = 0; }
-                        tekis[sentakun].waittime--;
+                       tekis[sentakun].waittime--;
                         if (tekis[sentakun].waittime < 0) { tekis[sentakun].waittime = 0; }
                     }
                     if (key[DX.KEY_INPUT_S] == 1)
                     {
-                       // Blpoint.Bl[sentakun].waittime++;
                         tekis[sentakun].waittime++;
                     }
                 }
@@ -765,49 +617,40 @@ namespace _2._0._0
                 {
                     if (key[DX.KEY_INPUT_W] > 0)
                     {
-                   //     Blpoint.Bl[sentakun].y--;
-                        tekis[sentakun].fy--;
+                       tekis[sentakun].fy--;
                     }
                     if (key[DX.KEY_INPUT_S] > 0)
                     {
-                     //   Blpoint.Bl[sentakun].y++;
                         tekis[sentakun].fy++;
                     }
                 }
                 if (key[DX.KEY_INPUT_A] > 0)
                 {
-                   // Blpoint.Bl[sentakun].x--;
                     tekis[sentakun].fx--;
                 }
                 if (key[DX.KEY_INPUT_D] > 0)
                 {
-                    //Blpoint.Bl[sentakun].x++;
                     tekis[sentakun].fx++;
                 }
                 if (key[DX.KEY_INPUT_K] == 1)
                 {
-                    //Blpoint.Bl[sentakun].Knd = (++Blpoint.Bl[sentakun].Knd) % tekisyuruisu;
                     tekis[sentakun].gaz = (++tekis[sentakun].gaz) % tekisyuruisu;
                 }
                 if (key[DX.KEY_INPUT_C] != 0)//動き方
                 {
                     if (key[DX.KEY_INPUT_LEFT] == 1 || key[DX.KEY_INPUT_LEFT] > 30)
                     {
-               //         Blpoint.Bl[sentakun].Col -= 1;
                         tekis[sentakun].ugokikata--;
                     }
                     //右キー
                     if (key[DX.KEY_INPUT_RIGHT] == 1 || key[DX.KEY_INPUT_RIGHT] > 30)
                     {
-                 //       Blpoint.Bl[sentakun].Col += 1;
-                        tekis[sentakun].ugokikata++;
+                       tekis[sentakun].ugokikata++;
                     }
                 }
                 if (key[DX.KEY_INPUT_DELETE] == 1)
                 {
-                  //  Blpoint.Bl[sentakun].x = -99;
-                   // Blpoint.Bl[sentakun].tamakankaku = 0;
-                    tekis[sentakun].zx = -99;
+                   tekis[sentakun].zx = -99;
                     tekis[sentakun].kankaku = 0;
                 }
             }
@@ -825,7 +668,6 @@ namespace _2._0._0
                     else if (key[DX.KEY_INPUT_RIGHT] == 1)
                     {
                         sentakun++;
-                     //   if (sentakun >= Blpoint.Bl.Count()) { sentakun = Blpoint.Bl.Count() - 1; }
                         if (sentakun >= tekis.Count) { sentakun = tekis.Count - 1; }
                     }
                 }
@@ -837,7 +679,6 @@ namespace _2._0._0
                 if (key[DX.KEY_INPUT_SPACE] == 1)
                 {
                     susumu = 0;
-                 //   gtime = Blpoint.Bl[sentakun].time;
                     gtime = tekis[sentakun].toujyou;
                     mode2kaishi = 0;
                     mode = 1;
@@ -846,21 +687,7 @@ namespace _2._0._0
                 {
                     gtime = 0;
                     mode2kaishi = gtime;
-                /*    for (int i = 0; i < Blpoint.Num; i++)
-                    {
-                        Blpoint.Bl[i].fx = Blpoint.Bl[i].x;
-                        Blpoint.Bl[i].fy = Blpoint.Bl[i].y;
-                        Blpoint.Bl[i].idoutime = 0;
-                        Blpoint.Bl[i].cnt = 0;
-                        Blpoint.Bl[i].tamas.Clear();
-                        Blpoint.Bl[i].seizon = true;
-                        Blpoint.Bl[i].hyouji = true;
-                        if (Blpoint.Bl[i].Col >= 12)
-                        {
-                            Blpoint.Bl[i].read.Close();
-                        }
-                       
-                    }*/
+              
                     foreach (var i in tekis)
                         {
                             i.zx = i.fx;
@@ -935,7 +762,6 @@ namespace _2._0._0
 
         public static void Show()
         {
-#warning リストと配列の境目
             foreach (var i in tekis)
             {
                 if (mode == 0 || mode == 2)
@@ -951,31 +777,7 @@ namespace _2._0._0
                   
                 }
             } enter_func("敵の描画", 0);
-         /*   for (int i = 0; i < Blpoint.Num; i++)
-            {
-                if (mode == 0 || mode == 2)
-                {
-                    if (gtime >= Blpoint.Bl[i].time&&mode2kaishi<=Blpoint.Bl[i].time )
-                    {
-                       // if (mode == 2&&mode2kaishi<) { }
-
-  //kansuu.DrawRotaGraphfk(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy, 1.0, Blpoint.Bl[i].Angle,
-    //                       tekiimg[Blpoint.Bl[i].Knd], DX.TRUE, false);
-                
-                       
-                    }
-                }
-                else if (mode == 1)
-                {
-                    if (gtime == Blpoint.Bl[i].time)
-                    {
-            //            kansuu.DrawRotaGraphfk(Blpoint.Bl[i].x, Blpoint.Bl[i].y, 1.0, Blpoint.Bl[i].Angle,
-            //                  tekiimg[Blpoint.Bl[i].Knd], DX.TRUE, false);
-                     }
-                }
-            
-                
-            }*/
+         
             if (mode == 3)
             {
                 foreach (var k in ugokin.ug[ugokin.Num].Ug.Where(c=>c.x!=0&&c.y!=0))
@@ -998,15 +800,11 @@ namespace _2._0._0
             }
             else if (mode == 1)
             {
-               // DX.DrawLine((int)Blpoint.Bl[sentakun].x, (int)Blpoint.Bl[sentakun].y, (int)Blpoint.Bl[sentakun].x + 50, (int)Blpoint.Bl[sentakun].y, Blue);
-           //     kansuu.DrawLine((int)Blpoint.Bl[sentakun].x, (int)Blpoint.Bl[sentakun].y, (int)Blpoint.Bl[sentakun].x + 50, (int)Blpoint.Bl[sentakun].y, Blue);
-                kansuu.DrawLine((int)tekis[sentakun].zx,(int)tekis[sentakun].zy,(int)tekis[sentakun].zx+50,(int)tekis[sentakun].zy,Blue);
+               kansuu.DrawLine((int)tekis[sentakun].zx,(int)tekis[sentakun].zy,(int)tekis[sentakun].zx+50,(int)tekis[sentakun].zy,Blue);
             }
             else if (mode == 2)
             {
-              //  DX.DrawLine((int)Blpoint.Bl[sentakun].fx, (int)Blpoint.Bl[sentakun].fy, (int)Blpoint.Bl[sentakun].fx + 50, (int)Blpoint.Bl[sentakun].fy, Blue);
-             //   kansuu.DrawLine((int)Blpoint.Bl[sentakun].fx, (int)Blpoint.Bl[sentakun].fy, (int)Blpoint.Bl[sentakun].fx + 50, (int)Blpoint.Bl[sentakun].fy, Blue);
-                kansuu.DrawLine((int)tekis[sentakun].fx, (int)tekis[sentakun].fy, (int)tekis[sentakun].fx + 50, (int)tekis[sentakun].fy, Blue);
+                 kansuu.DrawLine((int)tekis[sentakun].fx, (int)tekis[sentakun].fy, (int)tekis[sentakun].fx + 50, (int)tekis[sentakun].fy, Blue);
             }
             if (Operate.flag == 1)
             {
@@ -1082,227 +880,14 @@ namespace _2._0._0
                 
                 i.main();
             } enter_func("雑魚の動き", 0);
-         /*   for (int i = 0; i < Blpoint.Num; i++)
-            {
-                Blpoint.Bl[i].hyouji = !sotohan(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy);
-                if (Blpoint.Bl[i].tamas.Count > 0) { Blpoint.Bl[i].seizon = true; }
-                    if (!(gtime >= Blpoint.Bl[i].time)) { continue; }
-
-                    switch (Blpoint.Bl[i].Col)
-                    {
-                        case 0:
-                            zakoudou.enemy_pattern0(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy, ref Blpoint.Bl[i].sx, ref Blpoint.Bl[i].sy, ref Blpoint.Bl[i].idoutime, Blpoint.Bl[i].Col, Blpoint.Bl[i].waittime);
-                            break;
-                        case 1:
-                            zakoudou.enemy_pattern1(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy, ref Blpoint.Bl[i].sx, ref Blpoint.Bl[i].sy, ref Blpoint.Bl[i].idoutime, Blpoint.Bl[i].Col, Blpoint.Bl[i].waittime);
-                            break;
-                        case 2:
-                            zakoudou.enemy_pattern2(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy, ref Blpoint.Bl[i].sx, ref Blpoint.Bl[i].sy, ref Blpoint.Bl[i].idoutime, Blpoint.Bl[i].Col, Blpoint.Bl[i].waittime);
-                            break;
-                        case 3:
-                            zakoudou.enemy_pattern3(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy, ref Blpoint.Bl[i].sx, ref Blpoint.Bl[i].sy, ref Blpoint.Bl[i].idoutime, Blpoint.Bl[i].Col, Blpoint.Bl[i].waittime);
-                            break;
-                        case 4:
-                            zakoudou.enemy_pattern4(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy, ref Blpoint.Bl[i].sx, ref Blpoint.Bl[i].sy, ref Blpoint.Bl[i].idoutime, Blpoint.Bl[i].Col, Blpoint.Bl[i].waittime);
-                            break;
-                        case 5:
-                            zakoudou.enemy_pattern5(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy, ref Blpoint.Bl[i].sx, ref Blpoint.Bl[i].sy, ref Blpoint.Bl[i].idoutime, Blpoint.Bl[i].Col, Blpoint.Bl[i].waittime);
-                            break;
-                        case 6:
-                            zakoudou.enemy_pattern6(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy, ref Blpoint.Bl[i].sx, ref Blpoint.Bl[i].sx, ref Blpoint.Bl[i].idoutime, Blpoint.Bl[i].Col, Blpoint.Bl[i].waittime);
-                            break;
-                        case 7:
-                            zakoudou.enemy_pattern7(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy, ref Blpoint.Bl[i].sx, ref Blpoint.Bl[i].sx, ref Blpoint.Bl[i].idoutime, Blpoint.Bl[i].Col, Blpoint.Bl[i].waittime);
-                            break;
-                        case 8:
-                            zakoudou.enemy_pattern8(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy, ref Blpoint.Bl[i].sx, ref Blpoint.Bl[i].sy, ref Blpoint.Bl[i].idoutime, Blpoint.Bl[i].Col, Blpoint.Bl[i].waittime);
-                            break;
-                        case 9:
-                            zakoudou.enemy_pattern9(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy, ref Blpoint.Bl[i].sx, ref Blpoint.Bl[i].sy, ref Blpoint.Bl[i].idoutime, Blpoint.Bl[i].Col, Blpoint.Bl[i].waittime);
-                            break;
-                        case 10:
-                            zakoudou.enemy_pattern10(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy, ref Blpoint.Bl[i].sx, ref Blpoint.Bl[i].sy, ref Blpoint.Bl[i].idoutime, Blpoint.Bl[i].Col, Blpoint.Bl[i].waittime, ref Blpoint.Bl[i].ang, ref Blpoint.Bl[i].zspeed);
-                            break;
-                        case 11:
-                            zakoudou.enemy_pattern11(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy, ref Blpoint.Bl[i].sx, ref Blpoint.Bl[i].sy, ref Blpoint.Bl[i].idoutime, Blpoint.Bl[i].Col, Blpoint.Bl[i].waittime);
-                            break;
-                        default:
-                            zakoudou.enemyfile(ref Blpoint.Bl[i].sx, ref Blpoint.Bl[i].sy, ref Blpoint.Bl[i].idoutime, Blpoint.Bl[i].Col, ref Blpoint.Bl[i].waittime,Blpoint.Bl[i].cnt,ref Blpoint.Bl[i].read, "ugokiting" + (Blpoint.Bl[i].Col-12));
-                            break;
-
-                    }
-                    Blpoint.Bl[i].fx += (float)Math.Cos(Blpoint.Bl[i].ang) * Blpoint.Bl[i].zspeed;
-                    Blpoint.Bl[i].fy += (float)Math.Sin(Blpoint.Bl[i].ang) * Blpoint.Bl[i].zspeed;
-
-                    Blpoint.Bl[i].fx += Blpoint.Bl[i].sx;
-                    Blpoint.Bl[i].fy += Blpoint.Bl[i].sy;
-                   
-                    #region 弾の動き方
-               if (Blpoint.Bl[i].seizon)
-                {
-                    
-                        int t = Blpoint.Bl[i].cnt;
-                        int t2 = t % Blpoint.Bl[i].tamakankaku;
-                        float tzang = kansuu.zikiangle(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy);
-                        float tamasokudo = Blpoint.Bl[i].tamaspd;    
-                   switch (Blpoint.Bl[i].tamaugoki)
-                        {
-                            case 0:
-                                if (Blpoint.Bl[i].hyouji)
-                                {
-                                    if (t2 == 0)
-                                    {
-                                        for (int k = 0; k < Blpoint.Bl[i].tamakosuu; k++)
-                                        {
-                                            float plusangle = 0;
-                                            float jissai = 0;
-                                            if (k % 2 == 1) { plusangle = 5 * (k + 1) / 2; }
-                                            else { plusangle = -5 * k / 2; }
-                                            jissai = (plusangle) * Blpoint.Bl[i].pluskaku + kansuu.zikiangle(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy);
-                                            Blpoint.Bl[i].tamas.Add(new Tdan(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy, 0, Blpoint.Bl[i].tamacol, jissai, tamasokudo, Blpoint.Bl[i].tamaknd));
-                                        }
-                                    }
-                                }
-                                break;
-
-                            case 1:
-                                if (Blpoint.Bl[i].hyouji)
-                                {
-                                    if (t2 == 0)
-                                    {
-                                        for (int k = 0; k < Blpoint.Bl[i].tamakosuu; k++)
-                                        {
-                                            float plusangle = 0;
-                                            float jissai = 0;
-                                            if (k % 2 == 1) { plusangle = 5 * (k + 1) / 2; }
-                                            else { plusangle = -5 * k / 2; }
-                                            jissai = (plusangle) * Blpoint.Bl[i].pluskaku + kansuu.zikiangle(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy);
-                                            Blpoint.Bl[i].tamas.Add(new Tdan(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy, 0, Blpoint.Bl[i].tamacol, jissai, (tamasokudo / 1000) * t, Blpoint.Bl[i].tamaknd));
-                                        }
-                                    }
-                                }
-                                break;
-                            case 2:
-                                if (Blpoint.Bl[i].hyouji)
-                                {
-                                    if (t2 == 0)
-                                    {
-                                        for (int k = 0; k < Blpoint.Bl[i].tamakosuu; k++)
-                                        {
-                                            float angle = kansuu.zikiangle(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy);
-                                            Blpoint.Bl[i].tamas.Add(new Tdan(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy, 0, Blpoint.Bl[i].tamacol, angle + kansuu.PI2() / Blpoint.Bl[i].tamakosuu * i, tamasokudo, Blpoint.Bl[i].tamaknd));
-                                        }
-                                    }
-                                }
-                                break;
-                            case 3:
-                                if (Blpoint.Bl[i].hyouji)
-                                {
-                                    if (t2 == 0)
-                                    {
-                                        for (int k = 0; k < Blpoint.Bl[i].tamakosuu; k++)
-                                        {
-                                            Blpoint.Bl[i].tamas.Add(new Tdan(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy, 0, Blpoint.Bl[i].tamacol, tzang + kansuu.rang(kansuu.PI() / 4), tamasokudo + kansuu.rang(1.5), Blpoint.Bl[i].tamaknd));
-                                        }
-                                    }
-                                }
-                                break;
-                            case 4:
-                                if (Blpoint.Bl[i].hyouji)
-                                {
-                                    if (t2 == 0)
-                                    {
-                                        for (int k = 0; k < Blpoint.Bl[i].tamakosuu; k++)
-                                        {
-                                            Blpoint.Bl[i].tamas.Add(new Tdan(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy, 0, Blpoint.Bl[i].tamacol, tzang + kansuu.rang(kansuu.PI() / 4), tamasokudo + kansuu.rang(1.5), Blpoint.Bl[i].tamaknd));
-                                        }
-                                    }
-                                }
-                                foreach (var l in Blpoint.Bl[i].tamas)
-                                {
-                                    if (l.speed > 1.5)
-                                    {
-                                        l.speed -= 0.04f;
-                                    }
-                                }
-                                break;
-                            case 5:
-                                float baseangle = 0;
-                                
-                                if (Blpoint.Bl[i].hyouji)
-                                {
-                                    if (t2 == 0)
-                                    {
-                                        if (t == 0)
-                                        {
-                                            baseangle = tzang;
-                                        }
-                                        for (int k = 0; k < Blpoint.Bl[i].tamakosuu; k++)
-                                        {
-                                            float plusangle = 0;
-                                            float jissai = 0;
-                                            if (k % 2 == 1) { plusangle = 5 * (k + 1) / 2; }
-                                            else { plusangle = -5 * k / 2; }
-                                            jissai = (plusangle) * Blpoint.Bl[i].pluskaku + baseangle;
-                                            Blpoint.Bl[i].tamas.Add(new Tdan(Blpoint.Bl[i].fx, Blpoint.Bl[i].fy, 0, Blpoint.Bl[i].tamacol, jissai,tamasokudo, Blpoint.Bl[i].tamaknd));
-                                        }
-                                    }
-                                }
-                                break;
-                            default:
-                                break;
-
-                        }
-                    }
-                    #endregion
-               
-                    foreach (Tdan tama in Blpoint.Bl[i].tamas)
-                    {
-                        tama.x += kansuu.Cos(tama.angle) * tama.speed;
-                        tama.y += kansuu.Sin(tama.angle) * tama.speed;
-                        if (tama.inswitch)
-                        {
-                            if (kansuu.sotoRota(tama.x, tama.y, gazo.otamagw[tama.size], gazo.otamagh[tama.size]))
-                            {
-                                tama.seizon = false;
-                            }
-                            if (kansuu.haniatariz(tama.x, tama.y, tama.atarihani, tama.speed, tama.angle))
-                            {
-                                tama.seizon = false;
-                            }
-                        }
-
-                        else { if (kansuu.naka(tama.x, tama.y, gazo.otamagw[tama.size], gazo.otamagw[tama.size])) { tama.inswitch = true; }; }
-                   tama.dispangle = tama.angle + kansuu.PI() / 2; 
-                        kansuu.DrawRotaGraphfk(tama.x, tama.y, 1, tama.dispangle, gazo.otama[tama.size, tama.col], DX.TRUE, false);
-                        tama.cnt++;
-                        
-                    }
-                    if (mode2kaishi > Blpoint.Bl[i].time) { Blpoint.Bl[i].seizon = false; }
-                    Blpoint.Bl[i].tamas.RemoveAll(x => !x.seizon);
-                  Blpoint.Bl[i].idoutime += 1;
-                  Blpoint.Bl[i].cnt += 1;
-                
-            }*/
+        
         }
         public static void Output()
         {
             StreamWriter writer;
             if (mode == 0 || mode == 1 || mode == 2)
             {
-                /* for (int k = 0; k < 1000; k++)
-                 {
-                     if (File.Exists("enemy\\output" + k + ".csv")) { continue; }
                
-                  writer = new StreamWriter("enemy\\output"+k+".csv", false);
-                 writer.WriteLine("x座標,y座標,動き方,種類,登場時間,待ち時間,弾間隔,弾個数,弾種類,弾knd,弾col,弾角度,弾速度,体力,アイテム");
-                 foreach (var i in Blpoint.Bl.Where(c => c.x != -99 && c.tamakankaku != 0))
-                 {
-                     writer.WriteLine("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}", i.x, i.y, i.Col, i.Knd, i.time, i.waittime, i.tamakankaku, i.tamakosuu, i.tamaugoki, i.tamaknd, i.tamacol, i.pluskaku, i.tamaspd,i.hp, 0, 0, 0);
-                 }
-                 writer.Close();
-                 break;
-                 }*/
                 for (int k = 0; k < 1000; k++)
                 {
                     if (File.Exists("enemy\\output" + k + ".csv")) { continue; }
@@ -1348,7 +933,6 @@ namespace _2._0._0
             syokika();
             ini();
             load();
-            //Blpoint.Bl = new Bl_t[10000];
             ugokin.ug = new ugoki_t[1000];
             ugokin.ug[0].Ug = new ugoki_tt[1000];
             ugokin.ug[0].num = 0;

@@ -44,8 +44,6 @@ namespace _2._0._0
         public int defalutlife;
         public int size = 0;
         public bool kaitendraw=false;
-        //  public int color,size;
-     //   public List<allyuudou> ttama = new List<allyuudou>();
         public List<Tdan> tamas = new List<Tdan>();
         public StreamReader read;
         public en() { }
@@ -75,7 +73,6 @@ namespace _2._0._0
             life = Hp;
             fx = X; fy = Y;
             defalutlife=Hp;
-         //   life = 50;
         }
 
 
@@ -83,7 +80,6 @@ namespace _2._0._0
         public void main()
         {
             cnte += 1;
-          //  btama0();
             hassya();
             shot_calc();
            
@@ -99,7 +95,6 @@ namespace _2._0._0
                 }
             }
            
-       //     this.tamakanri();
             this.hihyouji();
            tamas.RemoveAll(c=>Program.isbom);
          
@@ -133,7 +128,6 @@ namespace _2._0._0
         }
         public void draw()
         {
-           // kansuu.setarea1();
             if (hyouji)
             {
                 if (alfha)
@@ -151,7 +145,6 @@ namespace _2._0._0
                 DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND, 255);
                 
             }
-          //  kansuu.setareaend();
         }
         public void hantei()
         {
@@ -164,11 +157,6 @@ namespace _2._0._0
             {
                 foreach (var item in Program.zibun)
                 {
-                  /*  foreach (var tama in item.ztama)
-                    {
-                        if (atari.CirCollison(zx, zy, 2 * gazo.zgw / 3, tama.ztamax, tama.ztamay, 2 * gw / 3)) { life -= damage; tama.seizon = false; }
-                       
-                    }*/
                     
                     foreach (var tama in item.tamas)
                     {
@@ -180,7 +168,10 @@ namespace _2._0._0
                         }
                   
                     }
-
+                    if (kansuu.haniatariz(zx,zy, gw/2, zspeed, ang))
+                    {
+                        seizon = false;
+                    }
                 }
 
 
@@ -195,6 +186,10 @@ namespace _2._0._0
         {
             switch (ugokikata)
             {
+                case -4:
+                    zakoudou.enemy_patternm4(zx, zy, ref sx, ref sy, ref idoutime, ugokikata, waittime, ref ang, ref zspeed);
+                    kaitendraw = true;
+                    break;
                 case -3:
                     zakoudou.enemy_patternm3(zx, zy, ref sx, ref sy, ref idoutime, ugokikata, waittime, ref ang, ref zspeed);
                     alfha = true ; kaitendraw = true;
@@ -251,8 +246,8 @@ namespace _2._0._0
                     break;
 
             }
-            zx += (float)Math.Cos(ang) * zspeed;
-            zy += (float)Math.Sin(ang) * zspeed;
+            zx += kansuu.Cos(ang) * zspeed;
+            zy += kansuu.Sin(ang) * zspeed;
             idoutime += 1;
             ti++;
             zx += sx;
@@ -272,6 +267,8 @@ namespace _2._0._0
         {
             switch (tamasyurui)
             {
+                case -1:
+                    break;
                 case 0:
                     btama0();
                     break;
@@ -338,6 +335,10 @@ namespace _2._0._0
             }
           //  gamemode4.ef.Add(new effect(zx, zy,-1,-1,-1,-1,255,-1,-1, 0, 255));
         }
+        public virtual Tdan gettamanum(long num)
+        {
+            return tamas.FirstOrDefault(c=>c.number==num);
+        }
         public virtual void shot_calc()
         {
             foreach (Tdan tama in tamas)
@@ -345,6 +346,8 @@ namespace _2._0._0
 
                 tama.x += kansuu.Cos(tama.angle) * tama.speed;
                 tama.y += kansuu.Sin(tama.angle) * tama.speed;
+                tama.x += tama.sx;
+                tama.y += tama.sy;
                 if (tama.inswitch)
                 {
                     //     if (tama.x < -50 || tama.x > Program.fmx + 50 || tama.y < -50 || tama.y > Program.fmy + 50)

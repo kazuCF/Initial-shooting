@@ -94,10 +94,6 @@ namespace _2._0._0
                         DX.SetDrawArea(0, 0, scx + hamix, scy);
                         haikeidraw();
                         DX.DrawBox(scx, 0, scx + 300, scy, DX.GetColor(255, 255, 255), DX.TRUE);
-
-                        gamemode4.bunki(); //enter_func("ゲームモード４", 0);
-
-                        if (brt != 255) { DX.SetDrawBright(255, 255, 255); }
                         DX.SetDrawArea(fx, fy, scx, scy - fy);
                         for (int i = 0; i < zibun.Count; i++)
                         {
@@ -106,6 +102,10 @@ namespace _2._0._0
                             syuy = zibun[0].zikiy;
                         }
                         DX.SetDrawArea(0, 0, scx + hamix, scy);
+                        gamemode4.bunki(); //enter_func("ゲームモード４", 0);
+
+                        if (brt != 255) { DX.SetDrawBright(255, 255, 255); }
+
                         dn_calc(); enter_func("描画", 0);
                         //  
                         break;

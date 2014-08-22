@@ -8,7 +8,11 @@ namespace _2._0._0
 {
     public static class zakoudou
     {
-
+        public static void enemy_patternm4(float ex, float ey, ref float sx, ref float sy, ref int time, int num, int wait, ref float ang, ref float speed)
+        {
+            if (time == 0) { ang = kansuu.PI() * 1 / 2.0f; speed = 6+kansuu.rang(5); }
+            
+        }
         public static void enemy_patternm3(float ex, float ey, ref float sx, ref float sy, ref int time, int num, int wait, ref float ang, ref float speed)
         {
             if (time == 0) { ang = kansuu.zikiangle(ex, ey); speed = kansuu.rang(2);  }

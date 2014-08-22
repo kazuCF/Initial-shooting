@@ -169,12 +169,12 @@ namespace _2._0._0
             {
                 hyouji = false;
                 DX.SetDrawBright(255, 0, 0); fend = dieefe(1); DX.SetDrawBright(255, 255, 255);
-   
-
-            }
+           }
             else
             {
+                DX.SetDrawBlendMode(DX.DX_BLENDMODE_SUB, 255);
                 kansuu.DrawRotaGraphfk(dx, dy, 1, 0, gaz, DX.TRUE, false);
+               DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND, 255);
             } fucount += 1;
         }
         
@@ -184,36 +184,24 @@ namespace _2._0._0
             dan.RemoveAll(c => Program.isbom);
             if (ziki.bommcool == 60)
             {
-
                 life -= 300;
             }
-            endtime--; if (endtime < 0) { life = 0; }
-        //    kansuu.setarea1();
-            foreach (Tdan tama in dan)
+            else if (ziki.bommcool == 130)
             {
-
-                if (tama.inswitch)
-                {
-                    if (kansuu.sotoRota(tama.x, tama.y, gazo.otamagw[tama.size], gazo.otamagh[tama.size]) || kansuu.haniatariz(tama.x, tama.y, tama.atarihani, tama.speed, tama.angle))
-                    {
-                        tama.seizon = false; continue;
-                    }
-                    // if (tama.kaiten)
-                    //    {
-                    //         tama.dispangle = 2 * PI * (tama.cnt % 120) / 120;
-                    //    }
-                    //   else
-                    { tama.dispangle = tama.angle + PI / 2; }
-                    kansuu.DrawRotaGraphfk(tama.x, tama.y, 1, tama.dispangle, gazo.otama[tama.size, tama.col], DX.TRUE, true);
-
-                }
-                else { if (kansuu.naka(tama.x, tama.y, gazo.otamagw[tama.size], gazo.otamagw[tama.size])) { tama.inswitch = true; }; }
-                tama.x += kansuu.Cos(tama.angle) * tama.speed;
-                tama.y += kansuu.Sin(tama.angle) * tama.speed;
-                tama.cnt++;
-
-            } 
-       //     kansuu.setareaend();
+                shot_cnt = 0;
+            }
+            endtime--; if (endtime < 0) { life = 0; }
+           foreach (Tdan tama in dan.Where(c=>c.effect==0))
+            {
+                dodan(tama);
+            }
+            DX.SetDrawBlendMode(DX.DX_BLENDMODE_ADD, 255);
+           
+          foreach (Tdan tama in dan.Where(c => c.effect == 1))
+         {
+               dodan(tama);
+           }
+            DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND,255);
             shot_cnt++;
 
             angle = this.zAtan2();
@@ -228,7 +216,28 @@ namespace _2._0._0
         {
 
         }
+        protected void dodan(Tdan tama)
+        {
+            if (tama.inswitch)
+            {
+                if (kansuu.sotoRota(tama.x, tama.y, gazo.otamagw[tama.size], gazo.otamagh[tama.size]) || kansuu.haniatariz(tama.x, tama.y, tama.atarihani, tama.speed, tama.angle))
+                {
+                    tama.seizon = false; return;
+                }
+                // if (tama.kaiten)
+                //    {
+                //         tama.dispangle = 2 * PI * (tama.cnt % 120) / 120;
+                //    }
+                //   else
+                { tama.dispangle = tama.angle + PI / 2; }
+                kansuu.DrawRotaGraphfk(tama.x, tama.y, 1, tama.dispangle, gazo.otama[tama.size, tama.col], DX.TRUE, true);
 
+            }
+            else { if (kansuu.naka(tama.x, tama.y, gazo.otamagw[tama.size], gazo.otamagw[tama.size])) { tama.inswitch = true; }; }
+            tama.x += kansuu.Cos(tama.angle) * tama.speed;
+            tama.y += kansuu.Sin(tama.angle) * tama.speed;
+            tama.cnt++;
+        }
         //ここから弾幕 
           int cnum = 0; float zangle = 0;
         int tcnt = 0; int cnt = 0;
@@ -543,7 +552,7 @@ namespace _2._0._0
             {
                 if (item.state == 0)
                 {
-                    item.speed *=3.5f;
+                    item.speed *= 3.5f;
                 }
             }
         }//漢字弾幕１
@@ -602,8 +611,9 @@ namespace _2._0._0
             int t = shot_cnt % 820; int t2 = shot_cnt;
             if (t == 0)
             {
-                sst = 0; sx = zx; sy = zy - 100; sangle = kansuu.PI() / 5 / 2 * kansuu.PI() / 2;
+                sst = 0; sx = zx; sy = zy - 100; sangle = PI / 5 / 2 + PI / 2;
                 bnum = 0;
+            }
                 if (sst <= 4)
                 {
                     for (int i = 0; i < 2; i++)
@@ -612,19 +622,52 @@ namespace _2._0._0
                         sy += kansuu.Sin(sangle) * 4;
                         if ((sx - zx) * (sx - zx) + (sy - zy) * (sy - zy) > 100.0 * 100.0)
                         {
-                            sangle -= kansuu.PI() - kansuu.PI() / 5;
+                            sangle -= PI - PI / 5.0f;
                             sst++;
                             if (sst == 5) { break; }
                         }
                         for (int j = 0; j < 5; j++)
                         {
-                              dan.Add(new Tdan(sx, sy, 0, j, -kansuu.PI()/2+kansuu.PI2()/5*j, 0, 3,j));
-
-            
+                              dan.Add(new Tdan(sx, sy, 0, j+3, -PI/2.0f+PI2/5.0f*j, 0, 7,9));
+                              dan[dan.Count-1].sx = kansuu.Cos(sangle) * 1.4f * 1.2f;
+                              dan[dan.Count - 1].sy = kansuu.Sin(sangle) * 1.4f;
+                              dan[dan.Count - 1].baseangle[0] = sangle - PI + PI / 20 * bnum;
+       
                         }
+                    }
+                    bnum++;
+                }
+            
+
+            foreach (var i in dan)
+            {
+                int cnt=i.cnt;
+                if (i.state == 9)
+                {
+                    if (t == 150)
+                    {
+                        i.speed = 4; i.cnt = 0;
+                        i.state++;
+                    }
+                }
+                else if (i.state == 10)
+                {
+                    if (cnt <= 80)
+                    {
+                        i.speed -= 0.05f;
+                    }
+                    else if (cnt == 100)
+                    {
+                        i.angle = i.baseangle[0];
+                    }
+                    else if (cnt >= 100 && cnt < 160)
+                    {
+                        i.speed += 0.015f;
                     }
                 }
             }
+
+
         }
         protected int[,] idx = new int[4,2] { { 50, 150 }, { 40, 50 }, { Program.scx - 100, 170 }, { Program.scx - 70, 50 } };
         protected int qo = 0;
@@ -649,8 +692,56 @@ namespace _2._0._0
             if (t == 0) { gx = Program.syux; gy = Program.syuy; }
             if (t < 50) { kansuu.DrawLine(zx+6, zy+6, gx, gy, DX.GetColor(255, 255, 0), t, true); }
             else { kansuu.DrawLine(zx + 6, zy + 6, gx, gy, DX.GetColor(255, 255, 0), 50, true); }
+        } 
+       int tm=0;
+        protected void shot12()
+        {
+            int t = shot_cnt % 200, t2 = shot_cnt;
+           
+            double angle;
+            if (t == 0) { tm = 190 + kansuu.rang(30); }
+            angle = PI * 1.5f + PI / 6 * kansuu.Sin(PI2 / tm * t2);
+            if (t2 % 4 == 0)
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    dan.Add(new Tdan(zx, zy, 0, 5, 0, 0, 19, 11));
+                    dan[dan.Count - 1].sx = kansuu.Cos(angle - PI / 8 * 4 + PI / 8 * i + PI / 16) * 3;
+                    dan[dan.Count - 1].sy = kansuu.Sin(angle - PI / 8 * 4 + PI / 8 * i + PI / 16) * 3;
+                    dan[dan.Count - 1].effect = 1;
+              
+                }
+            }
+            if ( t2 > 80)
+            {
+                int num = 1;
+                if (t % 2 == 1) { num = 2; }
+                for (int i = 0; i < num; i++)
+                {
+                    angle = PI * 1.5f - PI / 2 + PI / 12 * (t2 % 13) + kansuu.rang(PI / 15);
+                    dan.Add(new Tdan(zx, zy, 0, 4, 0, 0, 8, 12));
+                    dan[dan.Count - 1].sx = kansuu.Cos(angle) * 1.4f*1.2f;
+                    dan[dan.Count - 1].sy = kansuu.Sin(angle) * 1.4f;
+                }
+            }
+            foreach (var i in dan)
+            {
+                if (i.state == 11)
+                {
+                    if (i.cnt < 150) { i.sy += 0.03f; }
+                    i.x += i.sx;
+                    i.y += i.sy;
+                }
+                else if (i.state == 12)
+                {
+                    if (i.cnt < 160) { i.sy += 0.03f; }
+                    i.x += i.sx;
+                    i.y += i.sy;
+                    i.angle = kansuu.zikiangle(i.sx, i.sy);
+                }
+            }
+                    
         }
-
         public static float[] kx;
         public static float[] ky;
         public static int[] kcol;

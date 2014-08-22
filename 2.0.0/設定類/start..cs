@@ -15,6 +15,7 @@ namespace _2._0._0
         private static int exitGraph ;
         private static int howto;
         private static int sentaku2 ;
+        private static int[] options=new int[5];
         // private static int zkettei = DX.LoadGraph("z.bmp");
 
         private static bool exit ;
@@ -27,7 +28,7 @@ namespace _2._0._0
         private static int time ;
         private static int stime ;
         private static int wave ;
-        private const int koumokusu = 4;
+        private const int koumokusu = 5;
         public static void syokika()
         {
    
@@ -36,14 +37,20 @@ namespace _2._0._0
             exitGraph = DX.LoadGraph("exit.bmp");
             howto = DX.LoadGraph("howto.bmp");
             sentaku2 = DX.LoadGraph("sentaku2.bmp");
-            exit = false; start1 = true; how = false; r = g = b = wave = 0;
+            options[0] = DX.LoadGraph("option\\Game Start.png");
+            options[1] = DX.LoadGraph("option\\Extra Start.png");
+            options[2] = DX.LoadGraph("option\\Practice.png");
+            options[3] = DX.LoadGraph("option\\Option.png");
+            options[4] = DX.LoadGraph("option\\Exit.png");
+            exit = false; start1 = true; how = false; r = g = b = wave = 255;
             time = stime = 1;
             selecting = 0;
         }
         public static void gamen()
         {
+            DX.DrawBox(0, 0, Program.scx + 300, Program.scy, DX.GetColor(g, b, r), DX.TRUE);
             present.time = 0;
-            draw();
+          //  draw();
             if (size <= 5)
             {
                 ssize = 1;
@@ -71,15 +78,25 @@ namespace _2._0._0
 #warning エディットモード?
 //Program.gamemode = 8;
 
-         //   DX.DrawGraph(150, 283, howto, DX.TRUE);
-            DX.DrawStringToHandle(150, 183, "Start Game", (selecting==0?Program.red:Program.white),Program.Fonts[0]);
-            DX.DrawStringToHandle(150, 283, "How to Play", (selecting == 1 ? Program.red : Program.white), Program.Fonts[0]);
-            DX.DrawStringToHandle(150, 383, "Exit", (selecting == 2 ? Program.red : Program.white), Program.Fonts[0]);
+         //  
+          //  DX.DrawStringToHandle(150, 183, "Start Game", (selecting==0?Program.red:Program.white),Program.Fonts[0]);
+         //   DX.DrawStringToHandle(150, 283, "How to Play", (selecting == 1 ? Program.red : Program.white), Program.Fonts[0]);
+          //  DX.DrawStringToHandle(150, 383, "Exit", (selecting == 2 ? Program.red : Program.white), Program.Fonts[0]);
          //   DX.DrawGraph(150, 183, startgameGraph, DX.TRUE);
+         //   DX.DrawGraph(150, 283, howto, DX.TRUE);
           //  DX.DrawGraph(150, 383, exitGraph, DX.TRUE);
-            //    DX.DrawGraph(300, 453, zkettei, DX.TRUE);
+           // DX.DrawGraph(300, 453, zkettei, DX.TRUE);
+            DX.SetDrawBlendMode(DX.DX_BLENDMODE_ALPHA,50);
+            for (int i = 0; i < options.Length; i++)
+            {
+                if (selecting == i) { continue; }
+                DX.DrawGraph(450+10*i, 150 + 50 * i,options[i],DX.TRUE);
+            }
+            DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND, 255);
+            DX.DrawGraph(450+10*selecting+30, selecting * 50 + 150, options[selecting], DX.TRUE);
             if (Program.key[DX.KEY_INPUT_DOWN] == 1) { selecting=(++selecting)%koumokusu; }
             else if (Program.key[DX.KEY_INPUT_UP] == 1) { selecting = (--selecting) % koumokusu; }
+            if (selecting < 0) { selecting += koumokusu; }
             if (!Program.enter&&Program.key[DX.KEY_INPUT_RETURN] == 1)
             {
                 switch (selecting)

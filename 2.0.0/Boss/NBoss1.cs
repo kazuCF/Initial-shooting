@@ -17,7 +17,8 @@ namespace _2._0._0
           {
               set_life[i] = 5000;
           }
-          input_phypos(Program.scx-70,  50, 50);
+      //    input_phypos(Program.scx-70,  50, 50); 
+          input_phypos(Program.scx / 2, 150.0f, 50);
           danmakusu = 1;
       }
       public override void iroiro()
@@ -27,7 +28,8 @@ namespace _2._0._0
               switch (knd)
               { 
                   case 0:
-                     shot10();
+                    
+                     shot12();
                       break;
  
                   default:

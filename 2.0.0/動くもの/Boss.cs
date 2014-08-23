@@ -172,7 +172,10 @@ namespace _2._0._0
            }
             else
             {
-                DX.SetDrawBlendMode(DX.DX_BLENDMODE_SUB, 255);
+                if (state == 2)
+                {
+                    DX.SetDrawBlendMode(DX.DX_BLENDMODE_SUB, 255);
+                }
                 kansuu.DrawRotaGraphfk(dx, dy, 1, 0, gaz, DX.TRUE, false);
                DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND, 255);
             } fucount += 1;
@@ -196,11 +199,11 @@ namespace _2._0._0
                 dodan(tama);
             }
             DX.SetDrawBlendMode(DX.DX_BLENDMODE_ADD, 255);
-           
-          foreach (Tdan tama in dan.Where(c => c.effect == 1))
-         {
-               dodan(tama);
-           }
+
+            foreach (Tdan tama in dan.Where(c => c.effect == 1))
+            {
+                dodan(tama);
+            }
             DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND,255);
             shot_cnt++;
 
@@ -224,12 +227,8 @@ namespace _2._0._0
                 {
                     tama.seizon = false; return;
                 }
-                // if (tama.kaiten)
-                //    {
-                //         tama.dispangle = 2 * PI * (tama.cnt % 120) / 120;
-                //    }
-                //   else
-                { tama.dispangle = tama.angle + PI / 2; }
+                if (tama.speed != 0) { tama.dispangle = tama.angle + PI / 2; }
+                else { tama.dispangle = kansuu.angling(0, 0, tama.sx, tama.sy) + PI / 2; }
                 kansuu.DrawRotaGraphfk(tama.x, tama.y, 1, tama.dispangle, gazo.otama[tama.size, tama.col], DX.TRUE, true);
 
             }
@@ -314,7 +313,7 @@ namespace _2._0._0
             int t = shot_cnt % 1170;
             if (t >= 0 && t < 1170 && t % 90 == 0)
             {
-                float hangle = kansuu.rang(kansuu.PI());
+                float hangle = kansuu.rang(PI);
                 for (int j = 0; j < 2; j++)
                 {
                     for (int i = 0; i < 60; i++)
@@ -742,6 +741,61 @@ namespace _2._0._0
             }
                     
         }
+        public static int kai = 0;
+        protected void shot13()//中二のときの弾幕の再現
+        {
+            int sx = 10; sy = 5;
+            int kosuu = 100;
+            int t = shot_cnt %10;
+            float px = kansuu.Abs(kansuu.Cos(shot_cnt));
+            if (t == 0)
+            {
+                int plusk = 0;
+                if (kai == 0) { plusk = -5; }
+                else { plusk = 5; }
+                for (int i = 0; i < kosuu; i++)
+                {
+                    dan.Add(new Tdan(zx+px, zy, 0, 5, 0, 0, 7, 13));
+                    dan.Last().sx = kansuu.Cos((PI / 180) * 700 / kosuu * i);
+                    dan.Last().sy = kansuu.Sin((PI / 180) * 700 / kosuu * (i + plusk));
+                }
+                kai = (++kai) % 2;
+            }
+            foreach (var i in dan.Where(c=>c.state==13))
+            {
+                i.x += i.sx*sx;
+                i.y += i.sy*sy;
+          
+            }
+        }
+        protected void shot14()//中二のときの弾幕の再現
+        {
+            
+            int t = shot_cnt % 10;
+            if (t == 0)
+            {
+                int plusk = 0;
+                if (kai == 0) { plusk = -5; }
+                else { plusk = 5; }
+                for (int i = 0; i < 25; i++)
+                {
+                    dan.Add(new Tdan(zx, zy, 0, 5, 0, 0, 7, 14));
+                    dan.Last().sx = kansuu.Cos((PI / 180) * 205 / 25 * i);
+                    dan.Last().sy = kansuu.Sin((PI / 180) * 205 / 25 * (i + plusk));
+                }
+                kai = (++kai) % 2;
+            }
+            foreach (var i in dan.Where(c => c.state == 14))
+            {
+                float sx = 5; float sy = 0;
+                if (i.cnt < 55) { sy = 8-i.cnt/100.0f; }
+                if (i.cnt == 55) { sx = 0; sy = 0; }
+                else if (i.cnt > 65) { sx = -10; sy = -0.5f; }
+                i.x += i.sx * sx;
+                i.y += i.sy * sy;
+            }
+        }
+
         public static float[] kx;
         public static float[] ky;
         public static int[] kcol;

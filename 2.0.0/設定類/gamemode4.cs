@@ -28,7 +28,7 @@ namespace _2._0._0
         public static List<en> teki = new List<en>();
         public static void syokika()
         {
-            tekiyomi = 4;
+            tekiyomi = -1;
             im.Clear();
             ef.Clear();
             teki.Clear();

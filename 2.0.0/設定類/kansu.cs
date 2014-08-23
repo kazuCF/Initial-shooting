@@ -20,6 +20,8 @@ namespace _2._0._0
         public static float rang(float a, float b) { return (a + b * 2 * rnd.Next(10000) / 10000.0f); }//上のfloat版
         public static float rang(float ang) { return (-ang + ang * 2 * rnd.Next(10000) / 10000.0f); }//-a～aの乱数
         public static float rang(double ang) { return rang((float)ang); }//上のdouble版
+        public static float Abs(double abs) { return (float)Math.Abs(abs); }
+        public static float Abs(double A,double B) { return (float)Math.Abs(A-B); }
         public static float angling(double x, double y,double X,double Y) { return (float)Math.Atan2(Y - y, X - x); }
         public static float zikiangle(double x, double y) { return (float)Math.Atan2(Program.syuy - y, Program.syux - x); }
         public static bool sotoRota(double x, double y, int gw, int gh)//画面外にいるか否か

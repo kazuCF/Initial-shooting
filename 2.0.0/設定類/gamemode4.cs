@@ -28,7 +28,7 @@ namespace _2._0._0
         public static List<en> teki = new List<en>();
         public static void syokika()
         {
-            tekiyomi = -1;
+            tekiyomi = 4;
             im.Clear();
             ef.Clear();
             teki.Clear();
@@ -36,8 +36,9 @@ namespace _2._0._0
             bossnum = -1;
             effetime = 0;
             time = 0;
-            bosss[1] = new Boss1(Program.scx / 2, 30);
-            bosss[0] = new NBoss1(Program.scx / 2, -30);
+            bosss[1] = new Boss1(Program.scx / 2, 30,false);
+          //  bosss[0] = new NBoss1(Program.scx / 2, -30);
+            bosss[0] = new Boss1(Program.scx / 2, -30,true);
 
         }
         public static void removeall()

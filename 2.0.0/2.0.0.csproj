@@ -78,12 +78,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Boss\Boss2.cs" />
     <Compile Include="エディタ\ene.cs" />
     <Compile Include="設定類\atari.cs" />
     <Compile Include="設定類\beje.cs" />
     <Compile Include="動くもの\Boss.cs" />
     <Compile Include="Boss\Boss1.cs" />
-    <Compile Include="Boss\NBoss1.cs" />
     <Compile Include="動くもの\Tdan.cs" />
     <Compile Include="DxDLL.cs" />
     <Compile Include="動くもの\effect.cs" />

@@ -36,7 +36,8 @@ namespace _2._0._0
         public static int Boss1n1Graph;// = DX.LoadGraph("Boss1-1.png");
         public static int B1gw, B1gh;
         public static int Boss1Graph;// = DX.LoadGraph("BossGraph.bmp");
-        public static int Boss1gw, Boss1gh;
+        public static int[] BossGraphs = new int[3];
+       public static int Boss1gw, Boss1gh;
         public static int[] tama = new int[10];
         public static int tamakosu = 3;
        public static int[,] itemimg=new int[6,2];
@@ -91,6 +92,8 @@ namespace _2._0._0
 
         //   Boss1Graph = DX.LoadGraph("BossGraph.bmp");
            Boss1Graph = DX.LoadGraph("キャラクタ\\Boss1.png");
+           BossGraphs[0] = DX.LoadGraph("キャラクタ\\Boss1.png");
+           BossGraphs[1] = DX.LoadGraph("キャラクタ\\Boss2.png");
 
            ////////////////////////////////////////////////
           // zako1Graphs[0] = DX.LoadGraph("zakoteki.png");

@@ -9,6 +9,7 @@ namespace _2._0._0
     public  class Boss : en
     {
 #region 宣言
+        public bool nboss=false;
         public bool fend=false;
         public bool end = false;
         protected float BOSS_POS_X = Program.fmx / 2;
@@ -18,7 +19,7 @@ namespace _2._0._0
         protected bool saisyo = true;
         protected bool dansaisyo = true;
         protected bool phyflag = true, shotflag = false;
-        public int knd, state, endtime;
+        public  int knd, state, endtime;
         protected int phycnt, wtime;
         protected int[] set_life = new int[100];
         protected int  life_max;   
@@ -157,7 +158,10 @@ namespace _2._0._0
             if (phyflag) { calc(); }
             if (state == 2 && (life <= 0 || endtime <= 0)) { enter_boss(1); }
             else if (state == 1) { wait_enter(); }
-            iroiro(); Program.enter_func("ボスメイン", 0);
+            iroiro();
+            hantei();
+            graph_bossefe();
+            Program.enter_func("ボスメイン", 0);
             if (state == 2)
             {
                 int hyoujirai = Program.scx * (int)life / life_max;
@@ -211,6 +215,7 @@ namespace _2._0._0
             dan.RemoveAll(x => !x.seizon);
 
         }
+
         public virtual void iroiro()
         { }
         public virtual void danhenka()
@@ -343,7 +348,7 @@ namespace _2._0._0
         }
         #endregion
         #region shot3
-        protected void shot3()
+        protected void shot3(bool smalls)
         {
             int tm = 60;
             int t = shot_cnt % tm, t2 = shot_cnt;
@@ -364,7 +369,7 @@ namespace _2._0._0
                 }
             }
 
-            if (t % 4 == 0)
+            if (smalls&&t % 4 == 0)
             {
                 dan.Add(new Tdan(DX.GetRand(64-1), DX.GetRand(Program.fmx), DX.GetRand(200), 13, kansuu.PI() / 2, 1 + kansuu.rang(0.5)));
             }
@@ -673,7 +678,11 @@ namespace _2._0._0
         protected void shot10()//自機狙いからランダムではずして・・・
         {
             int t = shot_cnt % 320;
-            if (shot_cnt == 0) { input_phypos(idx[3,0],idx[3,1],50); }
+            if (shot_cnt == 0)
+            {
+                idx = new int[4, 2] { { 50, 150 }, { 40, 50 }, { Program.scx - 100, 170 }, { Program.scx - 70, 50 } };
+                input_phypos(idx[3, 0], idx[3, 1], 50);
+            }
             if (t >= 0 && t < 180 && t % 5 == 0)
             {
                 for (int i = 0; i < 30; i++)
@@ -744,18 +753,19 @@ namespace _2._0._0
         public static int kai = 0;
         protected void shot13()//中二のときの弾幕の再現
         {
-            int sx = 10; sy = 5;
+            idx = new int[2, 2] { { 40, 50 }, { Program.scx - 70, 50 } };
+            int sx = 6; sy = 3;
             int kosuu = 100;
             int t = shot_cnt %10;
             float px = kansuu.Abs(kansuu.Cos(shot_cnt));
-            if (t == 0)
+            if (t == 0 && !(shot_cnt % 320 > 220 && shot_cnt % 320 < 280))
             {
-                int plusk = 0;
+                          int plusk = 0;
                 if (kai == 0) { plusk = -5; }
                 else { plusk = 5; }
                 for (int i = 0; i < kosuu; i++)
                 {
-                    dan.Add(new Tdan(zx+px, zy, 0, 5, 0, 0, 7, 13));
+                    dan.Add(new Tdan(zx + px, zy, 0, 5, 0, 0, 7, 13));
                     dan.Last().sx = kansuu.Cos((PI / 180) * 700 / kosuu * i);
                     dan.Last().sy = kansuu.Sin((PI / 180) * 700 / kosuu * (i + plusk));
                 }
@@ -767,6 +777,9 @@ namespace _2._0._0
                 i.y += i.sy*sy;
           
             }
+            if (shot_cnt == 0) { input_phypos(idx[1, 0], idx[1, 1], 50); }
+            if (shot_cnt%320 == 220) { input_phypos(idx[qo, 0], idx[qo, 1], 50); qo = (++qo) % 2; }
+
         }
         protected void shot14()//中二のときの弾幕の再現
         {

@@ -5,10 +5,9 @@ using System.Text;
 using DxLibDLL;
 namespace _2._0._0
 {
-    public class Boss1 : Boss
+    public class Boss2 : Boss
     {
-        
-        public Boss1(float X, float Y, bool Tochu)
+        public Boss2(float X, float Y, bool Tochu)
         {
             zx = X; zy = Y; gw = gazo.Boss1gw; gh = gazo.Boss1gh;
             gaz = gazo.BossGraphs[0];
@@ -78,11 +77,5 @@ namespace _2._0._0
             //    kansuu.DrawRotaGraphfk(dx, dy, 1, 0, gaz, DX.TRUE,true);
 
         }
-
-        public override void danhenka()
-        {
-
-        }
-
     }
 }

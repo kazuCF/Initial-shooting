@@ -10,6 +10,7 @@ namespace _2._0._0
     class Program
     {//510-64=446
         //640-32=608
+        public const int bosskosuu = 3;
         public static int[] Fonts = new int[100];
         public static int dnx, dny, dns, dnc, dnflg, dnt;
         public static int brt;
@@ -57,7 +58,6 @@ namespace _2._0._0
             if (DX.DxLib_Init() < 0) { return; }
             int thickness = 100;
             DX.SetDrawScreen(DX.DX_SCREEN_BACK);
-            //  zibun.Add(new ziki(1, 320, 300));
 
             while (GetHitKeyStateAll_2(key) == 0 && DX.ProcessMessage() == 0)
             {
@@ -97,17 +97,16 @@ namespace _2._0._0
                         DX.SetDrawArea(fx, fy, scx, scy - fy);
                         for (int i = 0; i < zibun.Count; i++)
                         {
-                            zibun[i].Ziki(); //enter_func("自機", 0);
+                            zibun[i].Ziki();
                             syux = zibun[0].zikix;
                             syuy = zibun[0].zikiy;
                         }
                         DX.SetDrawArea(0, 0, scx + hamix, scy);
-                        gamemode4.bunki(); //enter_func("ゲームモード４", 0);
+                        gamemode4.bunki();
 
                         if (brt != 255) { DX.SetDrawBright(255, 255, 255); }
 
                         dn_calc(); enter_func("描画", 0);
-                        //  
                         break;
                     case 5:
                         //ゲームクリア
@@ -197,8 +196,6 @@ namespace _2._0._0
         public static int term, gnt;
         public static void fpsing()
         {
-            //  int term,  gnt;
-            //int t = 0;
             if (fpscount == 0)
             {
                 if (t == 0)
@@ -279,7 +276,6 @@ namespace _2._0._0
             }
             DX.DrawString(x, y + 14 * i, "合計:" + total / 1000, red);
             DX.DrawString(x, y + 14 * (i + 1), "敵の数:" + gamemode4.teki.Count, red);
-
         }
         public static int[] key = new int[256];
         public static int GetHitKeyStateAll_2(int[] GetHitKeyStateAll_InputKey)

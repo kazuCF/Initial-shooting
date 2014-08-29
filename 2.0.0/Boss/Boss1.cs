@@ -7,13 +7,12 @@ namespace _2._0._0
 {
     public class Boss1 : Boss
     {
-        
+
         public Boss1(float X, float Y, bool Tochu)
         {
-            zx = X; zy = Y; gw = gazo.Boss1gw; gh = gazo.Boss1gh;
+            zx = X; zy = Y; gw = gazo.Bossgws[0]; gh = gazo.Bossghs[0];
             gaz = gazo.BossGraphs[0];
             set_life = new int[10];
-            damage = 5;
             if (nboss)
             {
                 danmakusu = 1;
@@ -38,8 +37,9 @@ namespace _2._0._0
                     switch (knd)
                     {
                         case 0:
-                            shot13();
-                            shot3(false);
+                            //shot13();
+                         //   shot3(false);
+                            shot14();
                             break;
 
                         default:
@@ -73,16 +73,10 @@ namespace _2._0._0
                     }
                 }
                 DX.DrawString(0, 0, "ライフ：" + life + "残り時間：" + endtime, DX.GetColor(255, 255, 255));
-                //     DX.DrawBox(10, 10, 10 + life , 20, DX.GetColor(255, 255, 255), DX.TRUE);
             }
-            //    kansuu.DrawRotaGraphfk(dx, dy, 1, 0, gaz, DX.TRUE,true);
 
         }
 
-        public override void danhenka()
-        {
-
-        }
 
     }
 }

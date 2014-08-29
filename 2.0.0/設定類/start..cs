@@ -78,14 +78,6 @@ namespace _2._0._0
 #warning エディットモード?
 //Program.gamemode = 8;
 
-         //  
-          //  DX.DrawStringToHandle(150, 183, "Start Game", (selecting==0?Program.red:Program.white),Program.Fonts[0]);
-         //   DX.DrawStringToHandle(150, 283, "How to Play", (selecting == 1 ? Program.red : Program.white), Program.Fonts[0]);
-          //  DX.DrawStringToHandle(150, 383, "Exit", (selecting == 2 ? Program.red : Program.white), Program.Fonts[0]);
-         //   DX.DrawGraph(150, 183, startgameGraph, DX.TRUE);
-         //   DX.DrawGraph(150, 283, howto, DX.TRUE);
-          //  DX.DrawGraph(150, 383, exitGraph, DX.TRUE);
-           // DX.DrawGraph(300, 453, zkettei, DX.TRUE);
             DX.SetDrawBlendMode(DX.DX_BLENDMODE_ALPHA,50);
             for (int i = 0; i < options.Length; i++)
             {

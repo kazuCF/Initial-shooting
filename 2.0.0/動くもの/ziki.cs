@@ -277,9 +277,9 @@ namespace _2._0._0
                      //   l++;
                     }
                 }
-                if ((num != -1) || (gamemode4.bosschuu && gamemode4.bosss[gamemode4.bossnum].state == 2))
+                if ((num != -1) || (gamemode4.bosschuu && gamemode4.boss[0].state == 2))
                 {
-                    if (gamemode4.bosschuu) { x = gamemode4.bosss[gamemode4.bossnum].zx; y = gamemode4.bosss[gamemode4.bossnum].zy; }
+                    if (gamemode4.bosschuu) { x = gamemode4.boss[0].zx; y = gamemode4.boss[0].zy; }
                     else { x = gamemode4.teki.FirstOrDefault(c => c.number == num).zx; y = gamemode4.teki.FirstOrDefault(c => c.number == num).zy; }
                     i.angle = kansuu.angling(i.x, i.y, x, y);
                 }

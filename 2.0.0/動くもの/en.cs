@@ -13,7 +13,7 @@ namespace _2._0._0
         public bool editing = false;
         public float fx, fy;//エディト用描画変数
         public static int mynumber;
-        public int number = 0;
+        public int number = 0;//敵一つ一つにつく個別番号
         protected float chouseikakudo = (float)Math.PI / 180;
         protected float tzang;
         protected float PI = kansuu.PI();
@@ -34,7 +34,6 @@ namespace _2._0._0
         public int itemnum = 3;//デフォルト値。
         public int[] dasitem;
         public int dantime = 0;
-        public int damage = 2;
         public int gaz;
         public int toujyou;
         public int tamaknd, tamacol;

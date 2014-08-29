@@ -28,7 +28,6 @@ namespace _2._0._0
         protected float angle;
         protected float dx, dy;
         protected int fucount = 0;
-        protected new int damage = 5;
         protected static int count = -1;
         protected  int danmakusu = 1;
         protected float[] shot_base_angle = new float[10];
@@ -37,7 +36,6 @@ namespace _2._0._0
         {
             effecttime = 255;
             count = -1;
-            damage = 5;
             fucount = 0;
             dan.Clear();
             BOSS_POS_Y = 150.0f; v0x = 0;v0y = 0;
@@ -73,7 +71,7 @@ namespace _2._0._0
             if (phycnt >= set_t)
             {//移動にかける時間分になったら
                 phyflag = false;
-            };//
+            }
         }
 
 
@@ -112,28 +110,22 @@ namespace _2._0._0
             if (num == 0)
             {
                 gamemode4.bossnum++;
-   //             gamemode4.removeall();
                 gamemode4.bosschuu = true;
-              //  zx = Program.fmx / 2; zy = -30;
                 knd = -1;
             }
-            endtime = 9900;//99 * 60;
+            endtime = 9900;
             dan.Clear();
             state = 1;
             dantime = 0;
             knd++;
             if (state == 1 && knd == danmakusu) { end = true; }
-            
             wtime = 0;
-        //    ttama.Clear();
             dansaisyo = true;
-         //   input_phy(60);
             shot_cnt = 0;
             danhenka();
         }
         protected void enter_boss_shot()
         {
-       //     ttama.Clear();
            wtime = 0; state = 2; life = set_life[knd]; life_max = (int)life;
             shotflag = true;
         }
@@ -147,10 +139,6 @@ namespace _2._0._0
             dx = zx; dy = zy + kansuu.Sin(PI2 / 130 * (fucount % 130)) * 10;
         }
 
-        /// <summary>
-        /// </summary>
-        /// // ////////////////////////////////////////////////////
-        
         public void boss_shot_main()
         {
             if (saisyo) { enter_boss(0); saisyo = false; }
@@ -173,7 +161,7 @@ namespace _2._0._0
             {
                 hyouji = false;
                 DX.SetDrawBright(255, 0, 0); fend = dieefe(1); DX.SetDrawBright(255, 255, 255);
-           }
+            }
             else
             {
                 if (state == 2)
@@ -181,11 +169,10 @@ namespace _2._0._0
                     DX.SetDrawBlendMode(DX.DX_BLENDMODE_SUB, 255);
                 }
                 kansuu.DrawRotaGraphfk(dx, dy, 1, 0, gaz, DX.TRUE, false);
-               DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND, 255);
+                DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND, 255);
             } fucount += 1;
         }
         
-        // // // // // // /// /////////////////////////////////////////
         override public void shot_calc()
         {
             dan.RemoveAll(c => Program.isbom);
@@ -198,7 +185,7 @@ namespace _2._0._0
                 shot_cnt = 0;
             }
             endtime--; if (endtime < 0) { life = 0; }
-           foreach (Tdan tama in dan.Where(c=>c.effect==0))
+            foreach (Tdan tama in dan.Where(c => c.effect == 0))
             {
                 dodan(tama);
             }
@@ -208,7 +195,7 @@ namespace _2._0._0
             {
                 dodan(tama);
             }
-            DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND,255);
+            DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND, 255);
             shot_cnt++;
 
             angle = this.zAtan2();
@@ -783,7 +770,7 @@ namespace _2._0._0
         }
         protected void shot14()//中二のときの弾幕の再現
         {
-            
+
             int t = shot_cnt % 10;
             if (t == 0)
             {
@@ -800,15 +787,20 @@ namespace _2._0._0
             }
             foreach (var i in dan.Where(c => c.state == 14))
             {
-                float sx = 5; float sy = 0;
-                if (i.cnt < 55) { sy = 8-i.cnt/100.0f; }
-                if (i.cnt == 55) { sx = 0; sy = 0; }
-                else if (i.cnt > 65) { sx = -10; sy = -0.5f; }
+                int sx = 6; sy = 3;
                 i.x += i.sx * sx;
                 i.y += i.sy * sy;
             }
         }
+        protected void shot15()
+        {
+            int t = shot_cnt % 10;
+            if (t == 0)
+            {
+                
+            }
 
+        }
         public static float[] kx;
         public static float[] ky;
         public static int[] kcol;

@@ -11,7 +11,9 @@ namespace _2._0._0
         private static int fx = Program.fx, fy = Program.fy, fmx = Program.fmx, fmy = Program.fmy, scx = Program.scx, scy = Program.scy;
         static Random rnd = new Random();
 
-     
+
+        public static float Cos(double x) { return (float)Math.Cos(x); }
+        public static float Sin(double x) { return (float)Math.Sin(x); }
         public static float PI() { return (float)Math.PI; }//円周率
         public static float PI2() { return (float)Math.PI * 2; }//円周率の二倍
         public static float rang() { return rnd.Next(0, 1); }//0～1の乱数
@@ -21,9 +23,9 @@ namespace _2._0._0
         public static float rang(float ang) { return (-ang + ang * 2 * rnd.Next(10000) / 10000.0f); }//-a～aの乱数
         public static float rang(double ang) { return rang((float)ang); }//上のdouble版
         public static float Abs(double abs) { return (float)Math.Abs(abs); }
-        public static float Abs(double A,double B) { return (float)Math.Abs(A-B); }
-        public static float angling(double x, double y,double X,double Y) { return (float)Math.Atan2(Y - y, X - x); }
-        public static float zikiangle(double x, double y) { return (float)Math.Atan2(Program.syuy - y, Program.syux - x); }
+        public static float Abs(double A,double B) { return (float)Math.Abs(A-B); }//二つの数字の差の絶対値を求める
+        public static float angling(double x, double y,double X,double Y) { return (float)Math.Atan2(Y - y, X - x); }//任意の二つの座標から角度を求める
+        public static float zikiangle(double x, double y) { return (float)Math.Atan2(Program.syuy - y, Program.syux - x); }//自機との角度を求める
         public static bool sotoRota(double x, double y, int gw, int gh)//画面外にいるか否か
         {
             return !naka(x,y,gw,gh);
@@ -54,7 +56,6 @@ namespace _2._0._0
             //return (x-fx >= -gw*2 && x-fx < fmx + gw && y-fy >= -gw && y-fy < fmy + gh*2);
             return (x >= -gw / 2 && x <= scx + gw / 2 && y >= -gh / 2 && y <= scy + gh / 2);
         }
-
         public static bool enatariz(double x, double y, double gw)//円を用いた自機との当たり判定
         {
             bool yes = false;
@@ -142,19 +143,14 @@ namespace _2._0._0
             DX.DrawPixel(x + fx + Program.dnx, y + fy + Program.dny, Color);
         }
         public static void setarea1()//描画範囲のセット
-        {
-            //  DX.SetDrawArea(fx, fy, scx +fx, scy +fy);  
+        { 
             DX.SetDrawArea(fx + Program.dnx, fy + Program.dny, scx + Program.dnx, scy + Program.dny - fy);
-
         }
         public static void setareaend()//描画範囲の補正解除
         {
             DX.SetDrawArea(0, 0, scx + Program.hamix, scy);
-
         }
 
-        public static float Cos(double x) { return (float)Math.Cos(x); }
-        public static float Sin(double x) { return (float)Math.Sin(x); }
         
 
 

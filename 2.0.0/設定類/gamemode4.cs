@@ -23,6 +23,7 @@ namespace _2._0._0
         public static bool kaishi = true;
         public static bool bosschuu = false;
         public static Boss[] bosss = new Boss[2];
+        public static List<Boss> boss = new List<Boss>();
         public static List<item> im = new List<item>();
         public static List<effect> ef = new List<effect>();
         public static List<en> teki = new List<en>();
@@ -36,9 +37,9 @@ namespace _2._0._0
             bossnum = -1;
             effetime = 0;
             time = 0;
-            bosss[1] = new Boss1(Program.scx / 2, 30,false);
-          //  bosss[0] = new NBoss1(Program.scx / 2, -30);
-            bosss[0] = new Boss1(Program.scx / 2, -30,true);
+       //     bosss[0] = new Boss1(Program.scx / 2, -30,true);
+        //    bosss[1] = new Boss1(Program.scx / 2, 30,false);
+            
 
         }
         public static void removeall()
@@ -88,17 +89,12 @@ namespace _2._0._0
             {
                 case -1:
                     if (startin(1)) { htime = time + 40; tekiyomi++; };
-                   
                     break;
                 case 0:
                     if (tekiyomikomi("1-1-1", 0)) { htime = time + 40; tekiyomi++; }
-                    //if (tekiyomikomi("1-1-5", htime)) { tekiyomi++; htime = time + 40; }
-
                     break;
                 case 1:
                     if (tekiyomikomi("1-1-2", htime)) { htime = time + 40; tekiyomi++; }
-                    //if (tekiyomikomi("1-1-6", htime)) { tekiyomi++; htime = time + 40; }
-
                     break;
                 case 2:
                     if (tekiyomikomi("1-1-3", htime)) { tekiyomi++; htime = time + 40; }
@@ -107,13 +103,7 @@ namespace _2._0._0
                     if (tekiyomikomi("1-1-4", htime)) { tekiyomi++; htime = time + 150; }
                     break;
                 case 4:
-
-                    if (time > htime)
-                    {
-                        removeall();
-                        bosss[0].boss_shot_main();
-                        if (bosss[0].fend) { tekiyomi++; htime = time + 40; gamemode4.bosschuu = false; }
-                    }
+                    bossing(Program.scx / 2, -30, true);
                     break;
                 case 5:
                     if (tekiyomikomi("1-1-5", htime)) { tekiyomi++; htime = time + 40; }
@@ -125,12 +115,7 @@ namespace _2._0._0
                     if (tekiyomikomi("1-1-7", htime)) { tekiyomi++; htime = time + 240; }
                     break;
                 case 8:
-                    if (time > htime)
-                    {
-                        // removeall();
-                        bosss[1].boss_shot_main();
-                        if (bosss[1].fend) { tekiyomi++; htime = time + 40; gamemode4.bosschuu = false; }
-                    }
+                    bossing(Program.scx / 2, 30, false);
                     break;
                 default:
                     chapter++;
@@ -162,10 +147,6 @@ namespace _2._0._0
             Program.enter_func("第2章", 0);
         }
         
-        private static bool tekiyomikomi(string filename)
-        {
-            return tekiyomikomi(filename, 0);
-        }
         private static bool tekiyomikomi(string filename, int hajime)
         {
             var owari = true;
@@ -175,9 +156,7 @@ namespace _2._0._0
                 lines = new string[100];
                 readin = true;
                 var read = new StreamReader("enemy\\" + filename + ".csv", false);
-
                 int k = 0;
-
                 var dam = read.ReadLine();
                 while (!read.EndOfStream)
                 {
@@ -201,9 +180,6 @@ namespace _2._0._0
                     //13敵の体力
                     //それ以降　出すアイテム
                 }
-
-
-
             }
             foreach (var i in lines)
             {
@@ -236,14 +212,22 @@ namespace _2._0._0
         }
         private static bool startin(int chapter)
         {
-            
-           // kansuu.DrawRotaGraphfk(Program.scx/2, Program.scy/2, 1, 0, gazo.titles[0], DX.TRUE, false);
-            DX.SetDrawBlendMode(DX.DX_BLENDMODE_ALPHA, 255-effetime);
-            kansuu.DrawRotaGraphfk(Program.scx / 2, Program.scy / 2,effetime/100.0, 0, gazo.titles[chapter-1], DX.TRUE, false);
+            DX.SetDrawBlendMode(DX.DX_BLENDMODE_ALPHA, 255 - effetime);
+            kansuu.DrawRotaGraphfk(Program.scx / 2, Program.scy / 2, effetime / 100.0, 0, gazo.titles[chapter - 1], DX.TRUE, false);
             DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND, effetime);
             if (++effetime >= 256) { effetime = 0; return true; }
             else { return false; }
-            
+        }
+        private static void bossing(float X, float Y, bool Tochu)
+        {
+            if (time == htime) { boss.Add(new Boss1(X,Y, Tochu)); }
+            if (time > htime)
+            {
+                removeall();
+                boss[0].boss_shot_main();
+                if (boss[0].fend) {  boss.Remove(boss[0]);gamemode4.bosschuu = false;tekiyomi++; htime = time + 40;  }
+               
+            }
         }
     }
 }

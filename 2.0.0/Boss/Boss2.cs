@@ -9,10 +9,9 @@ namespace _2._0._0
     {
         public Boss2(float X, float Y, bool Tochu)
         {
-            zx = X; zy = Y; gw = gazo.Boss1gw; gh = gazo.Boss1gh;
-            gaz = gazo.BossGraphs[0];
+            zx = X; zy = Y; gw = gazo.Bossgws[1]; gh = gazo.Bossghs[1];
+            gaz = gazo.BossGraphs[1];
             set_life = new int[10];
-            damage = 5;
             if (nboss)
             {
                 danmakusu = 1;
@@ -72,9 +71,7 @@ namespace _2._0._0
                     }
                 }
                 DX.DrawString(0, 0, "ライフ：" + life + "残り時間：" + endtime, DX.GetColor(255, 255, 255));
-                //     DX.DrawBox(10, 10, 10 + life , 20, DX.GetColor(255, 255, 255), DX.TRUE);
             }
-            //    kansuu.DrawRotaGraphfk(dx, dy, 1, 0, gaz, DX.TRUE,true);
 
         }
     }

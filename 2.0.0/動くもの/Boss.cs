@@ -277,23 +277,25 @@ namespace _2._0._0
         protected void shot1()
         {
             int t2 = shot_cnt % 150;
+            
             float rnd = 0;
             if (t2 >= 0 && t2 <= 110 && t2 % 10 == 0)
             {
+     
                 for (int i = 0; i < 20; i++)
                 {
-                    float x = zx + kansuu.Cos(kansuu.PI() / 2 + kansuu.PI() / 150 * t2) * 100;
-                    float y = zy + kansuu.Sin(kansuu.PI() / 2 + kansuu.PI() / 150 * t2) * 100;
+                    float x = zx + 7 + kansuu.Cos(kansuu.PI() / 2 + kansuu.PI() / 150 * t2) * 100;
+                    float y = zy + 7 + kansuu.Sin(kansuu.PI() / 2 + kansuu.PI() / 150 * t2) * 100;
                     float ang = PI2 / 20 * i;
-                    dan.Add(new Tdan(rnd+x, y, 0, 2, ang, 1.2f, 5));
+                    dan.Add(new Tdan(rnd + x, y, 0, 2, ang, 1.2f, 5));
                 }
                 for (int i = 0; i < 20; i++)
                 {
 
-                    float x = zx + kansuu.Cos(kansuu.PI() / 2 - kansuu.PI() / 150 * t2) * 100;
-                    float y = zy + kansuu.Sin(kansuu.PI() / 2 - kansuu.PI() / 150 * t2) * 100;
+                    float x = zx + 7 + kansuu.Cos(kansuu.PI() / 2 - kansuu.PI() / 150 * t2) * 100;
+                    float y = zy + 7 + kansuu.Sin(kansuu.PI() / 2 - kansuu.PI() / 150 * t2) * 100;
                     float ang = PI2 / 20 * i;
-                    dan.Add(new Tdan(rnd+x, y, 0, 4, ang, 1.2f, 5));
+                    dan.Add(new Tdan(rnd + x, y, 0, 4, ang, 1.2f, 5));
 
                 }
             }
@@ -710,7 +712,7 @@ namespace _2._0._0
             if ( t2 > 80)
             {
                 int num = 1;
-                if (t % 2 == 1) { num = 2; }
+                if (t % 2 == 1) { num = 3; }
                 for (int i = 0; i < num; i++)
                 {
                     angle = PI * 1.5f - PI / 2 + PI / 12 * (t2 % 13) + kansuu.rang(PI / 15);

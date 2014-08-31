@@ -185,6 +185,14 @@ namespace _2._0._0
         {
             switch (ugokikata)
             {
+                case -6:
+                    zakoudou.enemy_patternm6(zx, zy, ref sx, ref sy, ref idoutime, ugokikata, waittime, ref ang, ref zspeed);
+                    kaitendraw = true;
+                    break;
+                case -5:
+                    zakoudou.enemy_patternm5(zx, zy, ref sx, ref sy, ref idoutime, ugokikata, waittime, ref ang, ref zspeed);
+                    kaitendraw = true;
+                    break;
                 case -4:
                     zakoudou.enemy_patternm4(zx, zy, ref sx, ref sy, ref idoutime, ugokikata, waittime, ref ang, ref zspeed);
                     kaitendraw = true;

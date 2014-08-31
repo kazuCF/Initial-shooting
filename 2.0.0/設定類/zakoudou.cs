@@ -8,10 +8,17 @@ namespace _2._0._0
 {
     public static class zakoudou
     {
+        public static void enemy_patternm6(float ex, float ey, ref float sx, ref float sy, ref int time, int num, int wait, ref float ang, ref float speed)
+        {
+            if (time == 0) { ang = kansuu.angling(0, 0, 1, 0) + kansuu.rang(0.1f); speed = 9 + kansuu.rang(5); }
+        }
+        public static void enemy_patternm5(float ex, float ey, ref float sx, ref float sy, ref int time, int num, int wait, ref float ang, ref float speed)
+        {
+            if (time == 0) { ang = kansuu.angling(0, 0, -1, 0) + kansuu.rang(0.1f); speed = 9 + kansuu.rang(5); }
+        }
         public static void enemy_patternm4(float ex, float ey, ref float sx, ref float sy, ref int time, int num, int wait, ref float ang, ref float speed)
         {
             if (time == 0) { ang = kansuu.PI() * 1 / 2.0f; speed = 6+kansuu.rang(5); }
-            
         }
         public static void enemy_patternm3(float ex, float ey, ref float sx, ref float sy, ref int time, int num, int wait, ref float ang, ref float speed)
         {

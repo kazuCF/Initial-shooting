@@ -29,11 +29,11 @@ namespace _2._0._0
         public static List<en> teki = new List<en>();
         public static void syokika()
         {
-            tekiyomi = 4;
+            tekiyomi = 5;
             im.Clear();
             ef.Clear();
             teki.Clear();
-            chapter = 1;
+            chapter = 2;
             bossnum = -1;
             effetime = 0;
             time = 0;
@@ -103,7 +103,7 @@ namespace _2._0._0
                     if (tekiyomikomi("1-1-4", htime)) { tekiyomi++; htime = time + 150; }
                     break;
                 case 4:
-                    bossing(Program.scx / 2, -30, true);
+                    bossing(Program.scx / 2, -30, true,1);
                     break;
                 case 5:
                     if (tekiyomikomi("1-1-5", htime)) { tekiyomi++; htime = time + 40; }
@@ -115,7 +115,7 @@ namespace _2._0._0
                     if (tekiyomikomi("1-1-7", htime)) { tekiyomi++; htime = time + 240; }
                     break;
                 case 8:
-                    bossing(Program.scx / 2, 30, false);
+                    bossing(Program.scx / 2, 30, false,1);
                     break;
                 default:
                     chapter++;
@@ -142,6 +142,12 @@ namespace _2._0._0
                     break;
                 case 3:
                     if (tekiyomikomi("2-1-4", htime)) { tekiyomi++; htime = time + 40; }
+                    break;
+                case 4:
+                    bossing(Program.scx / 2, -30, true, 2);
+                    break;
+                case 5:
+                    if (tekiyomikomi("2-1-5", htime)) { tekiyomi++; htime = time + 40; }
                     break;
             }
             Program.enter_func("第2章", 0);
@@ -218,9 +224,22 @@ namespace _2._0._0
             if (++effetime >= 256) { effetime = 0; return true; }
             else { return false; }
         }
-        private static void bossing(float X, float Y, bool Tochu)
+        private static void bossing(float X, float Y, bool Tochu,int type)
         {
-            if (time == htime) { boss.Add(new Boss1(X,Y, Tochu)); }
+            if (time == htime) {
+                switch (type)
+                {
+                    case 1:
+                        boss.Add(new Boss1(X, Y, Tochu));
+                        break;
+                    case 2:
+                        boss.Add(new Boss2(X, Y, Tochu));
+                        break;
+                    default:
+                        break;
+                }
+                boss.Add(new Boss1(X,Y, Tochu)); 
+            }
             if (time > htime)
             {
                 removeall();

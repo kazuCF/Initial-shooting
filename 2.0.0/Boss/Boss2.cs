@@ -9,7 +9,7 @@ namespace _2._0._0
     {
         public Boss2(float X, float Y, bool Tochu)
         {
-            zx = X; zy = Y; gw = gazo.Bossgws[1]; gh = gazo.Bossghs[1];
+            zx = X; zy = Y; gw = gazo.Bossgws[1]; gh = gazo.Bossghs[1]; nboss = Tochu;
             gaz = gazo.BossGraphs[1];
             set_life = new int[10];
             if (nboss)
@@ -25,7 +25,7 @@ namespace _2._0._0
                 set_life[i] = 5000;
             }
             input_phypos(Program.scx / 2, 150.0f, 50);
-            nboss = Tochu;
+           
         }
         public override void iroiro()
         {
@@ -36,8 +36,7 @@ namespace _2._0._0
                     switch (knd)
                     {
                         case 0:
-                            shot13();
-                            shot3(false);
+                            shot12();
                             break;
 
                         default:
@@ -50,9 +49,9 @@ namespace _2._0._0
                     switch (knd)
                     {
                         case 0:
-                            shot1();
+                            shot14();
                             //    shot2();
-                            shot6();
+                            shot4();
                             break;
                         case 1:
                             shot3(true);

@@ -10,7 +10,7 @@ namespace _2._0._0
 
         public Boss1(float X, float Y, bool Tochu)
         {
-            zx = X; zy = Y; gw = gazo.Bossgws[0]; gh = gazo.Bossghs[0];
+            zx = X; zy = Y; gw = gazo.Bossgws[0]; gh = gazo.Bossghs[0];nboss = Tochu;
             gaz = gazo.BossGraphs[0];
             set_life = new int[10];
             if (nboss)
@@ -26,7 +26,7 @@ namespace _2._0._0
                 set_life[i] = 5000;
             }
             input_phypos(Program.scx / 2, 150.0f, 50);
-            nboss = Tochu;
+            
         }
         public override void iroiro()
         {
@@ -37,8 +37,8 @@ namespace _2._0._0
                     switch (knd)
                     {
                         case 0:
-                            //shot13();
-                         //   shot3(false);
+                            shot13();
+                            shot3(false);
                             shot14();
                             break;
 

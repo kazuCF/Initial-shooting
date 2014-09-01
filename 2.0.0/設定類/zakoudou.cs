@@ -8,30 +8,45 @@ namespace _2._0._0
 {
     public static class zakoudou
     {
+        public static void enemy_patternm8(float ex, float ey, ref float sx, ref float sy, ref int time, int num, int wait, ref float ang, ref float speed)
+        {
+            if (time == 0) { ang = kansuu.angling(0, 0, 0, -1) + kansuu.rang(0.1f); speed = 9 + kansuu.rang(5); }
+            //上移動
+        }
+        public static void enemy_patternm7(float ex, float ey, ref float sx, ref float sy, ref int time, int num, int wait, ref float ang, ref float speed)
+        {
+            if (time == 0) { ang = kansuu.angling(0, 0, 0, 1) + kansuu.rang(0.1f); speed = 9 + kansuu.rang(5); }
+            //下移動
+        }
         public static void enemy_patternm6(float ex, float ey, ref float sx, ref float sy, ref int time, int num, int wait, ref float ang, ref float speed)
         {
             if (time == 0) { ang = kansuu.angling(0, 0, 1, 0) + kansuu.rang(0.1f); speed = 9 + kansuu.rang(5); }
+            //右移動
         }
         public static void enemy_patternm5(float ex, float ey, ref float sx, ref float sy, ref int time, int num, int wait, ref float ang, ref float speed)
         {
             if (time == 0) { ang = kansuu.angling(0, 0, -1, 0) + kansuu.rang(0.1f); speed = 9 + kansuu.rang(5); }
+            //左移動
         }
         public static void enemy_patternm4(float ex, float ey, ref float sx, ref float sy, ref int time, int num, int wait, ref float ang, ref float speed)
         {
-            if (time == 0) { ang = kansuu.PI() * 1 / 2.0f; speed = 6+kansuu.rang(5); }
+            if (time == 0) { ang = kansuu.PI() * 1 / 2.0f; speed = 6 + kansuu.rang(5); }
         }
         public static void enemy_patternm3(float ex, float ey, ref float sx, ref float sy, ref int time, int num, int wait, ref float ang, ref float speed)
         {
-            if (time == 0) { ang = kansuu.zikiangle(ex, ey); speed = kansuu.rang(2);  }
-            else if (time == 20) { speed += 6+kansuu.rang(3); }
+            if (time == 0) { ang = kansuu.zikiangle(ex, ey); speed = kansuu.rang(2); }
+            else if (time == 20) { speed += 6 + kansuu.rang(3); }
+            //自機の方向
         }
         public static void enemy_patternm2(float ex, float ey, ref float sx, ref float sy, ref int time, int num, int wait, ref float ang, ref float speed)
         {
             if (time == 0) { ang = kansuu.PI() + kansuu.rang(-0.3f, 0.3f); speed = 5 + kansuu.rang(5); }
+     //ランダム角度2
         }
         public static void enemy_patternm1(float ex, float ey, ref float sx, ref float sy, ref int time, int num, int wait, ref float ang, ref float speed)
         {
             if (time == 0) { ang = kansuu.rang(-0.3f, 0.3f); speed = 5 + kansuu.rang(5); }
+     //ランダム角度1
         }
 
         public static void enemy_pattern0(float ex, float ey, ref float sx, ref float sy, ref int time, int num, int wait)
@@ -39,6 +54,7 @@ namespace _2._0._0
             if (time > 30 + wait) { sy = -0.5f - 0.1f * num; return; }
             else if (ey < Program.scy / 2) { sx = 0; sy = 1 + 0.1f * num; time = 0; return; }
             else { sy = 0; }
+            //真下に降りてそのあと上がる
         }
         public static void enemy_pattern1(float ex, float ey, ref float sx, ref float sy, ref int time, int num, int wait)
         {

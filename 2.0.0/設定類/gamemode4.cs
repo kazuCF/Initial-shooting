@@ -9,7 +9,6 @@ namespace _2._0._0
     public static class gamemode4
     {
         public static float[,] tekis = new float[100, 20];
-        //   public static List<string> tekis = new List<string>();
         public static string[] lines = new string[100];
         public static string[] values;
         public static bool fileend = false;
@@ -20,16 +19,14 @@ namespace _2._0._0
         public static int chapter = 1;
         public static int time = 0;
         private static int effetime = 0;
-        public static bool kaishi = true;
         public static bool bosschuu = false;
-        public static Boss[] bosss = new Boss[2];
         public static List<Boss> boss = new List<Boss>();
         public static List<item> im = new List<item>();
         public static List<effect> ef = new List<effect>();
         public static List<en> teki = new List<en>();
         public static void syokika()
         {
-            tekiyomi = 5;
+            tekiyomi = -1;
             im.Clear();
             ef.Clear();
             teki.Clear();
@@ -37,16 +34,11 @@ namespace _2._0._0
             bossnum = -1;
             effetime = 0;
             time = 0;
-       //     bosss[0] = new Boss1(Program.scx / 2, -30,true);
-        //    bosss[1] = new Boss1(Program.scx / 2, 30,false);
-            
-
         }
         public static void removeall()
         {
             teki.Clear();
         }
-
 
         public static void bunki()
         {
@@ -60,6 +52,7 @@ namespace _2._0._0
                     chapter2();
                     break;
             }
+            Program.enter_func("第"+chapter+"章", 0);
             im.RemoveAll(c => !c.seizon);
             ef.RemoveAll(c => !c.seizon);
             teki.RemoveAll(c => !c.seizon);
@@ -91,28 +84,28 @@ namespace _2._0._0
                     if (startin(1)) { htime = time + 40; tekiyomi++; };
                     break;
                 case 0:
-                    if (tekiyomikomi("1-1-1", 0)) { htime = time + 40; tekiyomi++; }
+                    Callene("1-1-1", 40);
                     break;
                 case 1:
-                    if (tekiyomikomi("1-1-2", htime)) { htime = time + 40; tekiyomi++; }
+                    Callene("1-1-2", 40);
                     break;
                 case 2:
-                    if (tekiyomikomi("1-1-3", htime)) { tekiyomi++; htime = time + 40; }
+                    Callene("1-1-3", 40);
                     break;
                 case 3:
-                    if (tekiyomikomi("1-1-4", htime)) { tekiyomi++; htime = time + 150; }
+                    Callene("1-1-4", 150);
                     break;
                 case 4:
                     bossing(Program.scx / 2, -30, true,1);
                     break;
                 case 5:
-                    if (tekiyomikomi("1-1-5", htime)) { tekiyomi++; htime = time + 40; }
+                    Callene("1-1-5", 40);
                     break;
                 case 6:
-                    if (tekiyomikomi("1-1-6", htime)) { tekiyomi++; htime = time + 40; }
+                    Callene("1-1-6", 40);
                     break;
                 case 7:
-                    if (tekiyomikomi("1-1-7", htime)) { tekiyomi++; htime = time + 240; }
+                    Callene("1-1-7", 240);
                     break;
                 case 8:
                     bossing(Program.scx / 2, 30, false,1);
@@ -122,7 +115,6 @@ namespace _2._0._0
                     tekiyomi = -1;
                     break;
             }
-            Program.enter_func("第1章", 0);
         }
         private static void chapter2()
         {
@@ -132,27 +124,39 @@ namespace _2._0._0
                     if (startin(2)) { htime = time + 40; tekiyomi++; };
                     break;
                 case 0:
-                    if (tekiyomikomi("2-1-1", htime)) { tekiyomi++; htime = time + 40; }
+                    Callene("2-1-1", 40);
                     break;
                 case 1:
-                    if (tekiyomikomi("2-1-2", htime)) { tekiyomi++; htime = time + 60; }
+                    Callene("2-1-2", 60);
                     break;
                 case 2:
-                    if (tekiyomikomi("2-1-3", htime)) { tekiyomi++; htime = time + 40; }
+                    Callene("2-1-3", 40);
                     break;
                 case 3:
-                    if (tekiyomikomi("2-1-4", htime)) { tekiyomi++; htime = time + 40; }
+                    Callene("2-1-4", 40);
                     break;
                 case 4:
                     bossing(Program.scx / 2, -30, true, 2);
                     break;
                 case 5:
-                    if (tekiyomikomi("2-1-5", htime)) { tekiyomi++; htime = time + 40; }
+                    Callene("2-1-5", 40);
+                    break;
+                case 6:
+                    Callene("2-1-6", 40);
+                    break;
+                case 7:
+                    Callene("2-1-7", 40);
+                    break;
+                case 8:
+                    bossing(Program.scx / 2, 30, false, 2);
+                    break;
+                default:
+                    chapter++;
+                    tekiyomi = -1;
                     break;
             }
-            Program.enter_func("第2章", 0);
         }
-        
+
         private static bool tekiyomikomi(string filename, int hajime)
         {
             var owari = true;
@@ -226,7 +230,8 @@ namespace _2._0._0
         }
         private static void bossing(float X, float Y, bool Tochu,int type)
         {
-            if (time == htime) {
+            if (time == htime)
+            {
                 switch (type)
                 {
                     case 1:
@@ -238,15 +243,20 @@ namespace _2._0._0
                     default:
                         break;
                 }
-                boss.Add(new Boss1(X,Y, Tochu)); 
             }
             if (time > htime)
             {
                 removeall();
                 boss[0].boss_shot_main();
-                if (boss[0].fend) {  boss.Remove(boss[0]);gamemode4.bosschuu = false;tekiyomi++; htime = time + 40;  }
-               
+                if (boss[0].fend)
+                {
+                    boss.Remove(boss[0]); gamemode4.bosschuu = false; tekiyomi++; htime = time + 40;
+                }
             }
+        }
+        private static void Callene(string name,int plustime)
+        {
+            if (tekiyomikomi(name, htime)) { tekiyomi++; htime = time + plustime; }
         }
     }
 }

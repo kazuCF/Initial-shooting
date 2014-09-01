@@ -16,8 +16,6 @@ namespace _2._0._0
         private static int howto;
         private static int sentaku2 ;
         private static int[] options=new int[5];
-        // private static int zkettei = DX.LoadGraph("z.bmp");
-
         private static bool exit ;
         private static bool start1;
         private static bool how;

@@ -155,19 +155,16 @@ namespace _2._0._0
             if (inswitch)
             {
                 foreach (var item in Program.zibun)
-                {
-                    
+                {  
                     foreach (var tama in item.tamas)
                     {
                         if (atari.CirCollison(zx, zy, gazo.otamagw[tama.size], tama.x, tama.y, 2 * gw / 3))
                         {
-                          //  if (tama.state == 0) { life -= damage; } else { life -= damage / 2; } 
                             life -= tama.power;
                             tama.seizon = false;
                         }
-                  
                     }
-                    if (kansuu.haniatariz(zx,zy, gw/2, zspeed, ang))
+                    if (size == 2 && kansuu.haniatariz(zx, zy, gw / 2, zspeed, ang))
                     {
                         seizon = false;
                     }
@@ -185,6 +182,15 @@ namespace _2._0._0
         {
             switch (ugokikata)
             {
+
+                case -8:
+                    zakoudou.enemy_patternm8(zx, zy, ref sx, ref sy, ref idoutime, ugokikata, waittime, ref ang, ref zspeed);
+                    kaitendraw = true;
+                    break;
+                case -7:
+                    zakoudou.enemy_patternm7(zx, zy, ref sx, ref sy, ref idoutime, ugokikata, waittime, ref ang, ref zspeed);
+                    kaitendraw = true;
+                    break;
                 case -6:
                     zakoudou.enemy_patternm6(zx, zy, ref sx, ref sy, ref idoutime, ugokikata, waittime, ref ang, ref zspeed);
                     kaitendraw = true;

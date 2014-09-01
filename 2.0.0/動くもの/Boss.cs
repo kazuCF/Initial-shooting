@@ -166,7 +166,7 @@ namespace _2._0._0
             {
                 if (state == 2)
                 {
-                    DX.SetDrawBlendMode(DX.DX_BLENDMODE_SUB, 255);
+     //               DX.SetDrawBlendMode(DX.DX_BLENDMODE_SUB, 255);
                 }
                 kansuu.DrawRotaGraphfk(dx, dy, 1, 0, gaz, DX.TRUE, false);
                 DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND, 255);
@@ -487,7 +487,7 @@ namespace _2._0._0
 
             if (t == tm - 1) { cnum++; }
         }
-#endregion
+        #endregion
         #region shot6
         protected void shot6()
         {

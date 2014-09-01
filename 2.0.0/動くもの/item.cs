@@ -14,6 +14,7 @@ namespace _2._0._0
         public int syurui;
         public int state;
         public float speed;
+        public bool nobori = false;
         public float range = 100;
         public double[] r = new double[] { 0.6, 0.6, 1.0, 0.6, 1.0, 1.0 };//dat/img/itemの画像の拡大率
         public float v;
@@ -30,7 +31,7 @@ namespace _2._0._0
             {
                 if (speed < 2.5f) { speed += 0.06f; } y += speed;
 
-                if (Program.border) { state = 1; }
+                if (Program.border&&speed>0) { state = 1; }
                 if (DX.CheckHitKey(DX.KEY_INPUT_LSHIFT) != 0 && kyorix * kyorix + kyoriy * kyoriy < range * range)
                 {
                     x += (float)Math.Cos(kansuu.zikiangle(x, y)) * v;

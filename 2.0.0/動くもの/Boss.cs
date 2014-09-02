@@ -740,7 +740,7 @@ namespace _2._0._0
                     
         }
         public static int kai = 0;
-        protected void shot13()//中二のときの弾幕の再現
+        protected void shot13(int kakudo)//中二のときの弾幕の再現
         {
             idx = new int[2, 2] { { 40, 50 }, { Program.scx - 70, 50 } };
             int sx = 6; sy = 3;
@@ -755,8 +755,8 @@ namespace _2._0._0
                 for (int i = 0; i < kosuu; i++)
                 {
                     dan.Add(new Tdan(zx + px, zy, 0, 5, 0, 0, 7, 13));
-                    dan.Last().sx = kansuu.Cos((PI / 180) * 700 / kosuu * i);
-                    dan.Last().sy = kansuu.Sin((PI / 180) * 700 / kosuu * (i + plusk));
+                    dan.Last().sx = kansuu.Cos((PI / 180) * kakudo / kosuu * i);
+                    dan.Last().sy = kansuu.Sin((PI / 180) * kakudo / kosuu * (i + plusk));
                 }
                 kai = (++kai) % 2;
             }
@@ -770,7 +770,7 @@ namespace _2._0._0
             if (shot_cnt%320 == 220) { input_phypos(idx[qo, 0], idx[qo, 1], 50); qo = (++qo) % 2; }
 
         }
-        protected void shot14()//中二のときの弾幕の再現
+        protected void shot14(int kakudo)//中二のときの弾幕の再現
         {
 
             int t = shot_cnt % 10;
@@ -782,8 +782,8 @@ namespace _2._0._0
                 for (int i = 0; i < 25; i++)
                 {
                     dan.Add(new Tdan(zx, zy, 0, 5, 0, 0, 7, 14));
-                    dan.Last().sx = kansuu.Cos((PI / 180) * 205 / 25 * i);
-                    dan.Last().sy = kansuu.Sin((PI / 180) * 205 / 25 * (i + plusk));
+                    dan.Last().sx = kansuu.Cos((PI / 180) * kakudo / 25 * i);
+                    dan.Last().sy = kansuu.Sin((PI / 180) * kakudo / 25 * (i + plusk));
                 }
                 kai = (++kai) % 2;
             }

@@ -18,7 +18,7 @@ namespace _2._0._0
             }
             else
             {
-                danmakusu = 4;
+                danmakusu = 3;
             }
             for (int i = 0; i < set_life.Length; i++)
             {
@@ -49,20 +49,17 @@ namespace _2._0._0
                     switch (knd)
                     {
                         case 0:
-                            shot14();
-                            //    shot2();
-                            shot4();
+                            shot1();
+                            shot2();
                             break;
                         case 1:
                             shot3(true);
                             shot6();
                             break;
                         case 2:
-                            shot7("漢字"); shot8("sample龍");
-
-                            break;
-                        case 3:
-                            shot5();
+                            shot13(700);
+                            shot3(false);
+                            //  shot14();
                             break;
                         default:
                             end = true;

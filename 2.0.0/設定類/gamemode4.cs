@@ -19,6 +19,8 @@ namespace _2._0._0
         public static int chapter = 1;
         public static int time = 0;
         private static int effetime = 0;
+        public static bool extra;
+        public static int exbos;
         public static bool bosschuu = false;
         public static List<Boss> boss = new List<Boss>();
         public static List<item> im = new List<item>();
@@ -30,9 +32,10 @@ namespace _2._0._0
             im.Clear();
             ef.Clear();
             teki.Clear();
-            chapter = 2;
+            chapter = 1;
             bossnum = -1;
             effetime = 0;
+            exbos = 0;
             time = 0;
         }
         public static void removeall()
@@ -52,15 +55,25 @@ namespace _2._0._0
                     chapter2();
                     break;
             }
+            drawside();
             Program.enter_func("第"+chapter+"章", 0);
             im.RemoveAll(c => !c.seizon);
             ef.RemoveAll(c => !c.seizon);
             teki.RemoveAll(c => !c.seizon);
-
+            
             foreach (var i in im) { i.main(); } Program.enter_func("アイテム計算", 0);
             foreach (var i in ef) { i.main(); } Program.enter_func("エフェクト計算", 0);
             foreach (var i in teki) { i.main(); if (ziki.bommcool == 60) { i.life -= 5; } } Program.enter_func("敵計算", 0);
             kansuu.setareaend();
+           
+            time += 1;
+            DX.DrawString(Program.scx, 0, "" + Program.power, DX.GetColor(255, 0, 0));
+        
+        }
+
+
+        private static void drawside()
+        {
             DX.DrawGraph(Program.hamix + 225, Program.scy - 200, gazo.haikeig, DX.TRUE);
             DX.DrawBox(0, 0, Program.fx, Program.scy, DX.GetColor(0, 0, 255), DX.TRUE);
             DX.DrawBox(0, 0, Program.scx, Program.fy, DX.GetColor(0, 0, 255), DX.TRUE);
@@ -69,13 +82,7 @@ namespace _2._0._0
             {
                 DX.DrawGraph(Program.hamix + 250 + (i * 30), 60, gazo.heart, DX.TRUE);
             }
-            time += 1;
-            DX.DrawString(Program.scx, 0, "" + Program.power, DX.GetColor(255, 0, 0));
-        
         }
-
-
-
         private static void chapter1()
         {
             switch (tekiyomi)
@@ -145,7 +152,7 @@ namespace _2._0._0
                     Callene("2-1-6", 40);
                     break;
                 case 7:
-                    Callene("2-1-7", 40);
+                    Callene("2-1-7", 240);
                     break;
                 case 8:
                     bossing(Program.scx / 2, 30, false, 2);
@@ -159,6 +166,7 @@ namespace _2._0._0
 
         private static bool tekiyomikomi(string filename, int hajime)
         {
+            if (extra) { return true; }
             var owari = true;
             int jyouhousu = 13;//アイテムを除いた情報の項目数
             if (!readin)

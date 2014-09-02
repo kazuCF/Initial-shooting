@@ -19,7 +19,7 @@ namespace _2._0._0
         public const int fx = 32, fy = 16, fmx = 510 - 32, fmy = 640 - 16;
         public const int scx = 510;
         public const int scy = 640;
-        public static int gamemode = 0;
+        public static int gamemode = 5;
         public static int power = 0, point = 0, score = 0;
         public const int hamix = 300;
         public const int realscx = scx + hamix, realscy = scy;
@@ -186,7 +186,7 @@ namespace _2._0._0
         public static void FINISH(string message)
         {
             DX.DrawString(realscx / 2, realscy / 2, message, DX.GetColor(255, 0, 0));
-            if (DX.DxLib_Init() < 0) { gamemode = 7; }
+            if (key[DX.KEY_INPUT_RETURN] > 0) { gamemode = 0; }
         }
         public static int fpscount, countot;
         public const int Flame = 100;

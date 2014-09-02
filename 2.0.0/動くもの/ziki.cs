@@ -32,10 +32,11 @@ namespace _2._0._0
         public int zikix;
         public int zikiy;
         public int life = 6;
+        public int boms = 3;
         public int zikitime = 0;
         public int tamakosuu = 3;
         public int kakudojyougen = 6;
-
+        public int bomsyoki = 3;
         public static int sx, sy;
 
         public void syokika()
@@ -65,18 +66,18 @@ namespace _2._0._0
             pluskakuding();
             calchoming();
             zikiido(); Program.enter_func("自機計算", 0);
-              if (_type == 1)
-              {
-                  bomcalc();
-                  
-                  graphefect(1);
-                  graphefect(2);
-                  graphefect(3); 
-                  
-                  Program.dn_calc();
-              } Program.enter_func("ボム系の計算", 0);
-              tamahassya();Program.enter_func("自機の弾計算", 0);
-              hantei(); Program.enter_func("自機の描画", 0);
+            if (_type == 1)
+            {
+                bomcalc();
+
+                graphefect(1);
+                graphefect(2);
+                graphefect(3);
+
+                Program.dn_calc();
+            } Program.enter_func("ボム系の計算", 0);
+            tamahassya(); Program.enter_func("自機の弾計算", 0);
+            hantei(); Program.enter_func("自機の描画", 0);
         }
         private void zikiido()
         {
@@ -197,7 +198,7 @@ namespace _2._0._0
         public void itemdrop()
         {
             life -= 1;
-
+            boms = bomsyoki;
             muteki = true; mutekijikan = 100;
             for (int i = 0; i < 3; i++)
             {
@@ -213,13 +214,13 @@ namespace _2._0._0
                 efs.Add(new effect(70, 300, 1.5f, 1, PI / 2, -PI / 2, 0, 2, gazo.imgefbom[3], 3, -1));
                 efs.Add(new effect(100, 450, 1.5f, 1, 0,0, 0, 2, gazo.imgefbom[3], 3, -1));
                 efs.Add(new effect(260, 300, 1, 0.7f,0, -PI / 2, 0, 2, gazo.imgefbom[2], 2, -1));
-            
+                boms--;
         }
         private void bomcalc()
         {
             int n = 0;
             float[] angles = new float[] {0,PI,PI/2,PI*1.5f };
-            if (Program.key[DX.KEY_INPUT_X] != 0 && bommcool == 0)
+            if (Program.key[DX.KEY_INPUT_X] != 0 && bommcool == 0&&boms>0)
             {
                 bomming();
                 bommcool++;
@@ -296,11 +297,17 @@ namespace _2._0._0
                         else { pluskaku = 3; }
                         tamakosuu = 5; Rpower = kijyunpower * 0.72f; //pluskaku = 3;
                     }
-                    else
+                    else if(Program.power>100)
                     {
                         if (Program.key[DX.KEY_INPUT_LSHIFT] > 0) { pluskaku = 3; }
                         else { pluskaku = 5; }
                         tamakosuu = 3; Rpower = kijyunpower;
+                    }
+                    else if (Program.power > 100)
+                    {
+                        if (Program.key[DX.KEY_INPUT_LSHIFT] > 0) { pluskaku = 3; }
+                        else { pluskaku = 5; }
+                        tamakosuu = 1; Rpower = kijyunpower * 2;
                     }
                     break;
                 default:

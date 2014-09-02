@@ -15,10 +15,7 @@ namespace _2._0._0
         private static int exitGraph ;
         private static int howto;
         private static int sentaku2 ;
-        private static int[] options=new int[5];
-        private static bool exit ;
-        private static bool start1;
-        private static bool how;
+        private static int[] options=new int[4];
         private static int selecting;
         public static int r ;
         public static int g;
@@ -26,7 +23,7 @@ namespace _2._0._0
         private static int time ;
         private static int stime ;
         private static int wave ;
-        private const int koumokusu = 5;
+        private const int koumokusu = 4;
         public static void syokika()
         {
    
@@ -37,10 +34,10 @@ namespace _2._0._0
             sentaku2 = DX.LoadGraph("sentaku2.bmp");
             options[0] = DX.LoadGraph("option\\Game Start.png");
             options[1] = DX.LoadGraph("option\\Extra Start.png");
-            options[2] = DX.LoadGraph("option\\Practice.png");
-            options[3] = DX.LoadGraph("option\\Option.png");
-            options[4] = DX.LoadGraph("option\\Exit.png");
-            exit = false; start1 = true; how = false; r = g = b = wave = 255;
+       //     options[2] = DX.LoadGraph("option\\Practice.png");
+            options[2] = DX.LoadGraph("option\\Option.png");
+            options[3] = DX.LoadGraph("option\\Exit.png");
+           r = g = b = wave = 255;
             time = stime = 1;
             selecting = 0;
         }
@@ -99,7 +96,8 @@ namespace _2._0._0
                         Program.enter = true;
                         break;
                     case 1:
-                        Program.gamemode = 3; DX.SetFontSize(15);
+                        Program.gamemode = 4; DX.SetFontSize(15);
+                        gamemode4.extra = true;
                         time = 0;
                         size = 5;
                         r = 0; g = 0; b = 0;
@@ -108,31 +106,10 @@ namespace _2._0._0
                     case 2:
                         Program.gamemode = 7;
                         break;
+                    case 3:
+                        Program.gamemode = 7;
+                        break;
                 }
-            }
-            if (!Program.enter && DX.CheckHitKey(DX.KEY_INPUT_RETURN) != 0)
-            {
-                if (start1)
-                {
-                    Program.gamemode = 4; DX.SetFontSize(15);
-                    time = 0;
-                    size = 5;
-                    r = 0; g = 0; b = 0;
-                    Program.enter = true;
-                }
-                else if (exit)
-                {
-                    Program.gamemode = 7;
-                }
-                else if (how)
-                {
-                    Program.gamemode = 3; DX.SetFontSize(15);
-                    time = 0;
-                    size = 5;
-                    r = 0; g = 0; b = 0;
-                    Program.enter = true;
-                }
-
             }
             if (DX.CheckHitKey(DX.KEY_INPUT_ESCAPE) != 0)
             {

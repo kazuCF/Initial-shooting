@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Boss\Boss2.cs" />
+    <Compile Include="option.cs" />
     <Compile Include="設定類\atari.cs" />
     <Compile Include="設定類\beje.cs" />
     <Compile Include="動くもの\Boss.cs" />

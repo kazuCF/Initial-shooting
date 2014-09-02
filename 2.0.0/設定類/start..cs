@@ -27,7 +27,6 @@ namespace _2._0._0
         public static void syokika()
         {
    
-            size = 5; ssize = 1;
             startgameGraph = DX.LoadGraph("startgame.bmp");
             exitGraph = DX.LoadGraph("exit.bmp");
             howto = DX.LoadGraph("howto.bmp");
@@ -38,7 +37,12 @@ namespace _2._0._0
             options[2] = DX.LoadGraph("option\\Option.png");
             options[3] = DX.LoadGraph("option\\Exit.png");
            r = g = b = wave = 255;
+           
+        }
+        public static void syokika2()
+        {
             time = stime = 1;
+            size = 5; ssize = 1;
             selecting = 0;
         }
         public static void gamen()
@@ -104,7 +108,7 @@ namespace _2._0._0
                         Program.enter = true;
                         break;
                     case 2:
-                        Program.gamemode = 7;
+                        Program.gamemode = 3;
                         break;
                     case 3:
                         Program.gamemode = 7;

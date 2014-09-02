@@ -8,6 +8,7 @@ namespace _2._0._0
 {
     public static class gamemode4
     {
+        public static int continues = 3;
         public static float[,] tekis = new float[100, 20];
         public static string[] lines = new string[100];
         public static string[] values;
@@ -37,6 +38,7 @@ namespace _2._0._0
             effetime = 0;
             exbos = 0;
             time = 0;
+            continues = 3;
         }
         public static void removeall()
         {
@@ -45,6 +47,7 @@ namespace _2._0._0
 
         public static void bunki()
         {
+            if (Program.zibun[0].life <= 0) { Program.gamemode = 9; }
             kansuu.setarea1();
             switch (chapter)
             {

@@ -36,7 +36,7 @@ namespace _2._0._0
         public int zikitime = 0;
         public int tamakosuu = 3;
         public int kakudojyougen = 6;
-        public int bomsyoki = 3;
+        
         public static int sx, sy;
 
         public void syokika()
@@ -46,7 +46,7 @@ namespace _2._0._0
             t = 0; bommcool = 0;
             muteki = false;
             mutekijikan = 0;
-            life = 6;
+            life = Program.lifesyoki;
             zikitime = 0;
             tamakosuu = 3;
             kakudojyougen = 6;
@@ -198,7 +198,7 @@ namespace _2._0._0
         public void itemdrop()
         {
             life -= 1;
-            boms = bomsyoki;
+            boms = Program.bomsyoki;
             muteki = true; mutekijikan = 100;
             for (int i = 0; i < 3; i++)
             {

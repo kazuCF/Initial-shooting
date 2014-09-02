@@ -20,23 +20,15 @@ namespace _2._0._0
         {
             K = DX.LoadGraph("k.bmp"); C = DX.LoadGraph("kc.bmp"); L = DX.LoadGraph("kcl.bmp"); C2 = DX.LoadGraph("kclc.bmp"); KCLC2013 = DX.LoadGraph("kclc2013.png");
         }
-        public static void Loading()
+        public static bool Loading()
         {
-         
-            
-    //         ThreadStart action = () =>
-   // {
-        syokika(); start.syokika(); Program.syokika(); gazo.syokika(); gamemode4.syokika();
-
- /*   }; 
-            Thread thread = new Thread(action);
-       
-      
-            thread.Start();
-            DX.DrawString(Program.realscx / 2, Program.realscy / 2, "Now Loading", DX.GetColor(255, 255, 255));
-           
-            thread.Join();*/
-                Program.gamemode = 1;
+         start.syokika(); Program.syokika(); gazo.syokika(); 
+                return true;
+        }
+        public static bool Loading2()
+        {
+            syokika(); start.syokika2(); gamemode4.syokika(); option.syokika(); Finished.syokika();
+            return true;
         }
         public static void hajimari()
         {

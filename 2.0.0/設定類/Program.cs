@@ -19,7 +19,7 @@ namespace _2._0._0
         public const int fx = 32, fy = 16, fmx = 510 - 32, fmy = 640 - 16;
         public const int scx = 510;
         public const int scy = 640;
-        public static int gamemode = 5;
+        public static int gamemode = 0;
         public static int power = 0, point = 0, score = 0;
         public const int hamix = 300;
         public const int realscx = scx + hamix, realscy = scy;
@@ -31,7 +31,8 @@ namespace _2._0._0
         public static bool enter = false, esc = false;
         public static bool border;
         public static bool isbom;
-
+        public static int bomsyoki = 3;
+        public static int lifesyoki = 6;
         public static void syokika()
         {
             white = DX.GetColor(255, 255, 255);
@@ -39,7 +40,6 @@ namespace _2._0._0
             red = DX.GetColor(255, 0, 0);
             blue = DX.GetColor(0, 0, 255);
             green = DX.GetColor(0, 255, 0);
-
             isbom = false;
             brt = 255;
             dnx = 0; dny = 0; dns = 0; dnc = 0; dnflg = 0; dnt = 0;
@@ -47,7 +47,7 @@ namespace _2._0._0
             zibun.Add(new ziki(1, 320, 300, 0));
             power = 100; point = 0; score = 0; gamemode = 0; count = 0;
             Fonts[0] = DX.CreateFontToHandle("Lindsey", 50, 10, DX.DX_CHARSET_DEFAULT);
-
+          
         }
         static void Main(string[] args)
         {
@@ -73,6 +73,7 @@ namespace _2._0._0
                     case 0:
                         //ローディング
                         present.Loading();
+                        if (present.Loading() & present.Loading2()) { gamemode = 6; }
                         break;
                     case 1:
                         //KCLC
@@ -84,7 +85,10 @@ namespace _2._0._0
                         DX.SetFontSize(15);
                         break;
                     case 3:
-                        //操作説明
+                        //設定
+                        option.settei();
+                        zibun[0].life = lifesyoki;
+                        zibun[0].boms = bomsyoki;
                         break;
                     case 4:
                         //ゲーム本体
@@ -109,9 +113,11 @@ namespace _2._0._0
                         dn_calc(); enter_func("描画", 0);
                         break;
                     case 5:
+                        Finished.Fin(0);
                         //ゲームクリア
                         break;
                     case 6:
+                        Finished.Fin(1);
                         //ゲームオーバー
                         break;
                     case 7:
@@ -121,6 +127,9 @@ namespace _2._0._0
                         edit.main();
                         DX.SetGraphMode(scx + hamix, scy, 32);
                         break;
+                    case 9://コンティニュー
+                        Finished.Fin(2);
+                        break;
                 }
 
                 /*
@@ -129,19 +138,21 @@ namespace _2._0._0
                  0：初期化
                  1：KCLC
                  2：スタート画面
-                 3：操作説明
+                 3：設定
                  4：実際のゲーム
                  5：ゲームクリア
                  6：ゲームオーバー
                  7：EXIT
+                 8:エディタ
+                 9:コンティニュー
                  */
                 if (DX.CheckHitKey(DX.KEY_INPUT_ESCAPE) != 0) gamemode = 7;
                 //         DX.DrawLine(0, 0, 300, 300, DX.GetColor(255, 255, 255), thickness);
                 if (thickness > 0) { thickness -= 1; }
                 DX.DrawString(0, scy - 20, "" + Math.Sqrt(1000 / fpsave), DX.GetColor(255, 0, 0));
 
-                fpsing(); enter_func("待機した時間", 1);
-                drawfunc(scx, 250);
+            //    fpsing(); enter_func("待機した時間", 1);
+            //    drawfunc(scx, 250);
                 DX.ScreenFlip();
             }
 

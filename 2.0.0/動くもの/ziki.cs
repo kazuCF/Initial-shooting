@@ -198,9 +198,11 @@ namespace _2._0._0
         public void itemdrop()
         {
             life -= 1;
+            int kosu = 3;
+            if (life == 0) { kosu = 5; }
             boms = Program.bomsyoki;
             muteki = true; mutekijikan = 100;
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < kosu; i++)
             {
                 if (i > 0) { gamemode4.im.Add(new item(zikix + kansuu.rang(40), zikiy + kansuu.rang(40), 4, -5.5f)); }
                 else { gamemode4.im.Add(new item(zikix, zikiy, 4, -5.5f)); }

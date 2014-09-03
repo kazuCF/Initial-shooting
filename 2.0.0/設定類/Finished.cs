@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DxLibDLL;
+using System.IO;
+using Microsoft.VisualBasic;
 namespace _2._0._0
 {
     public static class Finished
@@ -10,9 +12,11 @@ namespace _2._0._0
         private static int[] haikeis = new int[3];
         private static int[] finish = new int[3];
         private static int[] cont = new int[2];
+        private static List<int> high = new List<int>();
         private static string[] clearst = new string[] { "ゲームクリア！", "ボリューム少なくてスイマセン、来年にご期待ください。", "物足りない場合はオプションからボムや残機数の", "初期設定を変えて厳しくしてみては？", "エンターキーでタイトルに戻ります" };
         private static string[] overst = new string[] { "ゲームオーバー！", "どうしてもクリアできないときはオプションから", "ボムや残機数の初期設定を変えてみては？", "エンターキーでタイトルに戻ります" };
         private static int selecting = 0;
+        private static int cnt = 0;
         private static int font;
         public static void syokika()
         {
@@ -28,7 +32,6 @@ namespace _2._0._0
         public static void Fin(int how)
         {
             DX.DrawExtendGraph(0, 0, Program.realscx, Program.realscy, haikeis[how], 0);
-            //DX.DrawGraph(0, 0, haikeis[how], 0);
             switch (how)
             {
                 case 0:
@@ -43,6 +46,19 @@ namespace _2._0._0
             }
 
         }
+        private static void highscore(int score)
+        {
+            string inputText;
+            StreamReader read;
+            inputText = Interaction.InputBox("名前を入力してください", "ハイスコア更新！", "", 200, 100);
+            high.Clear();
+            read = new StreamReader("datafiles\\gamename.txt", Encoding.GetEncoding("Shift_JIS"));
+            string line;
+            for (int i = 0; (line = read.ReadLine()) != null; i++)
+            {
+               
+            }
+        }
         private static void clear()
         {
             DX.DrawGraph(70, 20, finish[0], 1);
@@ -50,6 +66,8 @@ namespace _2._0._0
             {
                 DX.DrawStringToHandle(70, 200 + i * 20, clearst[i], DX.GetColor(255, 255, 255), font);
             }
+          
+           
         }
         private static void over()
         {
@@ -61,7 +79,7 @@ namespace _2._0._0
         }
         private static void key1()
         {
-            if (Program.key[DX.KEY_INPUT_RETURN] == 1) { Program.gamemode = 0; present.Loading2(); }
+            cnt++; if (Program.key[DX.KEY_INPUT_RETURN] == 1) { present.Loading2(); Program.gamemode = 2; cnt = 0; }
         }
         /***********************************************************/
         private static void con()

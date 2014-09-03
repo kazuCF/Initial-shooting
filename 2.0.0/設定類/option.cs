@@ -10,6 +10,7 @@ namespace _2._0._0
         public static int[] OPs = new int[] { 6, 3 ,0};
         private static int opkosu = OPs.Length;
         private static int[] gazos = new int[3];
+        private static int haikei;
         private static int font ;
         private static int Option = 0;
         public static void syokika()
@@ -17,7 +18,8 @@ namespace _2._0._0
             gazos[0] = DX.LoadGraph("option\\Player.png");
             gazos[1] = DX.LoadGraph("option\\Bombs.png");
             gazos[2] = DX.LoadGraph("option\\Quit.png");
-            font = DX.CreateFontToHandle("MS明朝", 20, 4, 3,DX.DX_FONTTYPE_NORMAL);
+            haikei = DX.LoadGraph("option\\haiop.png");
+            font = DX.CreateFontToHandle("HGS行書体", 30, 4, DX.DX_FONTTYPE_ANTIALIASING);
         }
         public static void settei()
         {
@@ -26,7 +28,7 @@ namespace _2._0._0
         }
         private static void key()
         {
-            if (Program.key[DX.KEY_INPUT_RETURN] == 1 && Option == 2) { Program.gamemode = 1; }
+            if (Program.key[DX.KEY_INPUT_RETURN] == 1 && Option == 2) { Program.gamemode = 2; }
             else  if (Program.key[DX.KEY_INPUT_UP] == 1) { Option = (--Option) % opkosu; }
             else if (Program.key[DX.KEY_INPUT_DOWN] == 1) { Option = (++Option) % opkosu; }
             else if (Program.key[DX.KEY_INPUT_RIGHT] == 1) { OPs[Option]++; }
@@ -39,6 +41,7 @@ namespace _2._0._0
         }
         private static void byouga()
         {
+            DX.DrawExtendGraph(0, 0, Program.realscx, Program.realscy, haikei, 0);
             DX.SetDrawBlendMode(DX.DX_BLENDMODE_ALPHA, 50);
             for (int i = 0; i < opkosu; i++)
             {
@@ -50,7 +53,7 @@ namespace _2._0._0
             for (int i = 1; i < 9; i++)
             {
                 bool tyuu = i == OPs[0];
-                DX.DrawStringToHandle(240 + i * 25, tyuu ? 145 : 140, "" + i, tyuu ? DX.GetColor(255, 0, 0) : DX.GetColor(255, 255, 255), font);
+                DX.DrawStringToHandle(240 + i * 25, tyuu ? 145 : 140, "" + i, tyuu ? DX.GetColor(255, 0, 0) : DX.GetColor(255, 255, 255),font);
                 if (i >= 6) { continue; }
                 tyuu = i == OPs[1];
                 DX.DrawStringToHandle(240 + i * 25, tyuu ? 215 : 210, "" + i, tyuu ? DX.GetColor(255, 0, 0) : DX.GetColor(255, 255, 255), font);

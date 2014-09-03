@@ -15,6 +15,7 @@ namespace _2._0._0
         private static int exitGraph ;
         private static int howto;
         private static int sentaku2 ;
+        private static int haikei;
         private static int[] options=new int[4];
         private static int selecting;
         public static int r ;
@@ -36,6 +37,8 @@ namespace _2._0._0
        //     options[2] = DX.LoadGraph("option\\Practice.png");
             options[2] = DX.LoadGraph("option\\Option.png");
             options[3] = DX.LoadGraph("option\\Exit.png");
+            haikei = DX.LoadGraph("option\\haistart.png");
+
            r = g = b = wave = 255;
            
         }
@@ -43,11 +46,12 @@ namespace _2._0._0
         {
             time = stime = 1;
             size = 5; ssize = 1;
-            selecting = 0;
+            selecting = 0; r = g = b = wave = 255;
         }
         public static void gamen()
         {
-            DX.DrawBox(0, 0, Program.scx + 300, Program.scy, DX.GetColor(g, b, r), DX.TRUE);
+ //           DX.DrawBox(0, 0, Program.scx + 300, Program.scy, DX.GetColor(g, b, r), DX.TRUE);
+           DX.DrawExtendGraph(0, 0, Program.realscx, Program.realscy, haikei, 1);
             present.time = 0;
           //  draw();
             if (size <= 5)

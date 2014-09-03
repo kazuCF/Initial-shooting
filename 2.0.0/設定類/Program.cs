@@ -32,7 +32,7 @@ namespace _2._0._0
         public static bool border;
         public static bool isbom;
         public static int bomsyoki = 3;
-        public static int lifesyoki = 6;
+        public static int lifesyoki = 3;
         public static void syokika()
         {
             white = DX.GetColor(255, 255, 255);
@@ -47,6 +47,8 @@ namespace _2._0._0
             zibun.Add(new ziki(1, 320, 300, 0));
             power = 100; point = 0; score = 0; gamemode = 0; count = 0;
             Fonts[0] = DX.CreateFontToHandle("Lindsey", 50, 10, DX.DX_CHARSET_DEFAULT);
+            zibun[0].life = lifesyoki;
+            zibun[0].boms = bomsyoki;
           
         }
         static void Main(string[] args)
@@ -72,8 +74,8 @@ namespace _2._0._0
                 {
                     case 0:
                         //ローディング
-                        present.Loading();
-                        if (present.Loading() & present.Loading2()) { gamemode = 6; }
+                     //   present.Loading();
+                        if (present.Loading() & present.Loading2()) { gamemode = 1; }
                         break;
                     case 1:
                         //KCLC
@@ -149,7 +151,7 @@ namespace _2._0._0
                 if (DX.CheckHitKey(DX.KEY_INPUT_ESCAPE) != 0) gamemode = 7;
                 //         DX.DrawLine(0, 0, 300, 300, DX.GetColor(255, 255, 255), thickness);
                 if (thickness > 0) { thickness -= 1; }
-                DX.DrawString(0, scy - 20, "" + Math.Sqrt(1000 / fpsave), DX.GetColor(255, 0, 0));
+           //     DX.DrawString(0, scy - 20, "" + Math.Sqrt(1000 / fpsave), DX.GetColor(255, 0, 0));
 
             //    fpsing(); enter_func("待機した時間", 1);
             //    drawfunc(scx, 250);

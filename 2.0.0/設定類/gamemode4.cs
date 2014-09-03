@@ -68,7 +68,7 @@ namespace _2._0._0
             foreach (var i in ef) { i.main(); } Program.enter_func("エフェクト計算", 0);
             foreach (var i in teki) { i.main(); if (ziki.bommcool == 60) { i.life -= 5; } } Program.enter_func("敵計算", 0);
             kansuu.setareaend();
-           
+            drawside();
             time += 1;
             DX.DrawString(Program.scx, 0, "" + Program.power, DX.GetColor(255, 0, 0));
         
@@ -83,7 +83,7 @@ namespace _2._0._0
             DX.DrawBox(0, Program.scy, Program.scx, Program.scy - Program.fy, DX.GetColor(0, 0, 255), DX.TRUE);
             for (int i = 0; i < Program.zibun[0].life; i++)
             {
-                DX.DrawGraph(Program.hamix + 250 + (i * 30), 60, gazo.heart, DX.TRUE);
+                DX.DrawGraph(Program.hamix + 250 + (i * 30), 60, gazo.sinziki, DX.TRUE);
             }
         }
         private static void chapter1()

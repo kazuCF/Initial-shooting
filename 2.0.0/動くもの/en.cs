@@ -95,8 +95,8 @@ namespace _2._0._0
             }
            
             this.hihyouji();
-           tamas.RemoveAll(c=>Program.isbom);
-         
+         //   tamas.RemoveAll(c => Program.isbom && (c.x - kansuu.zikix()) * (c.x - kansuu.zikix()) + (c.y - kansuu.zikiy()) * (c.y - kansuu.zikiy()) < 3000);
+
             
           
         }
@@ -385,6 +385,15 @@ namespace _2._0._0
                                 tama.seizon = false;
                             }
                         }
+                    }
+                    foreach (var i in Program.zibun[0].efs.Where(c => c.knd != 2))
+                    {
+                        if (ziki.kuraibomming)
+                        {
+                            if (ziki.bommcool > 90) { break; }
+                        }
+                        if ((tama.x - i.x) * (tama.x - i.x) + (tama.y - i.y) * (tama.y - i.y) < (gazo.bomw * i.er / (13)) * (gazo.bomw * i.er / (13))) { tama.seizon = false; break; }
+
                     }
                     
                 }

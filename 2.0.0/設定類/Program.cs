@@ -46,9 +46,11 @@ namespace _2._0._0
             zibun.Clear();
             zibun.Add(new ziki(1, 320, 300, 0));
             power = 100; point = 0; score = 0; gamemode = 0; count = 0;
-            Fonts[0] = DX.CreateFontToHandle("Lindsey", 50, 10, DX.DX_CHARSET_DEFAULT);
+            Fonts[0] = DX.CreateFontToHandle("Lindsey", 50, 10, DX.DX_CHARSET_DEFAULT); 
+            zibun[0].syokika();
             zibun[0].life = lifesyoki;
             zibun[0].boms = bomsyoki;
+            DX.SetDrawBright(255, 255, 255);
           
         }
         static void Main(string[] args)

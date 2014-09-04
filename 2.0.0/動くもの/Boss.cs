@@ -175,7 +175,7 @@ namespace _2._0._0
         
         override public void shot_calc()
         {
-            dan.RemoveAll(c => Program.isbom);
+          //  dan.RemoveAll(c => Program.isbom && (c.x - kansuu.zikix()) * (c.x - kansuu.zikix()) + (c.y - kansuu.zikiy()) * (c.y - kansuu.zikiy()) < 3000); 
             if (ziki.bommcool == 60)
             {
                 life -= 300;
@@ -222,7 +222,13 @@ namespace _2._0._0
                 if (tama.speed != 0) { tama.dispangle = tama.angle + PI / 2; }
                 else { tama.dispangle = kansuu.angling(0, 0, tama.sx, tama.sy) + PI / 2; }
                 kansuu.DrawRotaGraphfk(tama.x, tama.y, 1, tama.dispangle, gazo.otama[tama.size, tama.col], DX.TRUE, true);
-
+                foreach (var i in Program.zibun[0].efs.Where(c=>c.knd!=2))
+                {
+                    if (ziki.kuraibomming) { 
+                        if (ziki.bommcool > 90) { break; } } 
+                   if ((tama.x - i.x) * (tama.x - i.x) + (tama.y - i.y) * (tama.y - i.y) < (gazo.bomw * i.er / (13 )) * (gazo.bomw * i.er / (13))) { tama.seizon = false; return; }
+                    
+                }
             }
             else { if (kansuu.naka(tama.x, tama.y, gazo.otamagw[tama.size], gazo.otamagw[tama.size])) { tama.inswitch = true; }; }
             tama.x += kansuu.Cos(tama.angle) * tama.speed;

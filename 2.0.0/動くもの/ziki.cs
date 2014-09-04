@@ -10,7 +10,9 @@ namespace _2._0._0
         public const int kijyunpower = 15;
         public float Rpower = kijyunpower;
         public int chara;
+        public int kurai;
         public float pluskaku = 5;
+        public static bool kuraibomming = false;
         public int[] cshotnum = new int[] { 2, 4 };
         public int[] cshotx = new int[] { -10, 10, -30, 30 };
         public int[] cshoty = new int[] { -30, -30,-10,-10 };
@@ -41,6 +43,7 @@ namespace _2._0._0
 
         public void syokika()
         {
+          
             efs = new List<effect>();
             tamas = new List<Tdan>();
             t = 0; bommcool = 0;
@@ -50,6 +53,7 @@ namespace _2._0._0
             zikitime = 0;
             tamakosuu = 3;
             kakudojyougen = 6;
+            kurai = 0;
             opc = 0;
                
         }
@@ -222,11 +226,15 @@ namespace _2._0._0
         {
             int n = 0;
             float[] angles = new float[] {0,PI,PI/2,PI*1.5f };
+            if (kurai > 0) { kurai++; }
+            if (kurai > 5) { itemdrop(); kurai = 0; }
+            if (muteki) { kurai = 0; }
             if (Program.key[DX.KEY_INPUT_X] != 0 && bommcool == 0&&boms>0)
             {
                 bomming();
                 bommcool++;
-                Program.isbom = true;
+                Program.isbom = true; if (kurai > 0) { kuraibomming = true; } else { kuraibomming = false; }
+                muteki = true; mutekijikan = 100;
             }
             if(bommcool>0)
             {

@@ -48,6 +48,7 @@ namespace _2._0._0
         public static int[] otamagh = new int[25];
         //ボムに関するエフェクト画像
         public static int[] imgefbom = new int[5];
+        public static int bomw, bomh;
         public static void zakoLoad()
         {
             zakoGraphs[0] = DX.LoadGraph("キャラクタ\\zako.png");
@@ -150,6 +151,7 @@ namespace _2._0._0
             DX.GetGraphSize(zikitamaGraph, out ztamagw, out ztamagh);
             DX.GetGraphSize(zako1Graphs[0], out zako1gw, out zako1gh);
             DX.GetGraphSize(zako1tGraph, out zako1tgw, out zako1tgh);
+            DX.GetGraphSize(imgefbom[3], out bomw, out bomh);
             for (int i = 0; i < Program.bosskosuu; i++)
             {
                 DX.GetGraphSize(BossGraphs[i],out Bossgws[i],out Bossghs[i]);

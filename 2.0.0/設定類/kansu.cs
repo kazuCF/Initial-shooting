@@ -11,7 +11,8 @@ namespace _2._0._0
         private static int fx = Program.fx, fy = Program.fy, fmx = Program.fmx, fmy = Program.fmy, scx = Program.scx, scy = Program.scy;
         static Random rnd = new Random();
 
-
+        public static float zikix() { return Program.zibun[0].zikix; }
+        public static float zikiy() { return Program.zibun[0].zikiy; }
         public static float Cos(double x) { return (float)Math.Cos(x); }
         public static float Sin(double x) { return (float)Math.Sin(x); }
         public static float PI() { return (float)Math.PI; }//円周率
@@ -63,7 +64,14 @@ namespace _2._0._0
             {
                 if (!item.muteki)
                 {
-                    if (atari.CirCollison(item.zikix, item.zikiy, gazo.zgw, x, y, gazo.zako1tgw / 2)) { yes = true; item.itemdrop(); }
+                    if (atari.CirCollison(item.zikix, item.zikiy, gazo.zgw, x, y, gazo.zako1tgw / 2))
+                    {
+                        yes = true; 
+                        if (item.kurai == 0)
+                        {
+                            item.kurai = 1;
+                        }
+                    }
                 }
             }
             return yes;
@@ -90,7 +98,7 @@ namespace _2._0._0
                             py = prey - zi.zikiy;
                             if (px * px + py * py < r * r)
                             {
-                                zi.itemdrop();
+                                if (zi.kurai == 0) { zi.kurai = 1; }   // zi.itemdrop();
                                 return true;
 
                             }
@@ -104,7 +112,9 @@ namespace _2._0._0
 
                         if (kx * kx + ky * ky < r * r)
                         {
-                            zi.itemdrop(); return true;
+                        //    zi.itemdrop();
+                            if (zi.kurai == 0) { zi.kurai = 1; } 
+                            return true;
                         }
                     }
                 }

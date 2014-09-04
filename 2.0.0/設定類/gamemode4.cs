@@ -161,6 +161,7 @@ namespace _2._0._0
                     bossing(Program.scx / 2, 30, false, 2);
                     break;
                 default:
+                    Program.gamemode = 5;
                     chapter++;
                     tekiyomi = -1;
                     break;

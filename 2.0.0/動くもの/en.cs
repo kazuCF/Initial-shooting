@@ -8,7 +8,6 @@ namespace _2._0._0
 {
     public class en
     {
-        public int state = 0;
         public bool alfha = false;
         public bool editing = false;
         public float fx, fy;//エディト用描画変数
@@ -16,8 +15,8 @@ namespace _2._0._0
         public int number = 0;//敵一つ一つにつく個別番号
         protected float chouseikakudo = (float)Math.PI / 180;
         protected float tzang;
-        protected float PI = kansuu.PI();
-        protected float PI2 = kansuu.PI2();
+        protected float PI = kansuu.PI;
+        protected float PI2 = kansuu.PI2;
         protected int shot_cnt = 1;
         protected int effecttime = 255;
         public int cnte = 0;
@@ -96,7 +95,7 @@ namespace _2._0._0
            
             this.hihyouji();
          //   tamas.RemoveAll(c => Program.isbom && (c.x - kansuu.zikix()) * (c.x - kansuu.zikix()) + (c.y - kansuu.zikiy()) * (c.y - kansuu.zikiy()) < 3000);
-
+            tamas.RemoveAll(c => Program.isbom && !ziki.kuraibomming);
             
           
         }
@@ -135,11 +134,11 @@ namespace _2._0._0
                 }
                 if (kaitendraw)
                 {
-                    kansuu.DrawRotaGraphfk(zx, zy, 1, ang - PI / 2, gaz, DX.TRUE, true);
+                    kansuu.DrawRotaGraphfk(zx, zy, 1, ang - PI / 2, gaz, 1, true);
                 }
                 else
                 {
-                    kansuu.DrawRotaGraphfk(zx, zy, 1, 0, gaz, DX.TRUE, true);
+                    kansuu.DrawRotaGraphfk(zx, zy, 1, 0, gaz, 1, true);
                 }
                 DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND, 255);
                 
@@ -325,14 +324,14 @@ namespace _2._0._0
         {
             if (!kaitendraw) { ang = PI / 2; }
             DX.SetDrawBlendMode(DX.DX_BLENDMODE_INVSRC, effecttime);
-            kansuu.DrawRotaGraphfk(zx, zy, kakudai, ang - PI / 2, gaz, DX.TRUE, false);
+            kansuu.DrawRotaGraphfk(zx, zy, kakudai, ang - PI / 2, gaz, 1, false);
             DX.SetDrawBlendMode(DX.DX_BLENDMODE_ADD, effecttime);
-            kansuu.DrawRotaGraphfk(zx, zy, kakudai, ang - PI / 2, gaz, DX.TRUE, false);
+            kansuu.DrawRotaGraphfk(zx, zy, kakudai, ang - PI / 2, gaz, 1, false);
             DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND, 255);
             effecttime-=2;
             return effecttime < 0;
         }
-        public void enteritem()
+        public virtual void enteritem()
         {
             if (kansuu.rang(10) != 1)
             {
@@ -386,20 +385,21 @@ namespace _2._0._0
                             }
                         }
                     }
-                    foreach (var i in Program.zibun[0].efs.Where(c => c.knd != 2))
+                    if (ziki.kuraibomming)
                     {
-                        if (ziki.kuraibomming)
+                        foreach (var i in Program.zibun[0].efs.Where(c => c.knd != 2))
                         {
-                            if (ziki.bommcool > 90) { break; }
-                        }
-                        if ((tama.x - i.x) * (tama.x - i.x) + (tama.y - i.y) * (tama.y - i.y) < (gazo.bomw * i.er / (13)) * (gazo.bomw * i.er / (13))) { tama.seizon = false; break; }
 
+                            if (ziki.bommcool > 90) { break; }
+
+                            if ((tama.x - i.x) * (tama.x - i.x) + (tama.y - i.y) * (tama.y - i.y) < (gazo.bomw * i.er / (13)) * (gazo.bomw * i.er / (13))) { tama.seizon = false; break; }
+
+                        }
                     }
                     
                 }
 
                 else { if (kansuu.naka(tama.x, tama.y, gazo.otamagw[tama.size], gazo.otamagw[tama.size])) { tama.inswitch = true; }; }
-                //kansuu.setarea1();
                 if (tama.kaiten)
                 {
                     tama.dispangle = 2 * PI * (tama.cnt % 120) / 120;
@@ -407,9 +407,8 @@ namespace _2._0._0
                 else { tama.dispangle = tama.angle + PI / 2; }
                 if (tama.draw)
                 {
-                    kansuu.DrawRotaGraphfk(tama.x, tama.y, 1, tama.dispangle, gazo.otama[tama.size, tama.col], DX.TRUE, true);
+                    kansuu.DrawRotaGraphfk(tama.x, tama.y, 1, tama.dispangle, gazo.otama[tama.size, tama.col], 1, true);
                 }
-              //  kansuu.setareaend();
 
                 if (!hyouji && tama.mitizure) { tama.seizon = false; }
 
@@ -507,7 +506,7 @@ namespace _2._0._0
                     for (int i = 0; i < tamakosuu; i++)
                     {
                         float angle = tzang;
-                        tamas.Add(new Tdan(zx, zy, 0, tamacol, angle + kansuu.PI2() / tamakosuu * i, tamasokudo, tamaknd));
+                        tamas.Add(new Tdan(zx, zy, 0, tamacol, angle + kansuu.PI2 / tamakosuu * i, tamasokudo, tamaknd));
                     }
                 }
             }
@@ -521,7 +520,7 @@ namespace _2._0._0
                 {
                     for (int i = 0; i < tamakosuu; i++)
                     {
-                        tamas.Add(new Tdan(zx, zy, 0, tamacol, tzang + kansuu.rang(kansuu.PI() / 4), 3 + kansuu.rang((int)pluskaku), tamaknd));
+                        tamas.Add(new Tdan(zx, zy, 0, tamacol, tzang + kansuu.rang(kansuu.PI / 4), 3 + kansuu.rang((int)pluskaku), tamaknd));
                     }
                 }
             }
@@ -535,7 +534,7 @@ namespace _2._0._0
                 {
                     for (int i = 0; i < tamakosuu; i++)
                     {
-                        tamas.Add(new Tdan(zx, zy, 0, tamacol, tzang + kansuu.rang(kansuu.PI() / 4), 4 + kansuu.rang((int)pluskaku), tamaknd,7));
+                        tamas.Add(new Tdan(zx, zy, 0, tamacol, tzang + kansuu.rang(kansuu.PI / 4), 4 + kansuu.rang((int)pluskaku), tamaknd,7));
                     }
                 }
             }
@@ -607,21 +606,21 @@ namespace _2._0._0
             {
                 foreach (var i in tamas)
                 {
-                    float genzai = i.angle * 180 / kansuu.PI();
+                    float genzai = i.angle * 180 / kansuu.PI;
                     genzai %= 360;
-                    float risou = kansuu.zikiangle(i.x,i.y) * 180 / kansuu.PI();
+                    float risou = kansuu.zikiangle(i.x,i.y) * 180 / kansuu.PI;
                     if ((risou-genzai)*(risou-genzai)<senkakigenkai*senkakigenkai)
                     {
                         i.angle = kansuu.zikiangle(i.x, i.y);
                     }
                     else if(risou>genzai)
                     {
-                        float jissai = senkakigenkai * kansuu.PI() / 180 +i.angle;
+                        float jissai = senkakigenkai * kansuu.PI / 180 +i.angle;
                         i.angle = jissai;
                     }
                     else if (risou < genzai)
                     {
-                        float jissai = -senkakigenkai * kansuu.PI() / 180 + i.angle;
+                        float jissai = -senkakigenkai * kansuu.PI / 180 + i.angle;
                         i.angle = jissai;
                     }
                     
@@ -671,7 +670,7 @@ namespace _2._0._0
                             tamas[i].draw = false;
                             for (int k = 0; k < 20; k++)
                             {
-                                tamas.Add(new Tdan(tamas[i].x, tamas[i].y, 0, tamacol, kansuu.zikiangle(tamas[i].x, tamas[i].y) + kansuu.PI2() / 20 * k, 4, tamaknd));
+                                tamas.Add(new Tdan(tamas[i].x, tamas[i].y, 0, tamacol, kansuu.zikiangle(tamas[i].x, tamas[i].y) + kansuu.PI2 / 20 * k, 4, tamaknd));
 
                             }
 
@@ -690,7 +689,7 @@ namespace _2._0._0
                 for (int i = 0; i < tamakosuu; i++)
                 {
                     float angle = tzang;
-                    tamas.Add(new Tdan(zx, zy, 0, tamacol, angle + kansuu.PI2() / tamakosuu * i, 0, tamaknd,8));
+                    tamas.Add(new Tdan(zx, zy, 0, tamacol, angle + kansuu.PI2 / tamakosuu * i, 0, tamaknd,8));
                 }
             }
             foreach (var i in tamas.Where(c=>c.seizon&&c.state==8))
@@ -717,7 +716,7 @@ namespace _2._0._0
                     tamas[i].mitizure = true;
                     for (int k = 0;  k < tamakosuu;  k++)
                     {
-                        tamas.Add(new Tdan(tamas[i].x,tamas[i].y,0,tamacol,tzang+ kansuu.PI2() / tamakosuu * k,0,tamaknd,6));
+                        tamas.Add(new Tdan(tamas[i].x,tamas[i].y,0,tamacol,tzang+ kansuu.PI2 / tamakosuu * k,0,tamaknd,6));
                     }
                 }
             }

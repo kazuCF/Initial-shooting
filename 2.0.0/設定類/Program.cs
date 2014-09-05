@@ -56,7 +56,7 @@ namespace _2._0._0
         static void Main(string[] args)
         {
             DX.SetWindowText("しゅーてぃんぐげぇむつー");
-            DX.ChangeWindowMode(DX.TRUE);
+            DX.ChangeWindowMode(1);
             DX.SetGraphMode(scx + hamix, scy, 32);
 
             if (DX.DxLib_Init() < 0) { return; }
@@ -76,7 +76,6 @@ namespace _2._0._0
                 {
                     case 0:
                         //ローディング
-                     //   present.Loading();
                         if (present.Loading() & present.Loading2()) { gamemode = 1; }
                         break;
                     case 1:
@@ -98,10 +97,9 @@ namespace _2._0._0
                         //ゲーム本体
                         enter_func("最初", 0);
                         if (brt != 255) { DX.SetDrawBright(brt, brt, brt); }
-
                         DX.SetDrawArea(0, 0, scx + hamix, scy);
                         haikeidraw();
-                        DX.DrawBox(scx, 0, scx + 300, scy, DX.GetColor(255, 255, 255), DX.TRUE);
+                        DX.DrawBox(scx, 0, scx + 300, scy, DX.GetColor(255, 255, 255), 1);
                         DX.SetDrawArea(fx, fy, scx, scy - fy);
                         for (int i = 0; i < zibun.Count; i++)
                         {
@@ -127,11 +125,13 @@ namespace _2._0._0
                     case 7:
                         //ゲーム終了
                         goto exit;
-                    case 8://エディター
+                    case 8:
+                        //エディター
                         edit.main();
                         DX.SetGraphMode(scx + hamix, scy, 32);
                         break;
-                    case 9://コンティニュー
+                    case 9:
+                        //コンティニュー
                         Finished.Fin(2);
                         break;
                 }
@@ -150,13 +150,14 @@ namespace _2._0._0
                  8:エディタ
                  9:コンティニュー
                  */
-                if (DX.CheckHitKey(DX.KEY_INPUT_ESCAPE) != 0) gamemode = 7;
+               
                 //         DX.DrawLine(0, 0, 300, 300, DX.GetColor(255, 255, 255), thickness);
                 if (thickness > 0) { thickness -= 1; }
-           //     DX.DrawString(0, scy - 20, "" + Math.Sqrt(1000 / fpsave), DX.GetColor(255, 0, 0));
+               DX.DrawString(0, scy - 20, "" + Math.Sqrt(1000 / fpsave), DX.GetColor(255, 0, 0));
 
-            //    fpsing(); enter_func("待機した時間", 1);
-            //    drawfunc(scx, 250);
+                fpsing(); 
+                //enter_func("待機した時間", 1);
+            //   drawfunc(scx, 250);
                 DX.ScreenFlip();
             }
 
@@ -197,14 +198,8 @@ namespace _2._0._0
             string s = reader.ReadLine();
             reader.Close();
         }
-
-        public static void FINISH(string message)
-        {
-            DX.DrawString(realscx / 2, realscy / 2, message, DX.GetColor(255, 0, 0));
-            if (key[DX.KEY_INPUT_RETURN] > 0) { gamemode = 0; }
-        }
         public static int fpscount, countot;
-        public const int Flame = 100;
+        public const int Flame = 60;
         static int[] f = new int[Flame];
         public static int t = 0;
         static double fpsave;

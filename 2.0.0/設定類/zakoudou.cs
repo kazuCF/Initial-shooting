@@ -30,7 +30,7 @@ namespace _2._0._0
         }
         public static void enemy_patternm4(float ex, float ey, ref float sx, ref float sy, ref int time, int num, int wait, ref float ang, ref float speed)
         {
-            if (time == 0) { ang = kansuu.PI() * 1 / 2.0f; speed = 6 + kansuu.rang(5); }
+            if (time == 0) { ang = kansuu.PI * 1 / 2.0f; speed = 6 + kansuu.rang(5); }
         }
         public static void enemy_patternm3(float ex, float ey, ref float sx, ref float sy, ref int time, int num, int wait, ref float ang, ref float speed)
         {
@@ -40,7 +40,7 @@ namespace _2._0._0
         }
         public static void enemy_patternm2(float ex, float ey, ref float sx, ref float sy, ref int time, int num, int wait, ref float ang, ref float speed)
         {
-            if (time == 0) { ang = kansuu.PI() + kansuu.rang(-0.3f, 0.3f); speed = 5 + kansuu.rang(5); }
+            if (time == 0) { ang = kansuu.PI + kansuu.rang(-0.3f, 0.3f); speed = 5 + kansuu.rang(5); }
      //ランダム角度2
         }
         public static void enemy_patternm1(float ex, float ey, ref float sx, ref float sy, ref int time, int num, int wait, ref float ang, ref float speed)
@@ -166,7 +166,7 @@ namespace _2._0._0
                 {
                     int r = Math.Cos(ang) < 0 ? 0 : 1;
                     speed = 6 + kansuu.rang(2);
-                    ang = kansuu.rang(Math.PI / 4) + kansuu.PI() * r;
+                    ang = kansuu.rang(Math.PI / 4) + kansuu.PI * r;
 
 
                 }

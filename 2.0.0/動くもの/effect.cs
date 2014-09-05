@@ -61,7 +61,6 @@ namespace _2._0._0
             DX.SetDrawBlendMode(DX.DX_BLENDMODE_ALPHA, value);
             DX.SetDrawBright(r, b, g);
             size = 0.1f + beje.Get(beje.ePrm_t.eRapid_Lv7, beje.ePrm_t.eSlow_Lv7, (float)time / (1504 * 1)) / 10;
-            kansuu.DrawRotaGraphfk(x, y, size, 0, gazo.syougeki, DX.TRUE, true);
         }
         private void ef1()//ボムエフェクト
         {

@@ -6,7 +6,6 @@ using DxLibDLL;
 
 namespace _2._0._0
 {
-    //Boss1用の弾幕(4種類ぐらい)
     public class Tdan
     {
         public static long mynumber;

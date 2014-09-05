@@ -10,13 +10,12 @@ namespace _2._0._0
 
         private static int fx = Program.fx, fy = Program.fy, fmx = Program.fmx, fmy = Program.fmy, scx = Program.scx, scy = Program.scy;
         static Random rnd = new Random();
-
-        public static float zikix() { return Program.zibun[0].zikix; }
-        public static float zikiy() { return Program.zibun[0].zikiy; }
+        public const float PI =(float) Math.PI;//円周率
+        public const float PI2 = PI * 2;//円周率の二倍
+        public static float zikix() { return Program.syux; }
+        public static float zikiy() { return Program.syuy; }
         public static float Cos(double x) { return (float)Math.Cos(x); }
         public static float Sin(double x) { return (float)Math.Sin(x); }
-        public static float PI() { return (float)Math.PI; }//円周率
-        public static float PI2() { return (float)Math.PI * 2; }//円周率の二倍
         public static float rang() { return rnd.Next(0, 1); }//0～1の乱数
         public static int rang(int a, int b) { return rnd.Next(a, b); }//a～bの乱数
         public static int rang(int a) { return rnd.Next(0, a); }
@@ -54,30 +53,8 @@ namespace _2._0._0
         }
         public static bool naka(double x, double y, int gw, int gh)//画面内にいるか
         {
-            //return (x-fx >= -gw*2 && x-fx < fmx + gw && y-fy >= -gw && y-fy < fmy + gh*2);
             return (x >= -gw / 2 && x <= scx + gw / 2 && y >= -gh / 2 && y <= scy + gh / 2);
         }
-        public static bool enatariz(double x, double y, double gw)//円を用いた自機との当たり判定
-        {
-            bool yes = false;
-            foreach (var item in Program.zibun)
-            {
-                if (!item.muteki)
-                {
-                    if (atari.CirCollison(item.zikix, item.zikiy, gazo.zgw, x, y, gazo.zako1tgw / 2))
-                    {
-                        yes = true; 
-                        if (item.kurai == 0)
-                        {
-                            item.kurai = 1;
-                        }
-                    }
-                }
-            }
-            return yes;
-        }
-
-
         public static float Crange = 3.3f;
         public static bool haniatariz(double x, double y, double atarihani, double speed, double angle)//当たり範囲を用いた自機との当たり判定
         {
@@ -89,8 +66,8 @@ namespace _2._0._0
                     double r = atarihani + Crange;
                     if (speed > r)
                     {
-                        double prex = x + Cos(angle + PI()) * speed;
-                        double prey = y + Sin(angle + PI()) * speed;
+                        double prex = x + Cos(angle + PI) * speed;
+                        double prey = y + Sin(angle + PI) * speed;
                         double px, py;
                         for (int i = 0; i < speed / r; i++)
                         {

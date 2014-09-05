@@ -24,7 +24,7 @@ namespace _2._0._0
         public static int bommcool;
         public int t = 0;
         public const int optionx = 25, optiony = 35;
-        public static float PI = kansuu.PI();
+        public static float PI = kansuu.PI;
         public static float[] optionang = new float[] { -PI / 2, -PI / 2, -PI / 2 - PI / 4, -PI / 2 + PI / 4 };
         public const int T = 150;
         public const int W = 300;
@@ -43,7 +43,6 @@ namespace _2._0._0
 
         public void syokika()
         {
-          
             efs = new List<effect>();
             tamas = new List<Tdan>();
             t = 0; bommcool = 0;
@@ -54,8 +53,7 @@ namespace _2._0._0
             tamakosuu = 3;
             kakudojyougen = 6;
             kurai = 0;
-            opc = 0;
-               
+            opc = 0;             
         }
         public ziki(int type, int X, int Y,int Chara)
         {
@@ -168,9 +166,9 @@ namespace _2._0._0
             {
                 i.x += kansuu.Cos(i.angle) * i.speed;
                 i.y += kansuu.Sin(i.angle) * i.speed;
-          //      if (Program.brt != 255) { DX.SetDrawBright(Program.brt, Program.brt, Program.brt); }
+
                 kansuu.DrawRotaGraphfk(i.x, i.y, 1, 0, gazo.otama[i.size, i.col], DX.TRUE, false);
-           //     if (Program.brt != 255) { DX.SetDrawBright(255, 255, 255); }
+            
                 if (kansuu.sotoRota(i.x, i.y, gazo.otamagw[i.size], gazo.otamagh[i.size]))
                 { i.seizon = false; }
                
@@ -184,7 +182,7 @@ namespace _2._0._0
             kansuu.DrawRotaGraphfk(zikix, zikiy, 1, 0, gazo.sinziki, 1, false);
             if (muteki)
             {
-                mutekijikan -= 1; if (Program.count % 20 < 10) { DX.SetDrawBright(255, 0, 0); } else { DX.SetDrawBright(100, 0, 0); }
+                mutekijikan -= 1; if (Program.count % 20 < 10) { DX.SetDrawBright(255, 0, 0); } else { DX.SetDrawBright(10, 0, 0); }
                 kansuu.DrawRotaGraphfk(zikix, zikiy, 2, 0, gazo.zikiGraph, DX.TRUE, false);
                 //   DX.DrawRotaGraph(zikix, zikiy, 1, 1, gazo.zikiGraph, DX.TRUE);
                 DX.SetDrawBright(255, 255, 255);
@@ -192,11 +190,7 @@ namespace _2._0._0
             }
             else
             {
-                //DX.SetDrawBlendMode(DX.DX_BLENDMODE_ADD,50);
-                //   kansuu.DrawRotaGraphfk(zikix, zikiy, 1, 1, gazo.zikiGraph, DX.TRUE);
                 kansuu.DrawRotaGraphfk(zikix, zikiy, 2, 0, gazo.zikiGraph, DX.TRUE, false);
-                // DX.DrawRotaGraph(zikix, zikiy, 1, 1, gazo.zikiGraph, DX.TRUE);
-                DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND, 255);
             }
         }
         public void itemdrop()
@@ -313,7 +307,7 @@ namespace _2._0._0
                         else { pluskaku = 5; }
                         tamakosuu = 3; Rpower = kijyunpower;
                     }
-                    else if (Program.power > 100)
+                    else if (Program.power < 100)
                     {
                         if (Program.key[DX.KEY_INPUT_LSHIFT] > 0) { pluskaku = 3; }
                         else { pluskaku = 5; }

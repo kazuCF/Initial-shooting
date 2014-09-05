@@ -7,7 +7,7 @@ namespace _2._0._0
 {
     public static class option
     {
-        public static int[] OPs = new int[] { 6, 3 ,0};
+        public static int[] OPs = new int[] { 3, 3 ,0};
         private static int opkosu = OPs.Length;
         private static int[] gazos = new int[3];
         private static int haikei;
@@ -28,7 +28,8 @@ namespace _2._0._0
         }
         private static void key()
         {
-            if (Program.key[DX.KEY_INPUT_RETURN] == 1 && Option == 2) { Program.gamemode = 2; }
+            if (Program.key[DX.KEY_INPUT_ESCAPE] != 0) { Program.gamemode = 2; Program.key[DX.KEY_INPUT_ESCAPE]++; }
+            if ((Program.key[DX.KEY_INPUT_RETURN] == 1||Program.key[DX.KEY_INPUT_Z] == 1) && Option == 2) { Program.gamemode = 2; }
             else  if (Program.key[DX.KEY_INPUT_UP] == 1) { Option = (--Option) % opkosu; }
             else if (Program.key[DX.KEY_INPUT_DOWN] == 1) { Option = (++Option) % opkosu; }
             else if (Program.key[DX.KEY_INPUT_RIGHT] == 1) { OPs[Option]++; }
@@ -46,10 +47,10 @@ namespace _2._0._0
             for (int i = 0; i < opkosu; i++)
             {
                 if (Option == i) { continue; }
-                DX.DrawGraph(50, 130 + 70 * i, gazos[i], DX.TRUE);
+                DX.DrawGraph(50, 130 + 70 * i, gazos[i], 1);
             }
             DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND, 255);
-            DX.DrawGraph(50, Option * 70 + 130, gazos[Option], DX.TRUE);
+            DX.DrawGraph(50, Option * 70 + 130, gazos[Option], 1);
             for (int i = 1; i < 9; i++)
             {
                 bool tyuu = i == OPs[0];

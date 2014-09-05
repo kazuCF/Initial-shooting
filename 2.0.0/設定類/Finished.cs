@@ -89,10 +89,10 @@ namespace _2._0._0
             for (int i = 0; i < 2; i++)
             {
                 if (selecting == i) { continue; }
-                DX.DrawGraph(50, 50 + 50 * i, cont[i], DX.TRUE);
+                DX.DrawGraph(50, 50 + 50 * i, cont[i], 1);
             }
             DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND, 255);
-            DX.DrawGraph(50, selecting * 50 + 50, cont[selecting], DX.TRUE);
+            DX.DrawGraph(50, selecting * 50 + 50, cont[selecting], 1);
             DX.DrawStringToHandle(50, 150, "あと" + gamemode4.continues + "回コンティニューできます", DX.GetColor(255, 255, 255), font);
           key2();
         }

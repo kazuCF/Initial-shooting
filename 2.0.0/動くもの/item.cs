@@ -48,9 +48,9 @@ namespace _2._0._0
                 y += (float)Math.Sin(kansuu.zikiangle(x, y)) * v;
 
             }
-            kansuu.DrawRotaGraphfk(x, y, r[syurui], Math.PI * 2 * (Program.count % 120) / 120, gazo.itemimg[syurui, 1], DX.TRUE, true);
-            kansuu.DrawRotaGraphfk(x, y, r[syurui] * 0.8, -Math.PI * 2 * (Program.count % 120) / 120, gazo.itemimg[syurui, 1], DX.TRUE, true);
-            kansuu.DrawRotaGraphfk(x, y, r[syurui], 0, gazo.itemimg[syurui, 0], DX.TRUE, true);
+            kansuu.DrawRotaGraphfk(x, y, r[syurui], Math.PI * 2 * (Program.count % 120) / 120, gazo.itemimg[syurui, 1], 1, true);
+            kansuu.DrawRotaGraphfk(x, y, r[syurui] * 0.8, -Math.PI * 2 * (Program.count % 120) / 120, gazo.itemimg[syurui, 1], 1, true);
+            kansuu.DrawRotaGraphfk(x, y, r[syurui], 0, gazo.itemimg[syurui, 0], 1, true);
             if (speed >= 0 || state == 1)
             {
 

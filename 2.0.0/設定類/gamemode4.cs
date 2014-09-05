@@ -47,6 +47,7 @@ namespace _2._0._0
 
         public static void bunki()
         {
+            if (Program.key[DX.KEY_INPUT_ESCAPE] != 0) { Program.gamemode = 7; }
             if (Program.zibun[0].life <= 0) { Program.gamemode = 9; }
             kansuu.setarea1();
             switch (chapter)
@@ -77,14 +78,22 @@ namespace _2._0._0
 
         private static void drawside()
         {
-            DX.DrawGraph(Program.hamix + 225, Program.scy - 200, gazo.haikeig, DX.TRUE);
-            DX.DrawBox(0, 0, Program.fx, Program.scy, DX.GetColor(0, 0, 255), DX.TRUE);
-            DX.DrawBox(0, 0, Program.scx, Program.fy, DX.GetColor(0, 0, 255), DX.TRUE);
-            DX.DrawBox(0, Program.scy, Program.scx, Program.scy - Program.fy, DX.GetColor(0, 0, 255), DX.TRUE);
+            DX.DrawGraph(Program.hamix + 225, Program.scy - 200, gazo.haikeig, 1);
+            DX.DrawBox(0, 0, Program.fx, Program.scy, DX.GetColor(0, 0, 255), 1);
+            DX.DrawBox(0, 0, Program.scx, Program.fy, DX.GetColor(0, 0, 255), 1);
+            DX.DrawBox(0, Program.scy, Program.scx, Program.scy - Program.fy, DX.GetColor(0, 0, 255), 1);
+            if (Program.brt != 255) { DX.SetDrawBright(Program.brt+3, Program.brt+3, Program.brt+3); }
+            DX.DrawGraph(Program.hamix + 220, 60, gazo.players, 1);
             for (int i = 0; i < Program.zibun[0].life; i++)
             {
-                DX.DrawGraph(Program.hamix + 250 + (i * 30), 60, gazo.sinziki, DX.TRUE);
+                DX.DrawGraph(Program.hamix + 320 + (i * 30), 60, gazo.star, 1);
             }
+            DX.DrawGraph(Program.hamix + 220, 120, gazo.bombs, 1);
+            for (int i = 0; i < Program.zibun[0].boms; i++)
+            {
+                DX.DrawGraph(Program.hamix + 320 + (i * 30), 120, gazo.star, 1);
+            }
+            if (Program.brt != 255) { DX.SetDrawBright(255, 255, 255); }
         }
         private static void chapter1()
         {
@@ -235,7 +244,7 @@ namespace _2._0._0
         private static bool startin(int chapter)
         {
             DX.SetDrawBlendMode(DX.DX_BLENDMODE_ALPHA, 255 - effetime);
-            kansuu.DrawRotaGraphfk(Program.scx / 2, Program.scy / 2, effetime / 100.0, 0, gazo.titles[chapter - 1], DX.TRUE, false);
+            kansuu.DrawRotaGraphfk(Program.scx / 2, Program.scy / 2, effetime / 100.0, 0, gazo.titles[chapter - 1], 1, false);
             DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND, effetime);
             if (++effetime >= 256) { effetime = 0; return true; }
             else { return false; }
@@ -263,6 +272,7 @@ namespace _2._0._0
                 if (boss[0].fend)
                 {
                     boss.Remove(boss[0]); gamemode4.bosschuu = false; tekiyomi++; htime = time + 40;
+
                 }
             }
         }

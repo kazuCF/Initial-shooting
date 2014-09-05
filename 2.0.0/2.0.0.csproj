@@ -29,6 +29,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -99,13 +100,13 @@
     <Compile Include="設定類\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="設定類\start..cs" />
-    <Compile Include="動くもの\tama.cs" />
     <Compile Include="設定類\zakoudou.cs" />
     <Compile Include="動くもの\ziki.cs" />
     <Compile Include="エディタ\edit.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DxLib.dll" />
+    <Content Include="icon.ico" />
     <Content Include="計画.txt" />
   </ItemGroup>
   <ItemGroup>

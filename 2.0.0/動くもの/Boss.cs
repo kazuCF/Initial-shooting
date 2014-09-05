@@ -24,7 +24,6 @@ namespace _2._0._0
         protected int[] set_life = new int[100];
         protected int  life_max;   
       protected List<Tdan> dan = new List<Tdan>();
-      //  protected int shot_cnt = 0;
         protected float angle;
         protected float dx, dy;
         protected int fucount = 0;
@@ -155,22 +154,21 @@ namespace _2._0._0
                 int hyoujirai = Program.scx * (int)life / life_max;
 
                 shot_calc(); Program.enter_func("ボスショット", 0);
-                kansuu.DrawBox(0, 0, hyoujirai, 20, DX.GetColor(255, 255, 255), DX.TRUE);
+                kansuu.DrawBox(0, 0, hyoujirai, 20, DX.GetColor(255, 255, 255), 1);
             }
+
             if (end)
             {
-                hyouji = false;
+                if (hyouji) { gamemode4.im.Add(new item(zx - kansuu.rang(40), zy - kansuu.rang(40), 4, -5.5f)); gamemode4.im.Add(new item(zx + kansuu.rang(40), zy + kansuu.rang(40), 4, -5.5f)); }
+                          hyouji = false;
                 DX.SetDrawBright(255, 0, 0); fend = dieefe(1); DX.SetDrawBright(255, 255, 255);
             }
             else
             {
-                if (state == 2)
-                {
-     //               DX.SetDrawBlendMode(DX.DX_BLENDMODE_SUB, 255);
-                }
-                kansuu.DrawRotaGraphfk(dx, dy, 1, 0, gaz, DX.TRUE, false);
+                kansuu.DrawRotaGraphfk(dx, dy, 1, 0, gaz, 1, false);
                 DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND, 255);
-            } fucount += 1;
+            }
+           fucount += 1;
         }
         
         override public void shot_calc()
@@ -182,7 +180,7 @@ namespace _2._0._0
             }
             else if (ziki.bommcool == 130)
             {
-                shot_cnt = 0;
+                //shot_cnt = 0;
             }
             endtime--; if (endtime < 0) { life = 0; }
             foreach (Tdan tama in dan.Where(c => c.effect == 0))
@@ -221,7 +219,7 @@ namespace _2._0._0
                 }
                 if (tama.speed != 0) { tama.dispangle = tama.angle + PI / 2; }
                 else { tama.dispangle = kansuu.angling(0, 0, tama.sx, tama.sy) + PI / 2; }
-                kansuu.DrawRotaGraphfk(tama.x, tama.y, 1, tama.dispangle, gazo.otama[tama.size, tama.col], DX.TRUE, true);
+                kansuu.DrawRotaGraphfk(tama.x, tama.y, 1, tama.dispangle, gazo.otama[tama.size, tama.col], 1, true);
                 foreach (var i in Program.zibun[0].efs.Where(c=>c.knd!=2))
                 {
                     if (ziki.kuraibomming) { 
@@ -258,7 +256,7 @@ namespace _2._0._0
 
                 for (int i = 0; i < 30; i++)
                 {
-                    dan.Add(new Tdan(zx + kansuu.Sin(kansuu.PI() * 2 / 30 * count) * 20, zy, 0, DX.GetRand(15), angle + PI2 / 30 * i + kansuu.Sin(kansuu.PI() * 2 / 30 * count) * 5, 10.0f, ki % 24));
+                    dan.Add(new Tdan(zx + kansuu.Sin(kansuu.PI * 2 / 30 * count) * 20, zy, 0, DX.GetRand(15), angle + PI2 / 30 * i + kansuu.Sin(kansuu.PI * 2 / 30 * count) * 5, 10.0f, ki % 24));
                 }
 
             }
@@ -266,7 +264,7 @@ namespace _2._0._0
             {
                 for (int i = 0; i < 30; i++)
                 {
-                    dan.Add(new Tdan(zx + kansuu.Sin(kansuu.PI() * 2 / 30 * count) * 20, zy, 0, /*5*/DX.GetRand(15), PI2 / 30 * i + kansuu.Sin(kansuu.PI() * 2 / 60 * count) * 5, 10.0f, ki % 24));
+                    dan.Add(new Tdan(zx + kansuu.Sin(kansuu.PI * 2 / 30 * count) * 20, zy, 0, /*5*/DX.GetRand(15), PI2 / 30 * i + kansuu.Sin(kansuu.PI * 2 / 60 * count) * 5, 10.0f, ki % 24));
                 }
             }
                 t2 += 1;
@@ -290,16 +288,16 @@ namespace _2._0._0
      
                 for (int i = 0; i < 20; i++)
                 {
-                    float x = zx + 7 + kansuu.Cos(kansuu.PI() / 2 + kansuu.PI() / 150 * t2) * 100;
-                    float y = zy + 7 + kansuu.Sin(kansuu.PI() / 2 + kansuu.PI() / 150 * t2) * 100;
+                    float x = zx + 7 + kansuu.Cos(kansuu.PI / 2 + kansuu.PI / 150 * t2) * 100;
+                    float y = zy + 7 + kansuu.Sin(kansuu.PI / 2 + kansuu.PI / 150 * t2) * 100;
                     float ang = PI2 / 20 * i;
                     dan.Add(new Tdan(rnd + x, y, 0, 2, ang, 1.2f, 5));
                 }
                 for (int i = 0; i < 20; i++)
                 {
 
-                    float x = zx + 7 + kansuu.Cos(kansuu.PI() / 2 - kansuu.PI() / 150 * t2) * 100;
-                    float y = zy + 7 + kansuu.Sin(kansuu.PI() / 2 - kansuu.PI() / 150 * t2) * 100;
+                    float x = zx + 7 + kansuu.Cos(kansuu.PI / 2 - kansuu.PI / 150 * t2) * 100;
+                    float y = zy + 7 + kansuu.Sin(kansuu.PI / 2 - kansuu.PI / 150 * t2) * 100;
                     float ang = PI2 / 20 * i;
                     dan.Add(new Tdan(rnd + x, y, 0, 4, ang, 1.2f, 5));
 
@@ -333,7 +331,7 @@ namespace _2._0._0
                     if (30 < cn && cn < 120)
                     {
                         s2.speed -= 1.2f / 120.0f;
-                        s2.angle += ((kansuu.PI() / 2)) / 120.0f * (st == 1 ? -1 : 1);
+                        s2.angle += ((kansuu.PI / 2)) / 120.0f * (st == 1 ? -1 : 1);
 
                     }
 
@@ -366,7 +364,7 @@ namespace _2._0._0
 
             if (smalls&&t % 4 == 0)
             {
-                dan.Add(new Tdan(DX.GetRand(64-1), DX.GetRand(Program.fmx), DX.GetRand(200), 13, kansuu.PI() / 2, 1 + kansuu.rang(0.5)));
+                dan.Add(new Tdan(DX.GetRand(64-1), DX.GetRand(Program.fmx), DX.GetRand(200), 13, kansuu.PI / 2, 1 + kansuu.rang(0.5)));
             }
             if (t == tm - 1)
             {
@@ -381,7 +379,7 @@ namespace _2._0._0
                     if (30 < cn && cn < 120&&st==10)
                     {
                         s2.speed -= 1.2f / 120.0f;
-                        s2.angle += ((kansuu.PI() / 2)) / 120.0f * (-1);
+                        s2.angle += ((kansuu.PI / 2)) / 120.0f * (-1);
 
                     }
 
@@ -505,15 +503,15 @@ namespace _2._0._0
                  for (int i = 0; i < 20; i++)
                 {
 
-                    float x = zx - kansuu.Cos(kansuu.PI() / 2 - kansuu.PI() / 150 * t) * 100;
-                    float y = zy+50 - kansuu.Sin(kansuu.PI() / 2 - kansuu.PI() / 150 * t) * 100;
+                    float x = zx - kansuu.Cos(kansuu.PI / 2 - kansuu.PI / 150 * t) * 100;
+                    float y = zy+50 - kansuu.Sin(kansuu.PI / 2 - kansuu.PI / 150 * t) * 100;
                     float ang = PI2 / 20 * i;
                     dan.Add(new Tdan(x, y, 0, 4, ang, 1.2f, 7));
                 }
                 for (int i = 0; i < 20; i++)
                 {
-                    float x = zx - kansuu.Cos(kansuu.PI() / 2 + kansuu.PI() / 150 * t) * 100;
-                    float y = zy+50 - kansuu.Sin(kansuu.PI() / 2 + kansuu.PI() / 150 * t) * 100;
+                    float x = zx - kansuu.Cos(kansuu.PI / 2 + kansuu.PI / 150 * t) * 100;
+                    float y = zy+50 - kansuu.Sin(kansuu.PI / 2 + kansuu.PI / 150 * t) * 100;
                     float ang = PI2 / 20 * i;
                     dan.Add(new Tdan(x, y, 0, 2, ang, 1.2f, 7));
                 }

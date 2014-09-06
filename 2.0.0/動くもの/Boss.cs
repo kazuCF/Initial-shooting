@@ -173,7 +173,6 @@ namespace _2._0._0
         
         override public void shot_calc()
         {
-          //  dan.RemoveAll(c => Program.isbom && (c.x - kansuu.zikix()) * (c.x - kansuu.zikix()) + (c.y - kansuu.zikiy()) * (c.y - kansuu.zikiy()) < 3000); 
             if (ziki.bommcool == 60)
             {
                 life -= 300;

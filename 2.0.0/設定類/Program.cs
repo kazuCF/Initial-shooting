@@ -155,7 +155,7 @@ namespace _2._0._0
                 if (thickness > 0) { thickness -= 1; }
                DX.DrawString(0, scy - 20, "" + Math.Sqrt(1000 / fpsave), DX.GetColor(255, 0, 0));
 
-                fpsing(); 
+            //    fpsing(); 
                 //enter_func("待機した時間", 1);
             //   drawfunc(scx, 250);
                 DX.ScreenFlip();

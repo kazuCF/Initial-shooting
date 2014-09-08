@@ -45,7 +45,7 @@ namespace _2._0._0
             dnx = 0; dny = 0; dns = 0; dnc = 0; dnflg = 0; dnt = 0;
             zibun.Clear();
             zibun.Add(new ziki(1, 320, 300, 0));
-            power = 100; point = 0; score = 0; gamemode = 0; count = 0;
+            power = 0; point = 0; score = 0; gamemode = 0; count = 0;
             Fonts[0] = DX.CreateFontToHandle("Lindsey", 50, 10, DX.DX_CHARSET_DEFAULT); 
             zibun[0].syokika();
             zibun[0].life = lifesyoki;

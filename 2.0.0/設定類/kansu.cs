@@ -55,7 +55,7 @@ namespace _2._0._0
         {
             return (x >= -gw / 2 && x <= scx + gw / 2 && y >= -gh / 2 && y <= scy + gh / 2);
         }
-        public static float Crange = 3.3f;
+        public static float Crange = 3.0f;
         public static bool haniatariz(double x, double y, double atarihani, double speed, double angle)//当たり範囲を用いた自機との当たり判定
         {
             foreach (var zi in Program.zibun)

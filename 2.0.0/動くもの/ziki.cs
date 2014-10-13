@@ -38,9 +38,9 @@ namespace _2._0._0
         public int zikitime = 0;
         public int tamakosuu = 3;
         public int kakudojyougen = 6;
-
+        public bool teisoku = false;
         public static int sx, sy;
-
+        public const int warp = 50;
         public void syokika()
         {
             efs = new List<effect>();
@@ -90,7 +90,9 @@ namespace _2._0._0
                 {
                     opx[i] = zikix + optionx * (i == 0 ? -1 : 1);
                     opy[i] = zikiy + optiony + kansuu.Sin(PI * 2 / 150 * opc) * 20;
-                }
+                }  sx = 4; sy = 4; kakudojyougen = 6;
+              
+                teisoku = false;
             }
             else
             {
@@ -98,29 +100,52 @@ namespace _2._0._0
                 {
                     opx[i] = zikix + optionx / 2 * (i == 0 ? -1 : 1);
                     opy[i] = zikiy + optiony / 2;
+                } sx = 1; sy = 1; kakudojyougen = 3;
+                teisoku = true;
+            }
+            if (Program.key[Program.UP] != 0)
+            {
+                if (Program.Benyuryoku == Program.UP && Program.key[Program.UP] == 1&&!teisoku)
+                {
+                    zikiy -=warp;
+                }
+                else
+                {
+                    zikiy -= sy;
                 }
             }
-            if (DX.CheckHitKey(DX.KEY_INPUT_LSHIFT) != 0)
+            if (Program.key[Program.DOWN] != 0)
             {
-                sx = 1;
-                sy = 1; kakudojyougen = 3;
+                if (Program.Benyuryoku == Program.DOWN && Program.key[Program.DOWN] == 1 && !teisoku)
+                {
+                    zikiy += warp;
+                }
+                else
+                {
+                    zikiy += sy;
+                }
             }
-            else { sx = 4; sy = 4; kakudojyougen = 6; }
-            if (DX.CheckHitKey(DX.KEY_INPUT_UP) != 0)
+            if (Program.key[Program.RIGHT] != 0)
             {
-                zikiy -= sy;
+                if (Program.Benyuryoku == Program.RIGHT && Program.key[Program.RIGHT] == 1 && !teisoku)
+                {
+                    zikix += warp;
+                }
+                else
+                {
+                    zikix+= sx;
+                }
             }
-            if (DX.CheckHitKey(DX.KEY_INPUT_DOWN) != 0)
+            if (Program.key[Program.LEFT] != 0)
             {
-                zikiy += sy;
-            }
-            if (DX.CheckHitKey(DX.KEY_INPUT_RIGHT) != 0)
-            {
-                zikix += sx;
-            }
-            if (DX.CheckHitKey(DX.KEY_INPUT_LEFT) != 0)
-            {
-                zikix -= sx;
+                if (Program.Benyuryoku == Program.LEFT && Program.key[Program.LEFT] == 1 && !teisoku)
+                {
+                    zikix -= warp;
+                }
+                else
+                {
+                    zikix -= sx;
+                }
             }
             kansuu.sotoRotaz(ref zikix, ref zikiy, gazo.zgw, gazo.zgh);
             Program.border = (zikiy < 100);

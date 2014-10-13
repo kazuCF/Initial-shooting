@@ -77,10 +77,10 @@ namespace _2._0._0
             }
             DX.SetDrawBlendMode(DX.DX_BLENDMODE_NOBLEND, 255);
             DX.DrawGraph(450+10*selecting+30, selecting * 50 + 150, options[selecting], 1);
-            if (Program.key[DX.KEY_INPUT_DOWN] == 1) { selecting=(++selecting)%koumokusu; }
-            else if (Program.key[DX.KEY_INPUT_UP] == 1) { selecting = (--selecting) % koumokusu; }
+            if (Program.key[Program.DOWN] == 1) { selecting=(++selecting)%koumokusu; }
+            else if (Program.key[Program.UP] == 1) { selecting = (--selecting) % koumokusu; }
             if (selecting < 0) { selecting += koumokusu; }
-            if (!Program.enter && (Program.key[DX.KEY_INPUT_RETURN] == 1 || Program.key[DX.KEY_INPUT_Z] == 1))
+            if (!Program.enter && (Program.key[Program.ENTER] == 1 || Program.key[DX.KEY_INPUT_Z] == 1))
             {
                 switch (selecting)
                 {

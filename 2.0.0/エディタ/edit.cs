@@ -287,7 +287,7 @@ namespace _2._0._0
                 {
                     mode = 3;
                 }
-                if (key[DX.KEY_INPUT_RETURN] == 1)
+                if (key[Program.ENTER] == 1)
                 {
                     if (susumu == -1) { susumu = 0; }
                     else if (susumu > 0) { susumu = 0; }
@@ -331,7 +331,7 @@ namespace _2._0._0
                 if (key[DX.KEY_INPUT_S] > 0)
                 {
                     //左キー押されたら
-                    if (key[DX.KEY_INPUT_LEFT] == 1 || key[DX.KEY_INPUT_LEFT] > 30)
+                    if (key[Program.LEFT] == 1 || key[Program.LEFT] > 30)
                     {
                         //スペース減らす
                         if (Operate.Space > 2)
@@ -340,7 +340,7 @@ namespace _2._0._0
                         }
                     }
                     //右キー
-                    if (key[DX.KEY_INPUT_RIGHT] == 1 || key[DX.KEY_INPUT_RIGHT] > 30)
+                    if (key[Program.RIGHT] == 1 || key[Program.RIGHT] > 30)
                     {
                         //スペース増やす
                         if (Operate.Space < 300)
@@ -351,13 +351,13 @@ namespace _2._0._0
                 }
                 else if (key[DX.KEY_INPUT_T] > 0)
                 {
-                    if (key[DX.KEY_INPUT_LEFT] == 1 || key[DX.KEY_INPUT_LEFT] > 30)
+                    if (key[Program.LEFT] == 1 || key[Program.LEFT] > 30)
                     {
                         //スペース減らす
                         gtime -= 1;
                     }
                     //右キー
-                    if (key[DX.KEY_INPUT_RIGHT] == 1 || key[DX.KEY_INPUT_RIGHT] > 30)
+                    if (key[Program.RIGHT] == 1 || key[Program.RIGHT] > 30)
                     {
                         //スペース増やす
                         gtime += 1;
@@ -365,47 +365,47 @@ namespace _2._0._0
                 }
                 else if (key[DX.KEY_INPUT_R] > 0)
                 {
-                    if (key[DX.KEY_INPUT_LEFT] == 1 || key[DX.KEY_INPUT_LEFT] > 30)
+                    if (key[Program.LEFT] == 1 || key[Program.LEFT] > 30)
                     {
                         Operate.renzoku -= 1;
                     }
-                    if (key[DX.KEY_INPUT_RIGHT] == 1 || key[DX.KEY_INPUT_RIGHT] > 30)
+                    if (key[Program.RIGHT] == 1 || key[Program.RIGHT] > 30)
                     {
                         Operate.renzoku += 1;
                     }
                 }
                 else if (key[DX.KEY_INPUT_F] > 0)
                 {
-                    if (key[DX.KEY_INPUT_LEFT] == 1 || key[DX.KEY_INPUT_LEFT] > 30)
+                    if (key[Program.LEFT] == 1 || key[Program.LEFT] > 30)
                     {
                         Operate.renzokukaisu -= 1;
                     }
                     //右キー
-                    if (key[DX.KEY_INPUT_RIGHT] == 1 || key[DX.KEY_INPUT_RIGHT] > 30)
+                    if (key[Program.RIGHT] == 1 || key[Program.RIGHT] > 30)
                     {
                         Operate.renzokukaisu += 1;
                     }
                 }
                 if (key[DX.KEY_INPUT_C] > 0)//動き方
                 {
-                    if (key[DX.KEY_INPUT_LEFT] == 1 || key[DX.KEY_INPUT_LEFT] > 30)
+                    if (key[Program.LEFT] == 1 || key[Program.LEFT] > 30)
                     {
                         Operate.Col -= 1;
                     }
                     //右キー
-                    if (key[DX.KEY_INPUT_RIGHT] == 1 || key[DX.KEY_INPUT_RIGHT] > 30)
+                    if (key[Program.RIGHT] == 1 || key[Program.RIGHT] > 30)
                     {
                         Operate.Col += 1;
                     }
                 }
                 if (key[DX.KEY_INPUT_H] > 0)//動き方
                 {
-                    if (key[DX.KEY_INPUT_LEFT] == 1 || key[DX.KEY_INPUT_LEFT] > 30)
+                    if (key[Program.LEFT] == 1 || key[Program.LEFT] > 30)
                     {
                         Operate.hp -= 1;
                     }
                     //右キー
-                    if (key[DX.KEY_INPUT_RIGHT] == 1 || key[DX.KEY_INPUT_RIGHT] > 30)
+                    if (key[Program.RIGHT] == 1 || key[Program.RIGHT] > 30)
                     {
                         Operate.hp += 1;
                     }
@@ -435,7 +435,7 @@ namespace _2._0._0
             {              gtime = tekis[sentakun].toujyou;
                 if (key[DX.KEY_INPUT_SPACE] == 1)//表示フラグ
                     Operate.flag *= -1; 
-                if (key[DX.KEY_INPUT_RETURN] == 1)
+                if (key[Program.ENTER] == 1)
                 {
                     mode = 2;
                     susumu = 1;
@@ -443,12 +443,12 @@ namespace _2._0._0
                 }
                 if (key[DX.KEY_INPUT_N] != 0)
                 {
-                    if (key[DX.KEY_INPUT_LEFT] == 1)
+                    if (key[Program.LEFT] == 1)
                     {
                         sentakun--;
                         if (sentakun < 0) { sentakun = 0; }
                     }
-                    else if (key[DX.KEY_INPUT_RIGHT] == 1)
+                    else if (key[Program.RIGHT] == 1)
                     {
                         sentakun++;
                          if (sentakun >= tekis.Count) { sentakun = tekis.Count - 1; }
@@ -461,40 +461,40 @@ namespace _2._0._0
                 }
                 else if (key[DX.KEY_INPUT_R] != 0)
                 {
-                    if (key[DX.KEY_INPUT_LEFT] == 1)
+                    if (key[Program.LEFT] == 1)
                     {
                         tekis[sentakun].tamakosuu--;
                     }
-                    else if (key[DX.KEY_INPUT_RIGHT] == 1)
+                    else if (key[Program.RIGHT] == 1)
                     {
                         tekis[sentakun].tamakosuu++;
                    }
                 }
                 else if (key[DX.KEY_INPUT_P] != 0)
                 {
-                    if (key[DX.KEY_INPUT_LEFT] == 1)
+                    if (key[Program.LEFT] == 1)
                     {
                         tekis[sentakun].tamacol--;
                 }
-                    else if (key[DX.KEY_INPUT_RIGHT] == 1)
+                    else if (key[Program.RIGHT] == 1)
                     {
                         tekis[sentakun].tamacol++;
                    }
                 }
                 else if (key[DX.KEY_INPUT_O] != 0)
                 {
-                    if (key[DX.KEY_INPUT_LEFT] == 1)
+                    if (key[Program.LEFT] == 1)
                     {
                         tekis[sentakun].tamaknd--;
                     }
-                    else if (key[DX.KEY_INPUT_RIGHT] == 1)
+                    else if (key[Program.RIGHT] == 1)
                     {
                         tekis[sentakun].tamaknd++;
                     }
                 }
                 else if (key[DX.KEY_INPUT_I] != 0)
                 {
-                    if (key[DX.KEY_INPUT_LEFT] == 1)
+                    if (key[Program.LEFT] == 1)
                     {
                      
                         tekis[sentakun].tamasyurui--;
@@ -504,7 +504,7 @@ namespace _2._0._0
                         tekis[sentakun].tamasokudo = tehonspeed[tekis[sentakun].tamasyurui];
 
                     }
-                    else if (key[DX.KEY_INPUT_RIGHT] == 1)
+                    else if (key[Program.RIGHT] == 1)
                     {
                       
                         tekis[sentakun].tamasyurui++;
@@ -516,7 +516,7 @@ namespace _2._0._0
                 }
                 else if (key[DX.KEY_INPUT_U] != 0)
                 {
-                    if (key[DX.KEY_INPUT_LEFT] % 5 == 1)
+                    if (key[Program.LEFT] % 5 == 1)
                     {
 
                         if (tekis[sentakun].tamasyurui == 3 || tekis[sentakun].tamasyurui == 4)
@@ -528,7 +528,7 @@ namespace _2._0._0
                             tekis[sentakun].pluskaku--;
                         }
                     }
-                    else if (key[DX.KEY_INPUT_RIGHT] % 5 == 1)
+                    else if (key[Program.RIGHT] % 5 == 1)
                     {
  
                         if (tekis[sentakun].tamasyurui == 3 || tekis[sentakun].tamasyurui == 4)
@@ -543,40 +543,40 @@ namespace _2._0._0
                 }
                 else if (key[DX.KEY_INPUT_Y] != 0)
                 {
-                    if (key[DX.KEY_INPUT_LEFT] % 5 == 1)
+                    if (key[Program.LEFT] % 5 == 1)
                     {   tekis[sentakun].kankaku--;
                         if (tekis[sentakun].kankaku < 1) { tekis[sentakun].kankaku = 1; }
                     }
-                    else if (key[DX.KEY_INPUT_RIGHT] % 5 == 1)
+                    else if (key[Program.RIGHT] % 5 == 1)
                     {
                         tekis[sentakun].kankaku++;
                     }
                 }
                 else if (key[DX.KEY_INPUT_T] != 0)
                 {
-                    if (key[DX.KEY_INPUT_LEFT] > 0)
+                    if (key[Program.LEFT] > 0)
                     {
                         tekis[sentakun].toujyou--;
                     }
-                    else if (key[DX.KEY_INPUT_RIGHT] > 0)
+                    else if (key[Program.RIGHT] > 0)
                     {
                         tekis[sentakun].toujyou++;
                     }
                 }
                 else if (key[DX.KEY_INPUT_H] != 0)
                 {
-                    if (key[DX.KEY_INPUT_LEFT] > 0)
+                    if (key[Program.LEFT] > 0)
                     {
                         tekis[sentakun].life--;
                     }
-                    else if (key[DX.KEY_INPUT_RIGHT] > 0)
+                    else if (key[Program.RIGHT] > 0)
                     {
                        tekis[sentakun].life++;
                     }
                 }
                 else if (key[DX.KEY_INPUT_F] != 0)
                 {
-                    if (key[DX.KEY_INPUT_LEFT] == 1)
+                    if (key[Program.LEFT] == 1)
                     {
                   
                         if (tekis[sentakun].tamasyurui == 8)
@@ -588,7 +588,7 @@ namespace _2._0._0
                             tekis[sentakun].tamasokudo--;
                         }
                     }
-                    else if (key[DX.KEY_INPUT_RIGHT] == 1)
+                    else if (key[Program.RIGHT] == 1)
                     {
                       
                         if (tekis[sentakun].tamasyurui == 8)
@@ -638,12 +638,12 @@ namespace _2._0._0
                 }
                 if (key[DX.KEY_INPUT_C] != 0)//動き方
                 {
-                    if (key[DX.KEY_INPUT_LEFT] == 1 || key[DX.KEY_INPUT_LEFT] > 30)
+                    if (key[Program.LEFT] == 1 || key[Program.LEFT] > 30)
                     {
                         tekis[sentakun].ugokikata--;
                     }
                     //右キー
-                    if (key[DX.KEY_INPUT_RIGHT] == 1 || key[DX.KEY_INPUT_RIGHT] > 30)
+                    if (key[Program.RIGHT] == 1 || key[Program.RIGHT] > 30)
                     {
                        tekis[sentakun].ugokikata++;
                     }
@@ -660,18 +660,18 @@ namespace _2._0._0
             {
                 if (key[DX.KEY_INPUT_N] != 0)
                 {
-                    if (key[DX.KEY_INPUT_LEFT] == 1)
+                    if (key[Program.LEFT] == 1)
                     {
                         sentakun--;
                         if (sentakun < 0) { sentakun = 0; }
                     }
-                    else if (key[DX.KEY_INPUT_RIGHT] == 1)
+                    else if (key[Program.RIGHT] == 1)
                     {
                         sentakun++;
                         if (sentakun >= tekis.Count) { sentakun = tekis.Count - 1; }
                     }
                 }
-                if (key[DX.KEY_INPUT_RETURN] == 1)
+                if (key[Program.ENTER] == 1)
                 {
                     if (susumu > 0) { susumu = 0; }
                     else { susumu = 1; }
@@ -710,7 +710,7 @@ namespace _2._0._0
             #endregion
             if (mode == 3)
             {
-                if (key[DX.KEY_INPUT_RETURN] == 1)
+                if (key[Program.ENTER] == 1)
                 {
                     StreamWriter writer = new StreamWriter("ugokikata\\ugokiting" + ugokin.Num + ".csv", false);
                     foreach (var k in ugokin.ug[ugokin.Num].Ug.Where(c => c.jizoku != 0))
@@ -730,26 +730,26 @@ namespace _2._0._0
                 }
                 else if (key[DX.KEY_INPUT_LSHIFT] > 0)
                 {
-                    if (key[DX.KEY_INPUT_LEFT] == 1 || key[DX.KEY_INPUT_LEFT] > 30)
+                    if (key[Program.LEFT] == 1 || key[Program.LEFT] > 30)
                     {
                         jizokujikan--;
                     }
                     //右キー
-                    if (key[DX.KEY_INPUT_RIGHT] == 1 || key[DX.KEY_INPUT_RIGHT] > 30)
+                    if (key[Program.RIGHT] == 1 || key[Program.RIGHT] > 30)
                     {
                         jizokujikan++;
                     }
                 }
                 else if (key[DX.KEY_INPUT_Q] > 0)
                 {
-                    if (key[DX.KEY_INPUT_LEFT] == 1)
+                    if (key[Program.LEFT] == 1)
                     {
                         ugokin.Num--;
                         ugokin.ug[ugokin.Num].Ug = new ugoki_tt[1000];
                         ugokin.ug[ugokin.Num].num = 0;
                     }
                     //右キー
-                    if (key[DX.KEY_INPUT_RIGHT] == 1)
+                    if (key[Program.RIGHT] == 1)
                     {
                         ugokin.Num++;
                         ugokin.ug[ugokin.Num].Ug = new ugoki_tt[1000];

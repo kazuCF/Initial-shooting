@@ -10,6 +10,7 @@ namespace _2._0._0
     class Program
     {//510-64=446
         //640-32=608
+       
         public const int bosskosuu = 3;
         public static int[] Fonts = new int[100];
         public static int dnx, dny, dns, dnc, dnflg, dnt;
@@ -33,6 +34,8 @@ namespace _2._0._0
         public static bool isbom;
         public static int bomsyoki = 3;
         public static int lifesyoki = 3;
+        public static int Benyuryoku = -1;
+        private static int Benlimit = 10;
         public static void syokika()
         {
             white = DX.GetColor(255, 255, 255);
@@ -288,6 +291,7 @@ namespace _2._0._0
             DX.DrawString(x, y + 14 * (i + 1), "敵の数:" + gamemode4.teki.Count, red);
         }
         public static int[] key = new int[256];
+        public static int ENTER= DX.KEY_INPUT_RETURN, UP = DX.KEY_INPUT_UP, DOWN = DX.KEY_INPUT_DOWN, RIGHT = DX.KEY_INPUT_RIGHT, LEFT = DX.KEY_INPUT_LEFT;
         public static int GetHitKeyStateAll_2(int[] GetHitKeyStateAll_InputKey)
         {
 
@@ -295,9 +299,10 @@ namespace _2._0._0
             DX.GetHitKeyStateAll(out GetHitKeyStateAll_Key[0]);
             for (int i = 0; i < 256; i++)
             {
-                if (GetHitKeyStateAll_Key[i] != 0) { key[i]++; }
-                else { key[i] = 0; }
+                if (GetHitKeyStateAll_Key[i] != 0) { if (key[i]++ == 1) { Benyuryoku = i; } Benlimit = 7; }
+              else { key[i] = 0; }
             }
+            if (Benlimit-- < 0) { Benyuryoku = -1; }
             return 0;
         }
 

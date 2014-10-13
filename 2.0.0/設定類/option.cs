@@ -7,17 +7,19 @@ namespace _2._0._0
 {
     public static class option
     {
-        public static int[] OPs = new int[] { 3, 3 ,0};
+        public static int[] OPs = new int[] { 3, 3, 0, 0 };
         private static int opkosu = OPs.Length;
-        private static int[] gazos = new int[3];
+        private static int[] gazos = new int[4];
         private static int haikei;
         private static int font ;
+        private static bool config=false;
         private static int Option = 0;
         public static void syokika()
         {
             gazos[0] = DX.LoadGraph("option\\Player.png");
             gazos[1] = DX.LoadGraph("option\\Bombs.png");
-            gazos[2] = DX.LoadGraph("option\\Quit.png");
+            gazos[2] = DX.LoadGraph("option\\KeyConfig.png");
+            gazos[3] = DX.LoadGraph("option\\Quit.png");
             haikei = DX.LoadGraph("option\\haiop.png");
             font = DX.CreateFontToHandle("HGS行書体", 30, 4, DX.DX_FONTTYPE_ANTIALIASING);
         }
@@ -28,12 +30,19 @@ namespace _2._0._0
         }
         private static void key()
         {
-            if (Program.key[DX.KEY_INPUT_ESCAPE] != 0) { Program.gamemode = 2; Program.key[DX.KEY_INPUT_ESCAPE]++; }
-            if ((Program.key[DX.KEY_INPUT_RETURN] == 1||Program.key[DX.KEY_INPUT_Z] == 1) && Option == 2) { Program.gamemode = 2; }
-            else  if (Program.key[DX.KEY_INPUT_UP] == 1) { Option = (--Option) % opkosu; }
-            else if (Program.key[DX.KEY_INPUT_DOWN] == 1) { Option = (++Option) % opkosu; }
-            else if (Program.key[DX.KEY_INPUT_RIGHT] == 1) { OPs[Option]++; }
-            else if (Program.key[DX.KEY_INPUT_LEFT] == 1) { OPs[Option]--; }
+            if (Program.key[DX.KEY_INPUT_ESCAPE] != 0)
+            {
+                Program.gamemode = 2; Program.key[DX.KEY_INPUT_ESCAPE]++;
+            }
+            if ((Program.key[Program.ENTER] == 1 || Program.key[DX.KEY_INPUT_Z] == 1))
+            {
+                if (Option == 2) { config = true; }
+                if (Option == 3) { Program.gamemode = 2; }
+            }
+            else if (Program.key[Program.UP] == 1) { Option = (--Option) % opkosu; }
+            else if (Program.key[Program.DOWN] == 1) { Option = (++Option) % opkosu; }
+            else if (Program.key[Program.RIGHT] == 1) { OPs[Option]++; }
+            else if (Program.key[Program.LEFT] == 1) { OPs[Option]--; }
             if (OPs[0] < 1) { OPs[0] = 1; } if (OPs[0] > 8) { OPs[0] = 8; }
             if (OPs[1] < 1) { OPs[1] = 1; } if (OPs[1] > 5) { OPs[1] = 5; }
             if (Option < 0) { Option += opkosu; }

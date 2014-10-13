@@ -79,7 +79,7 @@ namespace _2._0._0
         }
         private static void key1()
         {
-            cnt++; if (Program.key[DX.KEY_INPUT_RETURN] == 1) { present.Loading2(); Program.gamemode = 2; cnt = 0; }
+            cnt++; if (Program.key[Program.ENTER] == 1) { present.Loading2(); Program.gamemode = 2; cnt = 0; }
         }
         /***********************************************************/
         private static void con()
@@ -98,16 +98,16 @@ namespace _2._0._0
         }
         private static void key2()
         {
-            if (Program.key[DX.KEY_INPUT_UP] == 1) { selecting--; }
-            if (Program.key[DX.KEY_INPUT_DOWN] == 1) { selecting++; }
+            if (Program.key[Program.UP] == 1) { selecting--; }
+            if (Program.key[Program.DOWN] == 1) { selecting++; }
             selecting = (selecting + 2) % 2;
             switch (selecting)
             {
                 case 0:
-                    if (Program.key[DX.KEY_INPUT_RETURN] == 1) { Program.zibun[0].boms = Program.bomsyoki; Program.zibun[0].life = Program.lifesyoki; gamemode4.continues--; Program.gamemode = 4; }
+                    if (Program.key[Program.ENTER] == 1) { Program.zibun[0].boms = Program.bomsyoki; Program.zibun[0].life = Program.lifesyoki; gamemode4.continues--; Program.gamemode = 4; }
                     break;
                 case 1:
-                    if (Program.key[DX.KEY_INPUT_RETURN] == 1) { present.Loading2(); gamemode4.continues = 3; Program.gamemode = 6; }
+                    if (Program.key[Program.ENTER] == 1) { present.Loading2(); gamemode4.continues = 3; Program.gamemode = 6; }
                     break;
                 default:
                     break;
